@@ -10,14 +10,18 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  name         String
-  email        String   @unique
-  passwordHash String
-  phone        String?
-  role         String   @default("CUSTOMER") // CUSTOMER, ADMIN
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                 String    @id @default(uuid())
+  name               String
+  email              String    @unique
+  passwordHash       String?
+  googleId           String?   @unique
+  avatar             String?
+  phone              String?
+  role               String    @default("CUSTOMER") // CUSTOMER, ADMIN
+  welcomeEmailSent   Boolean   @default(false)
+  welcomeEmailSentAt DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 
   addresses Address[]
   orders    Order[]
@@ -27,6 +31,7 @@ model User {
   auditLogs AuditLog[]
 
   @@index([role])
+  @@index([googleId])
 }
 
 model Address {
@@ -222,8 +227,12 @@ model Order {
   paymentMethod     String    @default("STRIPE")
   paymentIntentId   String?
   trackingNumber    String?
+  carrierName       String?
+  dispatchedAt      DateTime?
+  deliveredAt       DateTime?
   estimatedDelivery DateTime?
   notes             String?
+  internalNotes     String?
   idempotencyKey    String?   @unique
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
@@ -264,6 +273,8 @@ model OrderStatusHistory {
   orderId   String
   status    String
   notes     String?
+  actorId   String?
+  source    String   @default("SYSTEM") // ADMIN_ACTION, SYSTEM, CUSTOMER, GATEWAY_WEBHOOK
   createdAt DateTime @default(now())
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -402,4 +413,17 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([userId, createdAt])
   @@index([action, createdAt])
+}
+
+model PasswordReset {
+  id        String   @id @default(uuid())
+  email     String
+  otpHash   String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email, used])
+  @@index([expiresAt])
 }

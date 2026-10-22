@@ -127,8 +127,12 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   passwordHash: 'passwordHash',
+  googleId: 'googleId',
+  avatar: 'avatar',
   phone: 'phone',
   role: 'role',
+  welcomeEmailSent: 'welcomeEmailSent',
+  welcomeEmailSentAt: 'welcomeEmailSentAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -269,8 +273,12 @@ exports.Prisma.OrderScalarFieldEnum = {
   paymentMethod: 'paymentMethod',
   paymentIntentId: 'paymentIntentId',
   trackingNumber: 'trackingNumber',
+  carrierName: 'carrierName',
+  dispatchedAt: 'dispatchedAt',
+  deliveredAt: 'deliveredAt',
   estimatedDelivery: 'estimatedDelivery',
   notes: 'notes',
+  internalNotes: 'internalNotes',
   idempotencyKey: 'idempotencyKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -295,6 +303,8 @@ exports.Prisma.OrderStatusHistoryScalarFieldEnum = {
   orderId: 'orderId',
   status: 'status',
   notes: 'notes',
+  actorId: 'actorId',
+  source: 'source',
   createdAt: 'createdAt'
 };
 
@@ -406,6 +416,16 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PasswordResetScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  otpHash: 'otpHash',
+  expiresAt: 'expiresAt',
+  attempts: 'attempts',
+  used: 'used',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -444,7 +464,8 @@ exports.Prisma.ModelName = {
   NewsletterSubscriber: 'NewsletterSubscriber',
   IdempotencyRecord: 'IdempotencyRecord',
   BackgroundJob: 'BackgroundJob',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  PasswordReset: 'PasswordReset'
 };
 
 /**

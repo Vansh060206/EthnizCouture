@@ -22,11 +22,32 @@ const isPostgres = databaseUrl.startsWith('postgres://') || databaseUrl.startsWi
 
 let ClientClass: any = PrismaClient;
 if (isPostgres) {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { PrismaClient: PgClient } = require('./generated/pg-client');
-    ClientClass = PgClient;
-  } catch {
+  const candidatePaths = [
+    path.resolve(__dirname, './generated/pg-client'),
+    path.resolve(__dirname, '../src/generated/pg-client'),
+    path.resolve(process.cwd(), 'dist/generated/pg-client'),
+    path.resolve(process.cwd(), 'src/generated/pg-client'),
+    './generated/pg-client',
+    '../src/generated/pg-client'
+  ];
+
+  let loaded = false;
+  for (const candidate of candidatePaths) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { PrismaClient: PgClient } = require(candidate);
+      if (PgClient) {
+        ClientClass = PgClient;
+        loaded = true;
+        break;
+      }
+    } catch {
+      // Try next candidate
+    }
+  }
+
+  if (!loaded) {
+    console.warn('[PRISMA] Notice: Custom pg-client not found at standard candidate paths, falling back to @prisma/client');
     ClientClass = PrismaClient;
   }
 }
