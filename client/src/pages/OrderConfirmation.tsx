@@ -12,8 +12,9 @@ export const OrderConfirmation: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Browser back-button trapping: Prevent returning to checkout and route to orders instead
+  // Browser back-button trapping & ensure viewport is at the top
   useEffect(() => {
+    window.scrollTo(0, 0);
     window.history.pushState(null, '', window.location.href);
 
     const handlePopState = () => {

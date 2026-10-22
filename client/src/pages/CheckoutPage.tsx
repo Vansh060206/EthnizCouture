@@ -693,6 +693,7 @@ export const CheckoutPage: React.FC = () => {
           // ignore
         }
         showToast('Your royal Cash on Delivery order has been placed!', 'success');
+        window.scrollTo(0, 0);
         navigate(`/order-confirmation/${order.orderNumber}`, { replace: true });
         return;
       }
@@ -724,6 +725,7 @@ export const CheckoutPage: React.FC = () => {
             // ignore
           }
           showToast('Your royal couture order has been confirmed!', 'success');
+          window.scrollTo(0, 0);
           navigate(`/order-confirmation/${order.orderNumber}`, { replace: true });
         },
         onError: (err) => {
@@ -739,6 +741,7 @@ export const CheckoutPage: React.FC = () => {
             // ignore
           }
           showToast(`Order #${order.orderNumber} reserved. You can complete payment anytime in Order Tracking.`, 'info');
+          window.scrollTo(0, 0);
           navigate(`/track-order?orderNumber=${order.orderNumber}`, { replace: true });
         }
       });
@@ -1883,6 +1886,7 @@ export const CheckoutPage: React.FC = () => {
               // ignore
             }
             showToast(`Order #${num} reserved. You can complete payment anytime in Order Tracking.`, 'info');
+            window.scrollTo(0, 0);
             navigate(`/track-order?orderNumber=${num}`, { replace: true });
           }}
           onPaymentSuccess={() => {
@@ -1896,6 +1900,7 @@ export const CheckoutPage: React.FC = () => {
               // ignore
             }
             showToast('Your royal couture order has been confirmed!', 'success');
+            window.scrollTo(0, 0);
             navigate(`/order-confirmation/${num}`, { replace: true });
           }}
         />
