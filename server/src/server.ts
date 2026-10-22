@@ -54,7 +54,7 @@ app.use(
   compression({
     level: 6,
     threshold: 1024,
-    filter: (req, res) => {
+    filter: (req: any, res: any) => {
       if (req.headers['x-no-compression']) return false;
       return compression.filter(req, res);
     }
@@ -71,7 +71,7 @@ app.use(timeoutMiddleware(config.requestTimeoutMs));
 // CORS Configuration
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: (origin: any, callback: any) => {
       if (!origin) return callback(null, true);
       const allowed = [config.clientUrl, ...config.corsOrigins];
       if (allowed.some((allowedOrigin) => origin.startsWith(allowedOrigin) || allowedOrigin === '*')) {
@@ -101,7 +101,7 @@ app.post(
 app.use(
   express.json({
     limit: '10mb',
-    verify: (req: any, _res, buf) => {
+    verify: (req: any, _res: any, buf: any) => {
       req.rawBody = buf;
     }
   })
@@ -120,7 +120,7 @@ app.use(
     etag: true,
     lastModified: true,
     immutable: false,
-    setHeaders: (res) => {
+    setHeaders: (res: any) => {
       res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
     }
   })
