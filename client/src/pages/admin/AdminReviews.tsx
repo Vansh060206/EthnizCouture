@@ -98,9 +98,10 @@ export const AdminReviews: React.FC = () => {
         </div>
       </div>
 
-      {/* Reviews Table */}
+      {/* Reviews Table & Mobile Cards */}
       <div className="bg-[#1C060E] rounded-lg border border-gold-900/40 overflow-hidden shadow-md">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-zinc-300">
             <thead className="bg-black/40 text-gold-300 uppercase tracking-wider font-semibold">
               <tr>
@@ -205,6 +206,87 @@ export const AdminReviews: React.FC = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden divide-y divide-zinc-800">
+          {loading ? (
+            <div className="p-8 text-center text-zinc-500 space-y-2">
+              <div className="w-5 h-5 border-2 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-xs">Loading reviews...</p>
+            </div>
+          ) : reviews.length === 0 ? (
+            <div className="p-8 text-center text-zinc-500">
+              <p className="font-bold text-zinc-300 text-sm">No Reviews Found</p>
+            </div>
+          ) : (
+            reviews.map((r) => (
+              <div key={r.id} className="p-4 space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-semibold text-white text-xs">{r.product?.name || 'Garment Piece'}</h4>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">{r.user?.name} · {r.user?.email}</p>
+                  </div>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shrink-0 ${
+                      r.status === 'APPROVED'
+                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                        : 'bg-zinc-800 text-zinc-400 border border-zinc-600'
+                    }`}
+                  >
+                    {r.status}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex text-amber-400">
+                    {[...Array(r.rating)].map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
+                    ))}
+                  </div>
+                  {r.isVerifiedPurchase && (
+                    <span className="text-[10px] font-bold text-emerald-400 uppercase">
+                      ✓ Verified Buyer
+                    </span>
+                  )}
+                </div>
+
+                <div className="bg-black/30 p-2.5 rounded-lg border border-zinc-800 text-xs">
+                  {r.title && <p className="font-bold text-white mb-0.5">{r.title}</p>}
+                  <p className="text-zinc-300">{r.comment}</p>
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center justify-end gap-2 pt-1 border-t border-zinc-800/80">
+                  {r.status !== 'APPROVED' ? (
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateStatus(r.id, 'APPROVED')}
+                      className="px-3 py-1.5 bg-emerald-900 hover:bg-emerald-800 text-emerald-100 rounded text-xs font-bold uppercase tracking-wider"
+                    >
+                      Approve
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateStatus(r.id, 'HIDDEN')}
+                      className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded text-xs font-bold uppercase tracking-wider"
+                    >
+                      Hide
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(r.id)}
+                    className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded text-xs font-bold uppercase tracking-wider flex items-center gap-1"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

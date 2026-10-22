@@ -880,8 +880,8 @@ export const Shop: React.FC = () => {
 
       {/* 4. FLIPKART-STYLE MOBILE STICKY SORT & FILTER BAR */}
       <div
-        className="fixed bottom-14 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E8DEC8] py-2 px-3 flex items-center justify-around shadow-[0_-4px_20px_rgba(0,0,0,0.08)] lg:hidden"
-        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 4px)' }}
+        className="fixed inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E8DEC8] py-2 px-3 flex items-center justify-around shadow-[0_-4px_20px_rgba(0,0,0,0.08)] lg:hidden"
+        style={{ bottom: 'calc(3.5rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <button
           type="button"

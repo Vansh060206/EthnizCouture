@@ -112,6 +112,15 @@ export const AdminLayout: React.FC = () => {
         </button>
       </div>
 
+      {/* Mobile Drawer Backdrop */}
+      {isMobileNavOpen && (
+        <div
+          className="fixed inset-0 bg-black/75 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+          onClick={() => setIsMobileNavOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar Navigation */}
       <aside
         className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#18040B] border-r border-[#C6A15D]/20 flex flex-col justify-between transform transition-transform duration-200 ease-in-out ${

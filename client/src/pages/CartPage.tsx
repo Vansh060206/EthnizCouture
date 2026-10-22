@@ -150,17 +150,21 @@ export const CartPage: React.FC = () => {
 
                   <div className="flex items-center justify-between w-full sm:w-auto sm:gap-8">
                     {/* Quantity controls */}
-                    <div className="inline-flex items-center border border-zinc-300 rounded text-xs bg-[#FAF7F2]">
+                    <div className="inline-flex items-center border border-[#C6A15D]/40 rounded-lg text-xs bg-[#FAF7F2] overflow-hidden shadow-xs">
                       <button
+                        type="button"
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="px-2.5 py-1 text-zinc-600 hover:bg-zinc-200 font-bold"
+                        className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-zinc-700 hover:bg-zinc-200 font-bold transition-colors"
+                        aria-label="Decrease quantity"
                       >
                         -
                       </button>
-                      <span className="px-3 py-1 font-bold text-zinc-900">{item.quantity}</span>
+                      <span className="w-8 sm:w-9 text-center font-bold text-zinc-900 font-mono">{item.quantity}</span>
                       <button
+                        type="button"
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="px-2.5 py-1 text-zinc-600 hover:bg-zinc-200 font-bold"
+                        className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-zinc-700 hover:bg-zinc-200 font-bold transition-colors"
+                        aria-label="Increase quantity"
                       >
                         +
                       </button>
@@ -173,9 +177,11 @@ export const CartPage: React.FC = () => {
 
                     {/* Remove button */}
                     <button
+                      type="button"
                       onClick={() => removeFromCart(item.id)}
-                      className="p-2 text-zinc-400 hover:text-red-700 transition-colors"
+                      className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center text-zinc-400 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                       title="Remove from bag"
+                      aria-label="Remove from bag"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -337,8 +343,8 @@ export const CartPage: React.FC = () => {
 
       {/* Flipkart-Style Mobile Sticky Checkout Bar */}
       <div
-        className="fixed bottom-14 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E8DEC8] px-4 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] flex items-center justify-between sm:hidden"
-        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 6px)' }}
+        className="fixed inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E8DEC8] px-4 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] flex items-center justify-between sm:hidden"
+        style={{ bottom: 'calc(3.5rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <div>
           <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">Total Amount</span>

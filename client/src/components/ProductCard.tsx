@@ -126,12 +126,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               e.stopPropagation();
               toggleWishlist(product);
             }}
-            className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#FAF7F2]/90 hover:bg-white text-[#1A1A1A] hover:text-[#3E1A1E] shadow-sm backdrop-blur-md flex items-center justify-center transition-all z-10 hover:scale-110 active:scale-95 border border-[#C6A15D]/30"
+            className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 w-10 h-10 min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] rounded-full bg-[#FAF7F2]/90 hover:bg-white text-[#1A1A1A] hover:text-[#3E1A1E] shadow-sm backdrop-blur-md flex items-center justify-center transition-all z-10 hover:scale-110 active:scale-95 border border-[#C6A15D]/30"
             title="Save to Wardrobe"
             aria-label="Save to Wardrobe"
           >
             <Heart
-              className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
+              className={`w-4 h-4 transition-colors ${
                 isFavorited ? 'fill-[#3E1A1E] text-[#3E1A1E]' : 'text-zinc-600'
               }`}
             />

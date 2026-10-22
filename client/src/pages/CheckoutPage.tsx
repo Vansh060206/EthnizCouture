@@ -62,6 +62,12 @@ export const CheckoutPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(() => {
     return (savedCheckoutState?.currentStep as 1 | 2 | 3) || 1;
   });
+
+  // Automatically ensure viewport scrolls smoothly to top whenever checkout step advances or retreats
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStep]);
+
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isMobileSummaryExpanded, setIsMobileSummaryExpanded] = useState<boolean>(false);

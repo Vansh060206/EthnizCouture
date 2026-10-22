@@ -363,9 +363,10 @@ export const AdminProducts: React.FC = () => {
 
       </div>
 
-      {/* Products Data Table */}
+      {/* Products Data Table & Mobile Cards */}
       <div className="bg-[#1C060E] rounded-lg border border-gold-900/40 overflow-hidden shadow-md">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-zinc-300">
             <thead className="bg-black/40 text-gold-300 uppercase tracking-wider font-semibold">
               <tr>
@@ -501,6 +502,120 @@ export const AdminProducts: React.FC = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden divide-y divide-zinc-800">
+          {loading ? (
+            <div className="p-8 text-center text-zinc-500 space-y-2">
+              <div className="w-5 h-5 border-2 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-xs">Loading pieces from vault...</p>
+            </div>
+          ) : products.length === 0 ? (
+            <div className="p-8 text-center text-zinc-500 space-y-2">
+              <p className="font-bold text-zinc-300 text-sm">No Products Found</p>
+              <p className="text-xs">No products match your query. Click "Add New Product" to create one.</p>
+            </div>
+          ) : (
+            products.map((p) => {
+              const img = p.images?.find((i) => i.isPrimary)?.url || p.images?.[0]?.url || 'https://via.placeholder.com/60';
+              return (
+                <div key={p.id} className="p-4 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src={img}
+                      alt={p.name}
+                      className="w-14 h-18 object-cover rounded bg-zinc-800 shrink-0 border border-zinc-700"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <h4 className="font-semibold text-white text-xs leading-snug line-clamp-1">{p.name}</h4>
+                          <p className="text-[10px] text-zinc-400 font-mono mt-0.5">{p.sku} · {p.category?.name || 'Couture'}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => toggleActiveStatus(p)}
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shrink-0 ${
+                            p.isActive
+                              ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                              : 'bg-zinc-800 text-zinc-400 border border-zinc-600'
+                          }`}
+                        >
+                          {p.isActive ? 'Active' : 'Inactive'}
+                        </button>
+                      </div>
+
+                      <div className="mt-2 flex items-baseline justify-between">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="font-serif font-bold text-white text-sm">
+                            ₹{p.price.toLocaleString('en-IN')}
+                          </span>
+                          {p.comparePrice && (
+                            <span className="text-[10px] text-zinc-500 line-through">
+                              ₹{p.comparePrice.toLocaleString('en-IN')}
+                            </span>
+                          )}
+                        </div>
+                        <span
+                          className={`text-xs font-bold ${
+                            p.stock === 0
+                              ? 'text-red-400'
+                              : p.stock <= 5
+                              ? 'text-amber-400'
+                              : 'text-emerald-400'
+                          }`}
+                        >
+                          {p.stock} in stock
+                        </span>
+                      </div>
+
+                      <div className="mt-1 flex gap-1">
+                        {p.isFeatured && (
+                          <span className="px-1.5 py-0.2 bg-gold-950 text-gold-300 border border-gold-800 rounded text-[9px] font-bold uppercase">
+                            Featured
+                          </span>
+                        )}
+                        {p.isBestSeller && (
+                          <span className="px-1.5 py-0.2 bg-maroon-950 text-maroon-300 border border-maroon-800 rounded text-[9px] font-bold uppercase">
+                            Bestseller
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Actions */}
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-zinc-800/80">
+                    <button
+                      type="button"
+                      onClick={() => openEditModal(p)}
+                      className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-gold-300 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                    >
+                      <Edit2 className="w-3.5 h-3.5" />
+                      <span>Edit</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDuplicate(p.id)}
+                      className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-emerald-300 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Duplicate</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(p.id, p.name)}
+                      className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
 

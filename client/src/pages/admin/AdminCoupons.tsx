@@ -122,9 +122,10 @@ export const AdminCoupons: React.FC = () => {
         </button>
       </div>
 
-      {/* Coupons Table */}
+      {/* Coupons Table & Mobile Cards */}
       <div className="bg-[#1C060E] rounded-lg border border-gold-900/40 overflow-hidden shadow-md">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-zinc-300">
             <thead className="bg-black/40 text-gold-300 uppercase tracking-wider font-semibold">
               <tr>
@@ -219,6 +220,89 @@ export const AdminCoupons: React.FC = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden divide-y divide-zinc-800">
+          {loading ? (
+            <div className="p-8 text-center text-zinc-500 space-y-2">
+              <div className="w-5 h-5 border-2 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-xs">Loading promotional registry...</p>
+            </div>
+          ) : coupons.length === 0 ? (
+            <div className="p-8 text-center text-zinc-500">
+              <p className="font-bold text-zinc-300 text-sm">No Active Coupons</p>
+            </div>
+          ) : (
+            coupons.map((c) => (
+              <div key={c.id} className="p-4 space-y-2.5">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <span className="font-mono font-bold text-gold-300 text-base tracking-wider block">
+                      {c.code}
+                    </span>
+                    <span className="inline-block px-2 py-0.5 mt-1 bg-[#3E1A1E] text-[#DFC89D] border border-[#C6A15D]/40 rounded text-xs font-bold">
+                      {c.discountType === 'PERCENTAGE'
+                        ? `${c.discountValue}% OFF`
+                        : `₹${c.discountValue} FLAT`}
+                    </span>
+                  </div>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shrink-0 ${
+                      c.isActive
+                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                        : 'bg-zinc-800 text-zinc-400 border border-zinc-600'
+                    }`}
+                  >
+                    {c.isActive ? 'Active' : 'Disabled'}
+                  </span>
+                </div>
+
+                <div className="text-xs text-zinc-400 space-y-1 pt-1">
+                  <div className="flex justify-between">
+                    <span>Min Order:</span>
+                    <span className="text-zinc-200 font-semibold">₹{c.minOrderValue.toLocaleString('en-IN')}</span>
+                  </div>
+                  {c.maxDiscount && (
+                    <div className="flex justify-between">
+                      <span>Max Cap:</span>
+                      <span className="text-zinc-200 font-semibold">₹{c.maxDiscount.toLocaleString('en-IN')}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span>Usage:</span>
+                    <span className="text-zinc-200 font-semibold">{c.usedCount} / {c.usageLimit || '∞'} redemptions</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Expires:</span>
+                    <span className="text-zinc-200 font-semibold">
+                      {c.expiryDate ? new Date(c.expiryDate).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) : 'No Expiry'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-zinc-800/80">
+                  <button
+                    type="button"
+                    onClick={() => openEditModal(c)}
+                    className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-gold-300 rounded text-xs font-semibold flex items-center gap-1.5"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                    <span>Edit</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(c.id, c.code)}
+                    className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded text-xs font-semibold flex items-center gap-1.5"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete</span>
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

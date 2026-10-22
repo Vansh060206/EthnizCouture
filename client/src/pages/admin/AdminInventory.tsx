@@ -117,9 +117,10 @@ export const AdminInventory: React.FC = () => {
 
       </div>
 
-      {/* Inventory Table */}
+      {/* Inventory Table & Mobile Cards */}
       <div className="bg-[#1C060E] rounded-lg border border-gold-900/40 overflow-hidden shadow-md">
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-zinc-300">
             <thead className="bg-black/40 text-gold-300 uppercase tracking-wider font-semibold">
               <tr>
@@ -252,6 +253,114 @@ export const AdminInventory: React.FC = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden divide-y divide-zinc-800">
+          {loading ? (
+            <div className="p-8 text-center text-zinc-500 space-y-2">
+              <div className="w-5 h-5 border-2 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-xs">Loading inventory records...</p>
+            </div>
+          ) : inventory.length === 0 ? (
+            <div className="p-8 text-center text-zinc-500">
+              <p className="font-bold text-zinc-300 text-sm">No Inventory Items Found</p>
+            </div>
+          ) : (
+            inventory.map((item) => {
+              const img = item.images?.[0]?.url || 'https://via.placeholder.com/60';
+              const currentLocalStock = editingStock[item.id] !== undefined ? editingStock[item.id] : item.stock;
+              const hasChanged = currentLocalStock !== item.stock;
+
+              return (
+                <div key={item.id} className="p-4 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src={img}
+                      alt={item.name}
+                      className="w-14 h-18 object-cover rounded bg-zinc-800 shrink-0 border border-zinc-700"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <h4 className="font-semibold text-white text-xs leading-snug line-clamp-1">{item.name}</h4>
+                          <p className="text-[10px] text-zinc-400 font-mono mt-0.5">{item.sku} · {item.category?.name}</p>
+                        </div>
+                        {item.stock === 0 ? (
+                          <span className="px-2 py-0.5 bg-red-950 text-red-300 border border-red-800 rounded text-[10px] font-bold uppercase shrink-0">
+                            Out of Stock
+                          </span>
+                        ) : item.stock <= 5 ? (
+                          <span className="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-[10px] font-bold uppercase flex items-center gap-1 shrink-0">
+                            <AlertTriangle className="w-3 h-3 text-amber-400" />
+                            <span>Low Stock</span>
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded text-[10px] font-bold uppercase shrink-0">
+                            Optimal
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="mt-2 flex items-baseline justify-between">
+                        <span className="font-serif font-bold text-white text-sm">
+                          ₹{item.price.toLocaleString('en-IN')}
+                        </span>
+                        <span className="text-xs text-zinc-400">
+                          Current: <strong className="text-white">{item.stock} units</strong>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stock Stepper & Save */}
+                  <div className="flex items-center justify-between pt-2 border-t border-zinc-800/80">
+                    <span className="text-xs font-semibold text-zinc-400">Quick Adjust:</span>
+                    <div className="flex items-center gap-2">
+                      <div className="inline-flex items-center border border-zinc-700 rounded-lg bg-black/40 text-xs h-9">
+                        <button
+                          type="button"
+                          onClick={() => handleStockChange(item.id, currentLocalStock - 1)}
+                          className="w-8 h-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 active:bg-white/20 font-bold"
+                          aria-label="Decrease stock"
+                        >
+                          -
+                        </button>
+                        <input
+                          type="number"
+                          value={currentLocalStock}
+                          onChange={(e) => handleStockChange(item.id, parseInt(e.target.value, 10) || 0)}
+                          className="w-14 text-center bg-transparent font-mono font-bold text-white focus:outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleStockChange(item.id, currentLocalStock + 1)}
+                          className="w-8 h-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 active:bg-white/20 font-bold"
+                          aria-label="Increase stock"
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleSaveStock(item.id)}
+                        disabled={!hasChanged}
+                        className={`h-9 px-3 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all ${
+                          hasChanged
+                            ? 'bg-maroon-800 text-white hover:bg-maroon-700 shadow-md cursor-pointer'
+                            : 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
+                        }`}
+                      >
+                        <Save className="w-3.5 h-3.5" />
+                        <span>Save</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
 

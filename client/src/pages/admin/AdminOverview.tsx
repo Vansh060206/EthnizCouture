@@ -240,7 +240,8 @@ export const AdminOverview: React.FC = () => {
           </Link>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs text-zinc-300">
             <thead className="bg-black/40 text-gold-300 uppercase tracking-wider font-semibold">
               <tr>
@@ -292,6 +293,44 @@ export const AdminOverview: React.FC = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards View */}
+        <div className="md:hidden divide-y divide-zinc-800">
+          {recentOrders.length === 0 ? (
+            <p className="text-xs text-zinc-500 py-4 text-center">No recent orders recorded.</p>
+          ) : (
+            recentOrders.map((order: any) => (
+              <div key={order.id} className="py-3.5 space-y-2">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <Link to="/atelier-portal/orders" className="font-mono font-bold text-gold-300 text-xs hover:underline">
+                      {order.orderNumber}
+                    </Link>
+                    <p className="text-xs font-semibold text-white mt-0.5">{order.customerName}</p>
+                  </div>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shrink-0 ${
+                      order.paymentStatus === 'PAID'
+                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                        : 'bg-amber-950 text-amber-300 border border-amber-800'
+                    }`}
+                  >
+                    {order.paymentStatus}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between text-xs pt-1">
+                  <span className="text-zinc-400">
+                    {new Date(order.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })} · {order.items?.length || 1} pieces
+                  </span>
+                  <span className="font-serif font-bold text-white text-sm">
+                    ₹{order.totalAmount.toLocaleString('en-IN')}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
