@@ -62,9 +62,15 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
 
   const effectiveRedirectUrl = redirectUrl || searchParams.get('redirect') || '/account';
 
-  // Read Google Client ID from environment variables
+  // Read Google Client ID from environment variables with defensive sanitization
+  const rawId = (import.meta.env.VITE_GOOGLE_CLIENT_ID || '').trim();
+  const sanitizedId = rawId
+    .replace(/^VITE_GOOGLE_CLIENT_ID\s*=\s*/i, '')
+    .replace(/^["']|["']$/g, '')
+    .trim();
+
   const clientId =
-    import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+    sanitizedId ||
     '89261062890-r4l4ckev894v3fnp4ckkfb1184jn40eu.apps.googleusercontent.com';
 
   const buttonLabel =
