@@ -1,0 +1,112 @@
+{
+  "User": {
+    "backup_db": 2,
+    "active_db": 2,
+    "json_snapshot": 2
+  },
+  "Address": {
+    "backup_db": 2,
+    "active_db": 2,
+    "json_snapshot": 2
+  },
+  "Category": {
+    "backup_db": 8,
+    "active_db": 8,
+    "json_snapshot": 8
+  },
+  "Collection": {
+    "backup_db": 3,
+    "active_db": 3,
+    "json_snapshot": 3
+  },
+  "Product": {
+    "backup_db": 23,
+    "active_db": 23,
+    "json_snapshot": 23
+  },
+  "ProductImage": {
+    "backup_db": 46,
+    "active_db": 46,
+    "json_snapshot": 46
+  },
+  "ProductVariant": {
+    "backup_db": 0,
+    "active_db": 0,
+    "json_snapshot": 0
+  },
+  "Cart": {
+    "backup_db": 2,
+    "active_db": 2,
+    "json_snapshot": 2
+  },
+  "CartItem": {
+    "backup_db": 2,
+    "active_db": 2,
+    "json_snapshot": 2
+  },
+  "Wishlist": {
+    "backup_db": 0,
+    "active_db": 0,
+    "json_snapshot": 0
+  },
+  "Order": {
+    "backup_db": 29,
+    "active_db": 41,
+    "json_snapshot": 29
+  },
+  "OrderItem": {
+    "backup_db": 30,
+    "active_db": 42,
+    "json_snapshot": 30
+  },
+  "OrderStatusHistory": {
+    "backup_db": 40,
+    "active_db": 55,
+    "json_snapshot": 40
+  },
+  "Review": {
+    "backup_db": 5,
+    "active_db": 5,
+    "json_snapshot": 5
+  },
+  "Coupon": {
+    "backup_db": 3,
+    "active_db": 3,
+    "json_snapshot": 3
+  },
+  "Banner": {
+    "backup_db": 3,
+    "active_db": 3,
+    "json_snapshot": 3
+  },
+  "MediaAsset": {
+    "backup_db": 0,
+    "active_db": 0,
+    "json_snapshot": 0
+  },
+  "ContactMessage": {
+    "backup_db": 0,
+    "active_db": 0,
+    "json_snapshot": 0
+  },
+  "NewsletterSubscriber": {
+    "backup_db": 0,
+    "active_db": 0,
+    "json_snapshot": 0
+  },
+  "IdempotencyRecord": {
+    "backup_db": 7,
+    "active_db": 10,
+    "json_snapshot": 7
+  },
+  "BackgroundJob": {
+    "backup_db": 35,
+    "active_db": 50,
+    "json_snapshot": 35
+  },
+  "AuditLog": {
+    "backup_db": 28,
+    "active_db": 40,
+    "json_snapshot": 28
+  }
+}

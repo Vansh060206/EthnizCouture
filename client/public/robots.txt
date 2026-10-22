@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /shop
+Allow: /product/
+Allow: /about
+Allow: /contact
+Disallow: /atelier-portal/
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /account
+
+Sitemap: https://ethnizcouture.com/sitemap.xml

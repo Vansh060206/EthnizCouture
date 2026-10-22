@@ -1,0 +1,17 @@
+{
+  "name": "ethnizcouture",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"API,WEB\" -c \"magenta,cyan\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "seed": "npm run seed --prefix server",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "start": "npm start --prefix server",
+    "prisma:generate": "npm run prisma:generate --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}
