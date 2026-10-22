@@ -198,6 +198,16 @@ app.all(['/api', '/api/*'], (req: Request, res: Response) => {
   });
 });
 
+// Root endpoint for deployment health checks (Render, Railway, Uptime monitors)
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'online',
+    brand: 'Ethniz Couture Luxury API',
+    environment: config.nodeEnv,
+    health: '/api/health'
+  });
+});
+
 // Production Client Static Serving (Supports single-service unified deployments on Render, Railway, VPS)
 const clientDistPath = path.resolve(__dirname, '../../client/dist');
 const altClientDistPath = path.resolve(__dirname, '../client/dist');
