@@ -108,7 +108,7 @@ export const InstagramReelsSection: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isMuted, setIsMuted] = useState<boolean>(true);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
 
   useEffect(() => {
@@ -117,16 +117,12 @@ export const InstagramReelsSection: React.FC = () => {
       if (progressBarRef.current) {
         progressBarRef.current.style.width = '0%';
       }
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      setIsMuted(true);
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If unmuted autoplay is restricted by browser policy, smoothly fall back to muted autoplay to prevent lag
-          if (videoRef.current) {
-            videoRef.current.muted = true;
-            setIsMuted(true);
-            videoRef.current.play().catch(() => {});
-          }
-        });
+        playPromise.catch(() => {});
       }
     }
   }, [activeReelModal]);
@@ -529,15 +525,25 @@ export const InstagramReelsSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={toggleMute}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all border ${
+                  className={`px-2.5 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-md transition-all border text-xs font-semibold ${
                     isMuted 
-                      ? 'bg-black/60 text-zinc-400 border-white/20' 
-                      : 'bg-[#3E1A1E] text-[#DFC89D] border-[#C6A15D]/70 shadow-sm'
+                      ? 'bg-black/70 text-[#DFC89D] border-[#C6A15D]/60 hover:border-[#DFC89D]' 
+                      : 'bg-[#3E1A1E] text-[#DFC89D] border-[#C6A15D] shadow-sm'
                   } active:scale-95`}
                   title={isMuted ? 'Tap to unmute sound' : 'Tap to mute sound'}
                   aria-label="Toggle sound"
                 >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 animate-pulse" />}
+                  {isMuted ? (
+                    <>
+                      <VolumeX className="w-3.5 h-3.5 text-[#DFC89D]" />
+                      <span className="text-[10px] tracking-wider uppercase">Unmute</span>
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="w-3.5 h-3.5 text-[#DFC89D] animate-pulse" />
+                      <span className="text-[10px] tracking-wider uppercase text-emerald-400">Sound On</span>
+                    </>
+                  )}
                 </button>
 
                 <a
@@ -579,6 +585,11 @@ export const InstagramReelsSection: React.FC = () => {
                 muted={isMuted}
                 preload="auto"
                 disablePictureInPicture
+                onLoadedData={() => {
+                  if (videoRef.current) {
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full h-full object-cover bg-black select-none pointer-events-none"
                 style={{ transform: 'translate3d(0, 0, 0)', willChange: 'transform', backfaceVisibility: 'hidden' }}
