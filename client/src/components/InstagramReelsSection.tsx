@@ -45,7 +45,7 @@ const VERIFIED_REELS: ReelData[] = [
     collectionTag: 'NEW ARRIVAL',
     title: 'Rose Pink Embroidered Kurta & Palazzo Set',
     caption: 'A graceful rose pink kurta & palazzo set featuring delicate neckline embroidery, fine zari accents, and a comfortable wide-leg silhouette crafted for festive occasions.',
-    audioTrack: '♫ Heritage Rhythms • Ahmedabad Atelier',
+    audioTrack: '♫ Heritage Rhythms • Ethniz Couture',
     image: '/reels/reel-1.jpg',
     videoSrc: '/reels/reel-1.mp4',
     productName: 'Rose Pink Embroidered Palazzo Set',
@@ -265,7 +265,7 @@ export const InstagramReelsSectionComponent: React.FC = () => {
             </div>
 
             <h2 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-[#FAF7F2] mt-1.5">
-              Reels from Our Atelier
+              Reels from Ethniz Couture
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 font-light mt-2 max-w-xl leading-relaxed">
               Explore authentic celebratory ensembles straight from our Ahmedabad flagship. Tap any reel to play directly on site, or open it inside Instagram.
