@@ -110,10 +110,39 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
+  const [isAutoplayBlocked, setIsAutoplayBlocked] = useState<boolean>(false);
 
-  // Initialize playback only once when active reel opens (stable key, zero remounts)
+  // Touch scroll disambiguation for mobile swipe gesture handling
+  const touchStartPos = useRef<{ x: number; y: number } | null>(null);
+  const isTouchSwiping = useRef<boolean>(false);
+
+  const handleCardTouchStart = (e: React.TouchEvent) => {
+    touchStartPos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    isTouchSwiping.current = false;
+  };
+
+  const handleCardTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartPos.current) return;
+    const dx = Math.abs(e.touches[0].clientX - touchStartPos.current.x);
+    const dy = Math.abs(e.touches[0].clientY - touchStartPos.current.y);
+    if (dx > 10 || dy > 10) {
+      isTouchSwiping.current = true;
+    }
+  };
+
+  const handleCardClick = (reel: ReelData) => {
+    // If the user was swiping/scrolling through the carousel on mobile, do not open modal
+    if (isTouchSwiping.current) {
+      isTouchSwiping.current = false;
+      return;
+    }
+    setActiveReelModal(reel);
+  };
+
+  // Initialize playback only once when active reel opens (mobile policy aware)
   useEffect(() => {
     if (activeReelModal && videoRef.current) {
+      setIsAutoplayBlocked(false);
       setIsPlaying(true);
       if (progressBarRef.current) {
         progressBarRef.current.style.width = '0%';
@@ -121,12 +150,27 @@ export const InstagramReelsSectionComponent: React.FC = () => {
       videoRef.current.defaultMuted = true;
       videoRef.current.muted = true;
       setIsMuted(true);
+      videoRef.current.setAttribute('playsinline', 'true');
+      videoRef.current.setAttribute('webkit-playsinline', 'true');
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          // Mobile Safari / Chrome blocked automated playback without user touch
+          setIsAutoplayBlocked(true);
+          setIsPlaying(false);
+        });
       }
     }
   }, [activeReelModal?.id]);
+
+  const handleDirectPlayTap = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    videoRef.current.play().then(() => {
+      setIsAutoplayBlocked(false);
+      setIsPlaying(true);
+    }).catch(() => {});
+  };
 
   const togglePlayPause = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -316,7 +360,9 @@ export const InstagramReelsSectionComponent: React.FC = () => {
             return (
               <div
                 key={reel.id}
-                onClick={() => setActiveReelModal(reel)}
+                onTouchStart={handleCardTouchStart}
+                onTouchMove={handleCardTouchMove}
+                onClick={() => handleCardClick(reel)}
                 className={`snap-center sm:snap-start shrink-0 w-[80vw] max-w-[295px] sm:w-80 lg:w-auto group cursor-pointer transition-all duration-700 select-none ${
                   isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-14 scale-95'
                 }`}
@@ -500,7 +546,7 @@ export const InstagramReelsSectionComponent: React.FC = () => {
         >
           {/* 9:16 Vertical Video Frame */}
           <div 
-            className="relative w-full max-w-[400px] aspect-[9/16] max-h-[88vh] rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-[0_0_60px_rgba(0,0,0,0.95)] border border-[#C6A15D]/40 flex flex-col justify-between select-none"
+            className="relative w-full max-w-[400px] aspect-[9/16] max-h-[85dvh] sm:max-h-[88vh] rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-[0_0_60px_rgba(0,0,0,0.95)] border border-[#C6A15D]/40 flex flex-col justify-between select-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar Floating Controls */}
@@ -606,6 +652,21 @@ export const InstagramReelsSectionComponent: React.FC = () => {
                 className="w-full h-full object-cover bg-black select-none pointer-events-none"
                 style={{ transform: 'translate3d(0, 0, 0)', willChange: 'transform', backfaceVisibility: 'hidden' }}
               />
+
+              {/* Mobile Autoplay Policy Tap-to-Play Indicator */}
+              {isAutoplayBlocked && (
+                <div 
+                  className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-xs z-20 cursor-pointer animate-fade-in"
+                  onClick={handleDirectPlayTap}
+                >
+                  <div className="w-16 h-16 rounded-full bg-[#3E1A1E]/95 border-2 border-[#C6A15D] text-[#DFC89D] flex items-center justify-center shadow-2xl active:scale-95 transition-all">
+                    <Play className="w-7 h-7 fill-current translate-x-0.5" />
+                  </div>
+                  <span className="mt-3 px-3.5 py-1 rounded-full bg-black/80 border border-[#C6A15D]/50 text-white font-mono text-[11px] font-bold tracking-wider uppercase backdrop-blur-md shadow-lg">
+                    Tap to Play
+                  </span>
+                </div>
+              )}
 
               {/* Tap to Play / Pause Center Animation Indicator */}
               {showPlayAnim && (
