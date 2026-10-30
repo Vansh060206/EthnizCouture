@@ -26,12 +26,19 @@
     "test:order-email": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/order_confirmation_notification.test.ts",
     "test:inquiries": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/admin_contact_inquiries.test.ts",
     "test:billing-gst": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/checkout_billing_and_gstin.test.ts",
+    "test:cart-recovery": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/cart_recovery_phase1.test.ts test/cart_version_and_transactions.test.ts test/cart_recovery_phase2.test.ts",
+    "test:cart-recovery-phase2": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/cart_recovery_phase2.test.ts",
     "test": "npm run test:setup && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/architecture_and_scalability.test.ts && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/jwt_config_and_auth_security.test.ts && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/stripe_webhook_and_search.test.ts && node --env-file=.env.test ./node_modules/tsx/dist/cli.mjs --test test/phase2d_delivery_location.test.ts",
     "prisma:staging:push": "node --env-file=.env.staging ./node_modules/prisma/build/index.js db push --schema=prisma/schema.postgresql.prisma --skip-generate",
     "prisma:pg:generate": "prisma generate --schema=prisma/schema.postgresql.prisma",
     "staging:migrate": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/scripts/migrate_postgres_staging.ts",
     "staging:test": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs --test test/postgres_staging_validation.test.ts",
-    "staging:verify": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/scripts/independent_supabase_verify.ts"
+    "staging:verify": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/scripts/independent_supabase_verify.ts",
+    "staging:start": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/server.ts",
+    "staging:fixture": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/scripts/check_or_seed_recovery_fixture.ts",
+    "staging:test-cycle": "node --env-file=.env.staging ./node_modules/tsx/dist/cli.mjs src/scripts/test_recovery_callback_cycle.ts",
+    "dev:fixture": "node --env-file=.env ./node_modules/tsx/dist/cli.mjs src/scripts/check_or_seed_recovery_fixture.ts",
+    "dev:test-cycle": "node --env-file=.env ./node_modules/tsx/dist/cli.mjs src/scripts/test_recovery_callback_cycle.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

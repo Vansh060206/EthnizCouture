@@ -568,7 +568,7 @@ export const ProductDetail: React.FC = () => {
                 <span className="text-xs font-bold text-zinc-800 uppercase tracking-wider">Quantity:</span>
                 {product.stock <= 5 && product.stock > 0 && (
                   <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
-                    Only {product.stock} pieces left in atelier
+                    Only {product.stock} pieces left in vault
                   </span>
                 )}
                 {product.stock > 5 && (

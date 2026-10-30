@@ -156,7 +156,7 @@ export class OrderFulfilmentService {
       return {
         success: false,
         statusCode: 409,
-        message: `Order status conflict: Order has already been updated to ${order.orderStatus} by another atelier staff.`,
+        message: `Order status conflict: Order has already been updated to ${order.orderStatus} by another staff member.`,
         order
       };
     }
@@ -165,7 +165,7 @@ export class OrderFulfilmentService {
       return {
         success: false,
         statusCode: 409,
-        message: 'Order state conflict: This order was modified concurrently. Refreshing latest atelier details.',
+        message: 'Order state conflict: This order was modified concurrently. Refreshing latest order details.',
         order
       };
     }
@@ -213,7 +213,7 @@ export class OrderFulfilmentService {
         }
 
         targetStatus = 'CONFIRMED';
-        transitionNote = customerNotes || 'Order verified & confirmed by atelier concierge. Stock reserved.';
+        transitionNote = customerNotes || 'Order verified & confirmed by royal concierge. Stock reserved.';
         break;
       }
 
@@ -355,7 +355,7 @@ export class OrderFulfilmentService {
 
         targetStatus = 'CANCELLED';
         shouldRestoreStock = true;
-        transitionNote = `Order cancelled by atelier admin. Reason: ${cancellationReason.trim()}. Reserved stock restored to warehouse.`;
+        transitionNote = `Order cancelled by administrator. Reason: ${cancellationReason.trim()}. Reserved stock restored to warehouse.`;
 
         if (order.paymentStatus === 'PAID') {
           paymentStatusUpdate = 'REFUNDED';
@@ -375,7 +375,7 @@ export class OrderFulfilmentService {
 
         const resolution = payload.returnResolution || 'REFUND';
         targetStatus = 'RETURN_APPROVED';
-        transitionNote = customerNotes?.trim() || `Return approved by atelier admin. Resolution: ${resolution}. Reverse courier pickup scheduled.`;
+        transitionNote = customerNotes?.trim() || `Return approved by administrator. Resolution: ${resolution}. Reverse courier pickup scheduled.`;
 
         if (payload.restoreStockOnReturn) {
           shouldRestoreStock = true;
@@ -408,7 +408,7 @@ export class OrderFulfilmentService {
         }
 
         targetStatus = 'DELIVERED';
-        transitionNote = `Return request declined by atelier admin. Reason: ${reason}. Order status reverted to DELIVERED.`;
+        transitionNote = `Return request declined by administrator. Reason: ${reason}. Order status reverted to DELIVERED.`;
         break;
       }
 
@@ -423,7 +423,7 @@ export class OrderFulfilmentService {
 
         targetStatus = 'RETURNED';
         shouldRestoreStock = true;
-        transitionNote = customerNotes?.trim() || 'Garment received at atelier, passed quality inspection. Stock restored and return finalized.';
+        transitionNote = customerNotes?.trim() || 'Garment received at boutique, passed quality inspection. Stock restored and return finalized.';
 
         if (order.paymentStatus === 'PAID') {
           paymentStatusUpdate = 'REFUNDED';

@@ -18,7 +18,7 @@ const CANCELLATION_REASONS = [
   { id: 'WRONG_ADDRESS', label: 'Incorrect delivery address or contact details' },
   { id: 'CHANGED_MIND', label: 'Changed my mind / No longer needed' },
   { id: 'DELIVERY_TOO_LATE', label: 'Estimated delivery date is too late for occasion' },
-  { id: 'ANOTHER_OUTFIT', label: 'Selected another ensemble from the atelier' },
+  { id: 'ANOTHER_OUTFIT', label: 'Selected another ensemble from the boutique' },
   { id: 'OTHER', label: 'Other personal reason' },
 ];
 
@@ -78,7 +78,7 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
       onSuccess(order.orderNumber);
       onClose();
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Unable to cancel order. Please contact atelier concierge.';
+      const msg = err.response?.data?.message || 'Unable to cancel order. Please contact royal concierge.';
       setErrorMessage(msg);
       showToast(msg, 'error');
     } finally {

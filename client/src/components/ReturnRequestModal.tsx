@@ -133,7 +133,7 @@ export const ReturnRequestModal: React.FC<ReturnRequestModalProps> = ({
             </div>
             <div className="min-w-0">
               <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-[#84642C] bg-[#FAF1DF] px-2 py-0.5 rounded">
-                7-DAY ATELIER GUARANTEE
+                7-DAY BOUTIQUE GUARANTEE
               </span>
               <h2 id="return-modal-title" className="text-base sm:text-lg font-serif font-bold text-[#3E1A1E] mt-0.5 truncate">
                 Return / Exchange #{order.orderNumber}

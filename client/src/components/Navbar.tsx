@@ -40,7 +40,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const [announcement, setAnnouncement] = useState<string>(
-    'Complimentary Worldwide Air Shipping on Orders Above ₹2,999 • Private Bridal Atelier Consultations'
+    'Complimentary Worldwide Air Shipping on Orders Above ₹2,999 • Private Styling Consultations'
   );
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -152,7 +152,7 @@ export const Navbar: React.FC = () => {
       {/* 1. TOP ANNOUNCEMENT RIBBON */}
       <div className="bg-[#3E1A1E] text-[#FAF7F2] text-[10px] sm:text-[11px] py-1.5 px-4 border-b border-[#C6A15D]/30 flex items-center justify-between font-sans">
         <div className="hidden md:flex items-center gap-2 text-[#DFC89D] text-[10px] tracking-[0.25em] uppercase font-medium">
-          <span>HAUTE COUTURE ATELIER</span>
+          <span>HAUTE COUTURE MAISON</span>
         </div>
 
         <div className="flex-1 text-center flex items-center justify-center gap-2 tracking-[0.2em] uppercase font-medium text-zinc-200">
@@ -161,7 +161,7 @@ export const Navbar: React.FC = () => {
           <Sparkles className="w-3 h-3 text-[#C6A15D] shrink-0" />
         </div>
 
-        {/* Official Atelier Currency Display (Indian Rupees Only) */}
+        {/* Official Currency Display (Indian Rupees Only) */}
         <div className="flex items-center gap-1.5 text-zinc-300 text-[10px] tracking-wider uppercase font-semibold px-2 py-0.5" title="Currency: Indian Rupees (INR)">
           <Globe className="w-3 h-3 text-[#C6A15D]" />
           <span>INR (₹)</span>
@@ -170,7 +170,7 @@ export const Navbar: React.FC = () => {
 
       {/* 2. MAIN NAVIGATION BAR */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 sm:h-22">
+        <div className="flex items-center justify-between h-20 sm:h-22 gap-4 lg:gap-8 xl:gap-12">
           
           {/* Mobile Hamburger Toggle */}
           <div className="flex items-center lg:hidden">
@@ -186,7 +186,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* OFFICIAL BRAND LOGO (Left side on desktop as requested) */}
-          <div className="flex items-center">
+          <div className="flex items-center shrink-0 mr-4 sm:mr-6 lg:mr-10 xl:mr-14">
             <Link to="/" className="inline-flex items-center group py-2" title="EthnizCouture Home">
               {/* Display the authentic official logo asset */}
               <div className="relative overflow-hidden rounded-md border border-[#C6A15D]/30 p-1 bg-[#3E1A1E] shadow-sm transition-all duration-300 group-hover:border-[#C6A15D] group-hover:shadow-luxury">
@@ -200,7 +200,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Center Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 text-[11px] font-semibold tracking-[0.22em] uppercase">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 2xl:space-x-7 text-[11px] font-semibold tracking-[0.2em] uppercase">
             
             {/* COUTURE with mega menu trigger */}
             <div
@@ -221,32 +221,32 @@ export const Navbar: React.FC = () => {
             </div>
 
             <Link
-              to="/shop?category=sarees"
+              to="/shop?category=anarkalis"
               className={`transition-colors py-6 relative group ${
                 isTransparent ? 'text-white/90 hover:text-[#DFC89D]' : 'text-zinc-800 hover:text-[#3E1A1E]'
               }`}
             >
-              <span>SAREES</span>
+              <span>ANARKALIS</span>
               <span className="absolute bottom-5 left-0 w-0 h-[1.5px] bg-[#C6A15D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
             <Link
-              to="/shop?category=lehengas"
+              to="/shop?category=sherwanis"
               className={`transition-colors py-6 relative group ${
                 isTransparent ? 'text-white/90 hover:text-[#DFC89D]' : 'text-zinc-800 hover:text-[#3E1A1E]'
               }`}
             >
-              <span>LEHENGAS</span>
+              <span>SHERWANIS</span>
               <span className="absolute bottom-5 left-0 w-0 h-[1.5px] bg-[#C6A15D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
             <Link
-              to="/shop?occasion=Bridal"
+              to="/shop?occasion=Wedding"
               className={`transition-colors py-6 relative group ${
                 isTransparent ? 'text-white/90 hover:text-[#DFC89D]' : 'text-zinc-800 hover:text-[#3E1A1E]'
               }`}
             >
-              <span>BRIDAL</span>
+              <span>WEDDING</span>
               <span className="absolute bottom-5 left-0 w-0 h-[1.5px] bg-[#C6A15D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
@@ -326,7 +326,7 @@ export const Navbar: React.FC = () => {
                         <p className="font-serif font-bold text-[#3E1A1E] text-base">{user.name}</p>
                         <p className="text-xs text-zinc-600 truncate">{user.email}</p>
                         <span className="inline-block mt-1 px-2 py-0.5 bg-[#3E1A1E] text-[#DFC89D] text-[10px] font-bold tracking-widest uppercase rounded">
-                          {user.role === 'ADMIN' ? 'Atelier Director' : 'Verified'}
+                          {user.role === 'ADMIN' ? 'Executive Director' : 'Verified'}
                         </span>
                       </div>
 
@@ -337,7 +337,7 @@ export const Navbar: React.FC = () => {
                           className="flex items-center gap-2.5 px-4 py-2.5 text-xs tracking-wider uppercase font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border-b border-amber-200 transition-colors"
                         >
                           <ShieldAlert className="w-4 h-4 text-amber-700" />
-                          <span>Atelier Portal Console</span>
+                          <span>Executive Portal Console</span>
                         </Link>
                       )}
 
@@ -381,7 +381,7 @@ export const Navbar: React.FC = () => {
                           }}
                           className="w-full text-left py-1 text-[#3E1A1E] hover:text-[#1C080B] text-xs font-bold tracking-wider uppercase"
                         >
-                          Sign Out of Atelier
+                          Sign Out
                         </button>
                       </div>
                     </>
@@ -459,8 +459,8 @@ export const Navbar: React.FC = () => {
                 Couture Pavilions
               </span>
               <ul className="space-y-2 text-sm font-medium">
-                <li><Link to="/shop?category=sarees" className="hover:text-[#3E1A1E] block py-1">Varanasi &amp; Kanchipuram Sarees</Link></li>
-                <li><Link to="/shop?category=lehengas" className="hover:text-[#3E1A1E] block py-1 font-bold text-[#3E1A1E]">Bridal &amp; Festive Lehengas</Link></li>
+                <li><Link to="/shop?category=sherwanis" className="hover:text-[#3E1A1E] block py-1 font-bold text-[#3E1A1E]">Royal Sherwanis &amp; Bandhgalas</Link></li>
+                <li><Link to="/shop?category=indo-western" className="hover:text-[#3E1A1E] block py-1">Indo-Western Ensembles</Link></li>
                 <li><Link to="/shop?category=kurta-sets" className="hover:text-[#3E1A1E] block py-1">Embroidered Kurta Sets</Link></li>
                 <li><Link to="/shop?category=anarkalis" className="hover:text-[#3E1A1E] block py-1">Floor-Length Anarkalis</Link></li>
                 <li><Link to="/shop?category=accessories" className="hover:text-[#3E1A1E] block py-1">Zari Potlis &amp; Dupattas</Link></li>
@@ -472,7 +472,7 @@ export const Navbar: React.FC = () => {
                 Curated by Occasion
               </span>
               <ul className="space-y-2 text-sm text-zinc-700">
-                <li><Link to="/shop?occasion=Bridal" className="hover:text-[#3E1A1E] block py-1">Pheras &amp; Wedding Ceremonies</Link></li>
+                <li><Link to="/shop?occasion=Wedding" className="hover:text-[#3E1A1E] block py-1">Pheras &amp; Wedding Ceremonies</Link></li>
                 <li><Link to="/shop?occasion=Sangeet" className="hover:text-[#3E1A1E] block py-1">Sangeet &amp; Cocktail Soirées</Link></li>
                 <li><Link to="/shop?occasion=Mehendi" className="hover:text-[#3E1A1E] block py-1">Mehendi &amp; Haldi Celebrations</Link></li>
                 <li><Link to="/shop?occasion=Reception" className="hover:text-[#3E1A1E] block py-1">Grand Reception Elegance</Link></li>
@@ -495,14 +495,14 @@ export const Navbar: React.FC = () => {
               <div className="relative rounded overflow-hidden aspect-[4/5] bg-zinc-900 group shadow-lg border border-[#C6A15D]/40">
                 <img
                   src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80"
-                  alt="Bridal Lookbook"
+                  alt="Couture Lookbook"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end">
                   <span className="text-[9px] uppercase font-bold tracking-widest text-[#DFC89D]">Haute Couture 2026</span>
                   <h4 className="font-serif text-xl text-white font-bold">The Royal Rajgharana Edit</h4>
                   <Link
-                    to="/shop?category=lehengas"
+                    to="/shop?category=anarkalis"
                     className="mt-2 text-xs font-bold text-[#DFC89D] hover:text-white uppercase tracking-wider flex items-center gap-1"
                   >
                     <span>View Lookbook</span>
@@ -558,7 +558,7 @@ export const Navbar: React.FC = () => {
                     <div className="mt-2 flex items-center gap-2">
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-[#C6A15D]/20 text-[#DFC89D] border border-[#C6A15D]/40">
                         <Crown className="w-3 h-3 text-[#C6A15D]" />
-                        {user.role === 'ADMIN' ? 'Atelier Director' : 'Verified Patron'}
+                        {user.role === 'ADMIN' ? 'Executive Director' : 'Verified Patron'}
                       </span>
                       <Link
                         to="/account"
@@ -580,7 +580,7 @@ export const Navbar: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-xs text-[#DFC89D]/90 font-serif">
-                    Haute Indian Fashion &amp; Bridal Heirlooms
+                    Haute Indian Fashion &amp; Royal Heirlooms
                   </p>
                   <Link
                     to="/login"
@@ -645,7 +645,7 @@ export const Navbar: React.FC = () => {
                 </button>
 
                 <a
-                  href="https://wa.me/919820012345?text=Hello%20Ethniz%20Couture%20Atelier,%20I%20would%20like%20to%20consult%20with%20a%20bridal%20stylist."
+                  href="https://wa.me/919820012345?text=Hello%20Ethniz%20Couture,%20I%20would%20like%20to%20consult%20with%20a%20royal%20stylist."
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -672,13 +672,13 @@ export const Navbar: React.FC = () => {
 
                 <div className="flex flex-col text-xs font-bold tracking-wider uppercase text-zinc-800">
                   <Link
-                    to="/shop?category=sarees"
+                    to="/shop?category=anarkalis"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="px-5 py-3.5 hover:bg-white flex items-center justify-between border-b border-zinc-100 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#C6A15D]" />
-                      <span>Sarees (Varanasi &amp; Kanchi)</span>
+                      <span>Floor-Length Anarkalis</span>
                     </div>
                     <span className="text-[9px] bg-[#FAF7F2] text-[#84642C] px-2 py-0.5 rounded border border-[#C6A15D]/40 font-semibold tracking-normal normal-case">
                       Pure Silk
@@ -686,13 +686,13 @@ export const Navbar: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/shop?category=lehengas"
+                    to="/shop?category=sherwanis"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="px-5 py-3.5 hover:bg-white flex items-center justify-between border-b border-zinc-100 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#3E1A1E]" />
-                      <span>Bridal &amp; Festive Lehengas</span>
+                      <span>Royal Sherwanis &amp; Bandhgalas</span>
                     </div>
                     <span className="text-[9px] bg-red-50 text-red-800 px-2 py-0.5 rounded border border-red-200 font-semibold tracking-normal normal-case">
                       👑 Royal Edit
@@ -700,13 +700,13 @@ export const Navbar: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/shop?occasion=Bridal"
+                    to="/shop?occasion=Wedding"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="px-5 py-3.5 hover:bg-white flex items-center justify-between border-b border-zinc-100 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#C6A15D]" />
-                      <span>Bridal Pavilion</span>
+                      <span>Wedding Pavilion</span>
                     </div>
                     <ChevronRight className="w-4 h-4 text-zinc-400" />
                   </Link>
@@ -774,11 +774,11 @@ export const Navbar: React.FC = () => {
                 </div>
               </div>
 
-              {/* SECTION 3: ATELIER & ASSISTANCE */}
+              {/* SECTION 3: CONCIERGE & ASSISTANCE */}
               <div className="py-3">
                 <div className="px-5 pb-2 pt-1">
                   <span className="text-[10px] font-bold tracking-[0.25em] text-[#84642C] uppercase">
-                    Atelier &amp; Concierge
+                    Royal Concierge &amp; Care
                   </span>
                 </div>
 
@@ -797,7 +797,7 @@ export const Navbar: React.FC = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="px-5 py-3 hover:bg-white flex items-center justify-between border-b border-zinc-100"
                   >
-                    <span>Bridal Studio &amp; Appointments</span>
+                    <span>Private Studio &amp; Appointments</span>
                     <ChevronRight className="w-4 h-4 text-zinc-400" />
                   </Link>
 
@@ -809,7 +809,7 @@ export const Navbar: React.FC = () => {
                     >
                       <div className="flex items-center gap-2">
                         <ShieldAlert className="w-4 h-4 text-amber-700" />
-                        <span>Atelier Director Portal</span>
+                        <span>Executive Director Portal</span>
                       </div>
                       <ChevronRight className="w-4 h-4 text-amber-700" />
                     </Link>
@@ -844,7 +844,7 @@ export const Navbar: React.FC = () => {
                   }}
                   className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-red-700 hover:bg-red-50 rounded border border-red-200 transition-colors"
                 >
-                  Sign Out of Atelier
+                  Sign Out
                 </button>
               ) : null}
             </div>
@@ -866,7 +866,7 @@ export const Navbar: React.FC = () => {
             </button>
 
             <div className="text-xs font-bold tracking-[0.25em] text-[#84642C] uppercase mb-2">
-              Atelier Archive Search
+              Couture Vault Search
             </div>
 
             <form onSubmit={handleSearchSubmit} className="relative mt-2">
@@ -874,7 +874,7 @@ export const Navbar: React.FC = () => {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search by weave, fabric, collection, or attire (e.g., Banarasi, Velvet, Saree)..."
+                placeholder="Search by weave, fabric, collection, or attire (e.g., Banarasi, Velvet, Anarkali)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full h-12 pl-12 pr-4 bg-white border border-[#E8DEC8] rounded-lg focus:outline-none focus:border-[#3E1A1E] focus:ring-2 focus:ring-[#C6A15D]/30 text-zinc-900 placeholder:text-zinc-400 text-sm shadow-xs transition-all"
@@ -927,7 +927,7 @@ export const Navbar: React.FC = () => {
 
             {!isSearching && searchQuery.trim() && searchResults.length === 0 && (
               <div className="py-6 text-center text-sm text-zinc-500">
-                No couture pieces found matching "{searchQuery}". Try searching for 'Saree', 'Lehenga', or 'Silk'.
+                No couture pieces found matching "{searchQuery}". Try searching for 'Anarkali', 'Sherwani', or 'Silk'.
               </div>
             )}
           </div>

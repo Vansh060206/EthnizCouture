@@ -8,7 +8,7 @@
 ## 🏛 Brand Identity & Design Philosophy
 
 - **Color Palette:**
-  - **Royal Maroon (`#4A0E1A`, `#320911`, `#1F040A`):** Evoking imperial Mughal velvet and bridal vermillion.
+  - **Royal Maroon (`#4A0E1A`, `#320911`, `#1F040A`):** Evoking imperial Mughal velvet and royal vermillion.
   - **Antique Zari Gold (`#C5A059`, `#DFC89D`, `#96742E`):** Pure metallic luster derived from hallmarked bullion wires.
   - **Warm Ivory (`#FAF7F2`, `#F2ECE1`):** Soft, archival backdrop reminiscent of handmade wasli paper.
   - **Deep Charcoal (`#171717`, `#0D0D0D`):** Editorial grounding for high-contrast typography.
@@ -80,17 +80,17 @@ To test the application effortlessly without registering, you can use the **1-cl
 ## 🛍 Customer Experience Features
 
 1. **Haute Couture Hero Section:**
-   - 3-slide editorial lookbook (Bridal Lehengas, Varanasi Sarees, Imperial Sherwanis) with auto-slide & manual navigation.
+   - 3-slide editorial lookbook (Royal Couture, Varanasi Silks, Imperial Sherwanis) with auto-slide & manual navigation.
 2. **Infinite Royal Marquee Ticker:**
    - Smooth continuous announcement ribbon highlighting GI-tagged purity, free insured worldwide shipping, and bespoke fitting.
 3. **The Ancient Arts of Karigari (Craftsmanship Pavilion):**
    - Interactive visual showcase exploring 4 historic Indian disciplines: *Awadh Zardozi*, *Banarasi Kadwa Weaving*, *Lucknowi Chikankari & Mukaish*, and *Rajasthan Gota Patti*.
-4. **Bespoke Bridal Concierge Booking:**
+4. **Bespoke Concierge Booking:**
    - Interactive appointment booking card for private 1-on-1 video styling consultations with senior atelier stylists.
 5. **Shop & Vault Filtering:**
-   - Multi-currency price presets (Under ₹15,000 to ₹75,000+ Heirloom Bridal).
+   - Multi-currency price presets (Under ₹15,000 to ₹75,000+ Heirloom Masterpieces).
    - Filter by Fabric (Katan Silk, Velvet, Organza, Chanderi, Georgette).
-   - Filter by Occasion (Bridal, Sangeet, Mehendi, Reception, Festive).
+   - Filter by Occasion (Wedding, Sangeet, Mehendi, Reception, Festive).
    - Grid layout switcher (2 columns, 3 columns, 4 columns).
    - Active filter chips with 1-click removal.
 6. **Product Detail Experience:**

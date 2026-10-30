@@ -165,15 +165,15 @@ export function generateWelcomeEmailHtml(customerName?: string | null): string {
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center" style="font-size: 11px; color: #71717A; line-height: 1.6;">
-                    <strong style="color: #3E1A1E;">Ethniz Couture Atelier</strong>
+                    <strong style="color: #3E1A1E;">Ethniz Couture</strong>
                     <br>
-                    Handcrafted Varanasi Silks &bull; Royal Bridal Lehengas &bull; Heritage Sherwanis
+                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Heritage Sherwanis
                     <br><br>
                     <a href="${storefrontUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Visit Boutique</a>
                     &nbsp;&bull;&nbsp;
                     <a href="${shopUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Handloom Catalog</a>
                     &nbsp;&bull;&nbsp;
-                    <a href="${contactUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Atelier Concierge</a>
+                    <a href="${contactUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Royal Concierge</a>
                   </td>
                 </tr>
               </table>
@@ -220,7 +220,7 @@ Team Ethniz Couture
 Wear Your Heritage. Own Your Style.
 
 ---
-Ethniz Couture Atelier
+Ethniz Couture
 Visit: ${storefrontUrl}
 Concierge: ${storefrontUrl}/contact
 `;
@@ -618,11 +618,11 @@ class EmailService {
   }
 
   /**
-   * Dispatches the official atelier response email to a patron's contact inquiry.
+   * Dispatches the official concierge response email to a patron's contact inquiry.
    */
   async sendContactReplyEmail(options: ContactReplyEmailOptions): Promise<EmailSendResult> {
     const { customerEmail, originalSubject } = options;
-    const subject = `Re: ${originalSubject} — Ethniz Couture Atelier`;
+    const subject = `Re: ${originalSubject} — Ethniz Couture`;
     const html = generateContactReplyEmailHtml(options);
     const text = generateContactReplyEmailText(options);
 
@@ -678,6 +678,289 @@ class EmailService {
       provider: 'simulated'
     };
   }
+
+  /**
+   * Dispatches the royal abandoned cart recovery email to an eligible patron.
+   * Real Resend dispatch is strictly guarded by enableRecoveryEmailLiveSend configuration.
+   */
+  async sendAbandonedCartRecoveryEmail(options: AbandonedCartEmailOptions): Promise<EmailSendResult> {
+    const { customerEmail, customerName } = options;
+    const subject = 'Your Handcrafted Selection Awaits — Ethniz Couture';
+    const html = generateAbandonedCartEmailHtml(options);
+    const text = generateAbandonedCartEmailText(options);
+
+    if (config.enableRecoveryEmailLiveSend && config.emailApiKey && (config.nodeEnv !== 'test' || process.env.TEST_ALLOW_LIVE_RESEND_MOCK === 'true')) {
+      try {
+        const response = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${config.emailApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: config.emailFrom,
+            to: [customerEmail],
+            subject,
+            html,
+            text
+          }),
+          signal: AbortSignal.timeout(10000)
+        });
+
+        const data: any = await response.json();
+
+        if (!response.ok) {
+          logger.error('Resend abandoned cart recovery email delivery error', { status: response.status, data });
+          throw new Error(data?.message || `Resend email delivery failed with status ${response.status}`);
+        }
+
+        logger.info(`Luxury abandoned cart recovery email sent successfully via Resend to ${customerEmail} [ID: ${data.id}]`);
+        return {
+          success: true,
+          messageId: data.id,
+          provider: 'resend'
+        };
+      } catch (err: any) {
+        logger.error(`Failed to send abandoned cart recovery email via Resend to ${customerEmail}:`, err.message);
+        throw err;
+      }
+    }
+
+    // Safe simulated dispatch by default
+    logger.info(`[EMAIL SIMULATOR] Luxury abandoned cart recovery email rendered for ${customerEmail} (Items: ${options.items.length}, Subtotal: ₹${options.subtotal})`);
+    logger.info(`[EMAIL SIMULATOR] Subject: "${subject}" | From: ${config.emailFrom}`);
+
+    return {
+      success: true,
+      messageId: `sim_recovery_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+      provider: 'simulated'
+    };
+  }
+}
+
+export interface AbandonedCartEmailItem {
+  productName: string;
+  productImage?: string | null;
+  size?: string | null;
+  color?: string | null;
+  quantity: number;
+  price: number;
+}
+
+export interface AbandonedCartEmailOptions {
+  customerEmail: string;
+  customerName?: string | null;
+  cartId: string;
+  items: AbandonedCartEmailItem[];
+  subtotal: number;
+}
+
+/**
+ * Generates the royal Ethniz Couture luxury abandoned cart recovery email HTML.
+ */
+export function generateAbandonedCartEmailHtml(options: AbandonedCartEmailOptions): string {
+  const safeName = options.customerName?.trim() ? escapeHtml(options.customerName.trim()) : 'Patron';
+  const storefrontUrl = config.frontendUrl.replace(/\/+$/, '');
+  const cartUrl = `${storefrontUrl}/cart`;
+  const contactUrl = `${storefrontUrl}/contact`;
+
+  const itemRowsHtml = options.items.map((item) => {
+    const safeTitle = escapeHtml(item.productName);
+    const details = [item.size ? `Size: ${escapeHtml(item.size)}` : '', item.color ? `Color: ${escapeHtml(item.color)}` : '']
+      .filter(Boolean)
+      .join(' &bull; ');
+    const formattedPrice = `₹${item.price.toLocaleString('en-IN')}`;
+
+    return `<tr>
+      <td style="padding: 16px 0; border-bottom: 1px solid #F4EBE1;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td style="vertical-align: top;">
+              <span style="font-family: Georgia, Garamond, serif; font-size: 15px; font-weight: bold; color: #3E1A1E; display: block;">
+                ${safeTitle}
+              </span>
+              ${details ? `<span style="font-size: 12px; color: #71717A; display: block; margin-top: 4px;">${details}</span>` : ''}
+              <span style="font-size: 12px; color: #84642C; display: block; margin-top: 2px;">Qty: ${item.quantity}</span>
+            </td>
+            <td align="right" style="vertical-align: top; white-space: nowrap; font-size: 14px; font-weight: 600; color: #3E1A1E;">
+              ${formattedPrice}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>`;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Handcrafted Selection Awaits</title>
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+  </style>
+  <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background-color: #FAF7F2; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #27272A;">
+  <div style="display: none; max-height: 0px; overflow: hidden; mso-hide: all; font-size: 1px; line-height: 1px; color: #FAF7F2; opacity: 0;">
+    Your bespoke handloom pieces are reserved in your couture bag.
+  </div>
+
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAF7F2; padding: 30px 15px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #FFFFFF; border: 1px solid #DFC89D; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(62, 26, 30, 0.08);">
+          <!-- Header -->
+          <tr>
+            <td align="center" style="background: linear-gradient(135deg, #3E1A1E 0%, #2B0C10 100%); background-color: #3E1A1E; padding: 36px 30px 28px; border-bottom: 3px solid #C6A15D;">
+              <span style="font-family: Georgia, Garamond, 'Times New Roman', serif; font-size: 28px; font-weight: bold; letter-spacing: 0.15em; color: #FFFFFF; text-transform: uppercase; display: inline-block;">
+                ETHNIZ<span style="color: #DFC89D; font-weight: 300; font-style: italic; text-transform: lowercase; font-size: 24px;">Couture</span>
+              </span>
+              <div style="width: 44px; height: 1px; background-color: #C6A15D; margin: 10px auto 8px;"></div>
+              <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.22em; color: #DFC89D; text-transform: uppercase; display: block;">
+                Wear Your Heritage. Own Your Style.
+              </span>
+            </td>
+          </tr>
+
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 38px 36px 32px;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="font-family: Georgia, Garamond, 'Times New Roman', serif; font-size: 20px; font-weight: bold; color: #3E1A1E; padding-bottom: 16px;">
+                    Dear ${safeName},
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="font-size: 15px; line-height: 1.7; color: #3F3F46; padding-bottom: 14px;">
+                    We noticed you left some exquisite handloom pieces in your shopping bag.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="font-size: 15px; line-height: 1.7; color: #3F3F46; padding-bottom: 24px;">
+                    True craftsmanship is timeless, but our bespoke handcrafted collections are woven in limited quantities. We have held your bag so you can easily resume when you are ready.
+                  </td>
+                </tr>
+
+                <!-- Item Summary Header -->
+                <tr>
+                  <td style="font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #84642C; padding-bottom: 8px; border-bottom: 2px solid #DFC89D;">
+                    Your Reserved Selections
+                  </td>
+                </tr>
+
+                <!-- Item List -->
+                ${itemRowsHtml}
+
+                <!-- Subtotal Row -->
+                <tr>
+                  <td style="padding: 18px 0 28px;">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td style="font-family: Georgia, Garamond, serif; font-size: 16px; font-weight: bold; color: #3E1A1E;">
+                          Estimated Subtotal
+                        </td>
+                        <td align="right" style="font-family: Georgia, Garamond, serif; font-size: 18px; font-weight: bold; color: #3E1A1E;">
+                          ₹${options.subtotal.toLocaleString('en-IN')}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- CTA Button -->
+                <tr>
+                  <td align="center" style="padding-bottom: 30px;">
+                    <a href="${cartUrl}" target="_blank" style="display: inline-block; background-color: #3E1A1E; color: #DFC89D; border: 1px solid #C6A15D; padding: 16px 36px; border-radius: 8px; font-size: 12px; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; box-shadow: 0 4px 14px rgba(62, 26, 30, 0.25);">
+                      RESUME YOUR SELECTION
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Concierge Note -->
+                <tr>
+                  <td style="font-size: 13px; line-height: 1.6; color: #71717A; padding: 18px; background-color: #FAF7F2; border-radius: 8px; border: 1px solid #EFE4D2;">
+                    <strong>Need assistance with sizing or styling?</strong><br>
+                    Our royal concierge team is pleased to offer bespoke guidance. Simply reply to this email or reach us through our <a href="${contactUrl}" style="color: #84642C; text-decoration: none; font-weight: 600;">Royal Concierge</a>.
+                  </td>
+                </tr>
+
+                <!-- Signature -->
+                <tr>
+                  <td style="font-size: 14px; line-height: 1.7; color: #52525B; padding-top: 24px;">
+                    With warm regards,<br>
+                    <strong style="color: #3E1A1E;">Team Ethniz Couture</strong>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background-color: #FAF7F2; padding: 22px 30px; border-top: 1px solid #DFC89D;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="center" style="font-size: 11px; color: #71717A; line-height: 1.6;">
+                    <strong style="color: #3E1A1E;">Ethniz Couture</strong><br>
+                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Heritage Sherwanis<br><br>
+                    <a href="${storefrontUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Visit Boutique</a>
+                    &nbsp;&bull;&nbsp;
+                    <a href="${cartUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">View Cart</a>
+                    &nbsp;&bull;&nbsp;
+                    <a href="${contactUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Royal Concierge</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+/**
+ * Generates plain-text fallback for abandoned cart recovery email.
+ */
+export function generateAbandonedCartEmailText(options: AbandonedCartEmailOptions): string {
+  const safeName = options.customerName?.trim() || 'Patron';
+  const storefrontUrl = config.frontendUrl.replace(/\/+$/, '');
+  const cartUrl = `${storefrontUrl}/cart`;
+
+  const itemsList = options.items.map((item) => {
+    const details = [item.size ? `Size: ${item.size}` : '', item.color ? `Color: ${item.color}` : '']
+      .filter(Boolean)
+      .join(', ');
+    return `- ${item.productName}${details ? ` (${details})` : ''} x ${item.quantity} — ₹${item.price.toLocaleString('en-IN')}`;
+  }).join('\n');
+
+  return `Dear ${safeName},
+
+We noticed you left some exquisite handloom pieces in your shopping bag.
+
+True craftsmanship is timeless, but our handcrafted collections are woven in limited quantities. We have preserved your bag so you can easily complete your selection when you are ready.
+
+Your Reserved Selections:
+${itemsList}
+
+Estimated Subtotal: ₹${options.subtotal.toLocaleString('en-IN')}
+
+Resume Your Selection: ${cartUrl}
+
+Need assistance with sizing or bespoke requests? Contact our royal concierge: ${storefrontUrl}/contact
+
+With warm regards,
+Team Ethniz Couture
+Wear Your Heritage. Own Your Style.
+`;
 }
 
 export interface OrderConfirmationEmailItem {
@@ -796,7 +1079,7 @@ export function generateOrderConfirmationEmailHtml(options: OrderConfirmationEma
                 Thank you for your order, ${safeName}
               </div>
               <p style="font-size: 14px; line-height: 1.6; color: #52525B; margin: 0 0 24px;">
-                Your order <strong style="color: #3E1A1E;">${escapeHtml(options.orderNumber)}</strong> has been confirmed. Our master karigars and atelier specialists are preparing your garments with artisanal care.
+                Your order <strong style="color: #3E1A1E;">${escapeHtml(options.orderNumber)}</strong> has been confirmed. Our master karigars and artisans are preparing your garments with artisanal care.
               </p>
 
               <!-- Order Snapshot Banner -->
@@ -871,7 +1154,7 @@ export function generateOrderConfirmationEmailHtml(options: OrderConfirmationEma
 
               <!-- WhatsApp Concierge Callout -->
               <p style="font-size: 12px; line-height: 1.6; color: #71717A; text-align: center; margin: 0; padding-top: 16px; border-top: 1px solid #F4F4F5;">
-                Need custom sleeve length, blouse alterations, or urgent delivery date? Reply to this email or contact our atelier team on WhatsApp at <strong>+91 98200 12345</strong>.
+                Need custom sleeve length, blouse alterations, or urgent delivery date? Reply to this email or contact our royal concierge team on WhatsApp at <strong>+91 98200 12345</strong>.
               </p>
             </td>
           </tr>
@@ -879,7 +1162,7 @@ export function generateOrderConfirmationEmailHtml(options: OrderConfirmationEma
           <!-- Footer -->
           <tr>
             <td align="center" style="background-color: #FAF7F2; padding: 24px 30px; border-top: 1px solid #DFC89D; font-size: 11px; color: #71717A;">
-              <p style="margin: 0 0 6px; font-weight: 600; color: #3E1A1E;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px; font-weight: 600; color: #3E1A1E;">ETHNIZ COUTURE</p>
               <p style="margin: 0 0 6px;">Wear Your Heritage. Own Your Style.</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
@@ -926,7 +1209,7 @@ TRACK YOUR ORDER LIVE:
 ${trackingUrl}
 
 Have questions or custom fitting inquiries?
-Contact our atelier team on WhatsApp at +91 98200 12345 or reply to this email.
+Contact our royal concierge team on WhatsApp at +91 98200 12345 or reply to this email.
 
 With warmth,
 Team Ethniz Couture
@@ -976,14 +1259,14 @@ export function generatePasswordResetOtpEmailHtml(options: PasswordResetEmailOpt
       <td align="center">
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 580px; background-color: #FFFFFF; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(62, 26, 30, 0.06); border: 1px solid #EBE4D8;">
           
-          <!-- Atelier Header Banner -->
+          <!-- Royal Header Banner -->
           <tr>
             <td style="background-color: #3E1A1E; padding: 36px 30px; text-align: center; border-bottom: 3px solid #C5A262;">
               <h1 style="margin: 0; color: #FAF7F2; font-family: 'Playfair Display', Georgia, serif; font-size: 26px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500;">
                 ETHNIZ COUTURE
               </h1>
               <p style="margin: 8px 0 0 0; color: #D4AF37; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;">
-                ROYAL ATELIER &bull; SECURITY VERIFICATION
+                ROYAL MAISON &bull; SECURITY VERIFICATION
               </p>
             </td>
           </tr>
@@ -1018,7 +1301,7 @@ export function generatePasswordResetOtpEmailHtml(options: PasswordResetEmailOpt
               <!-- Security Information Note -->
               <div style="background-color: #FAF8F5; border-left: 3px solid #C5A262; padding: 14px 18px; border-radius: 4px; margin: 24px 0 20px 0;">
                 <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #71717A;">
-                  <strong>Security Reminder:</strong> Never share this code with anyone. Ethniz Couture concierge or atelier team will never ask for your verification code.
+                  <strong>Security Reminder:</strong> Never share this code with anyone. Ethniz Couture concierge or royal concierge team will never ask for your verification code.
                 </p>
               </div>
 
@@ -1040,7 +1323,7 @@ export function generatePasswordResetOtpEmailHtml(options: PasswordResetEmailOpt
           <!-- Footer -->
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1116,7 +1399,7 @@ export function generatePasswordResetSuccessEmailHtml(options: PasswordResetSucc
               </p>
               
               <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #52525B;">
-                This email confirms that the password for your Ethniz Couture atelier account (<strong>${escapeHtml(options.email)}</strong>) was successfully updated.
+                This email confirms that the password for your Ethniz Couture account (<strong>${escapeHtml(options.email)}</strong>) was successfully updated.
               </p>
 
               <div style="background-color: #F0FDF4; border-left: 3px solid #22C55E; padding: 14px 18px; border-radius: 4px; margin: 20px 0;">
@@ -1136,7 +1419,7 @@ export function generatePasswordResetSuccessEmailHtml(options: PasswordResetSucc
               </table>
 
               <p style="margin: 24px 0 0 0; font-size: 12px; line-height: 1.6; color: #71717A;">
-                If you did NOT perform this action, please contact our Atelier Concierge immediately to secure your account.
+                If you did NOT perform this action, please contact our Royal Concierge immediately to secure your account.
               </p>
 
               <div style="border-top: 1px solid #F4EFE6; padding-top: 24px; margin-top: 24px;">
@@ -1152,7 +1435,7 @@ export function generatePasswordResetSuccessEmailHtml(options: PasswordResetSucc
 
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1174,10 +1457,10 @@ export function generatePasswordResetSuccessEmailText(options: PasswordResetSucc
 
   return `Dear ${safeName},
 
-This email confirms that the password for your Ethniz Couture atelier account (${options.email}) was successfully updated.
+This email confirms that the password for your Ethniz Couture account (${options.email}) was successfully updated.
 
 If you made this change, no further action is required.
-If you did not perform this change, please immediately contact our Atelier Concierge at ${storefrontUrl}/contact.
+If you did not perform this change, please immediately contact our Royal Concierge at ${storefrontUrl}/contact.
 
 With warmth,
 Team Ethniz Couture
@@ -1267,7 +1550,7 @@ export function generateOrderCancellationEmailHtml(options: OrderCancellationEma
               </p>
               
               <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #52525B;">
-                Your order <strong>${escapeHtml(options.orderNumber)}</strong> has been successfully cancelled as requested. The reserved garments have been returned to our atelier inventory.
+                Your order <strong>${escapeHtml(options.orderNumber)}</strong> has been successfully cancelled as requested. The reserved garments have been returned to our boutique inventory.
               </p>
 
               <!-- Order Summary Box -->
@@ -1297,7 +1580,7 @@ export function generateOrderCancellationEmailHtml(options: OrderCancellationEma
               </div>
 
               <p style="margin: 20px 0 0 0; font-size: 13px; line-height: 1.6; color: #71717A;">
-                We hope to welcome you back to our atelier soon. If you have any questions, our concierge team is always at your service.
+                We hope to welcome you back soon. If you have any questions, our concierge team is always at your service.
               </p>
 
               <div style="border-top: 1px solid #F4EFE6; padding-top: 24px; margin-top: 24px;">
@@ -1313,7 +1596,7 @@ export function generateOrderCancellationEmailHtml(options: OrderCancellationEma
 
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Explore Collections</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1388,7 +1671,7 @@ export function generateReturnRequestEmailHtml(options: ReturnRequestEmailOption
               </p>
               
               <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #52525B;">
-                We have received your return request for Order <strong>${escapeHtml(options.orderNumber)}</strong>. Our atelier concierge has initiated the review process.
+                We have received your return request for Order <strong>${escapeHtml(options.orderNumber)}</strong>. Our royal concierge has initiated the review process.
               </p>
 
               <!-- Request Details Box -->
@@ -1414,7 +1697,7 @@ export function generateReturnRequestEmailHtml(options: ReturnRequestEmailOption
                   <strong>What happens next?</strong><br />
                   1. Our concierge team reviews your request within 24 hours.<br />
                   2. A complimentary reverse pickup will be scheduled at your doorstep via Delhivery / BlueDart.<br />
-                  3. Upon inspection at our atelier, your exchange or refund will be executed promptly.
+                  3. Upon inspection at our boutique, your exchange or refund will be executed promptly.
                 </p>
               </div>
 
@@ -1435,7 +1718,7 @@ export function generateReturnRequestEmailHtml(options: ReturnRequestEmailOption
 
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1461,7 +1744,7 @@ We have received your return/exchange request for Order ${options.orderNumber}.
 Resolution Requested: ${options.resolution}
 Reason: ${options.reason}
 ${options.comments ? `Notes: ${options.comments}\n` : ''}
-Our atelier team will review your request within 24 hours and arrange reverse pickup at your doorstep.
+Our royal concierge team will review your request within 24 hours and arrange reverse pickup at your doorstep.
 
 With warmth,
 Team Ethniz Couture
@@ -1498,7 +1781,7 @@ export function generateReturnDecisionEmailHtml(options: ReturnDecisionEmailOpti
                 ETHNIZ COUTURE
               </span>
               <span style="font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #C6A15D; display: block; margin-top: 4px;">
-                HAUTE FASHION HOUSE &bull; ATELIER CONCIERGE
+                HAUTE FASHION HOUSE &bull; ROYAL CONCIERGE
               </span>
             </td>
           </tr>
@@ -1521,14 +1804,14 @@ export function generateReturnDecisionEmailHtml(options: ReturnDecisionEmailOpti
               <p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #52525B;">
                 ${isApproved
                   ? `Your return/exchange request for Order <strong>#${escapeHtml(options.orderNumber)}</strong> has been approved by our master karigari concierge team.`
-                  : `Thank you for reaching out regarding Order <strong>#${escapeHtml(options.orderNumber)}</strong>. Following our atelier quality appraisal, we are unable to process this return request.`
+                  : `Thank you for reaching out regarding Order <strong>#${escapeHtml(options.orderNumber)}</strong>. Following our quality appraisal, we are unable to process this return request.`
                 }
               </p>
 
               <!-- Resolution / Details Box -->
               <div style="background-color: #FAF7F2; border: 1px solid #EBE4D8; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
                 <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: #84642C; text-transform: uppercase; letter-spacing: 0.05em;">
-                  ${isApproved ? 'Atelier Resolution Details' : 'Concierge Decision Notes'}
+                  ${isApproved ? 'Resolution Details' : 'Concierge Decision Notes'}
                 </p>
                 ${isApproved ? `
                 <p style="margin: 4px 0; font-size: 13px; color: #3F3F46;">
@@ -1543,7 +1826,7 @@ export function generateReturnDecisionEmailHtml(options: ReturnDecisionEmailOpti
                 </p>` : ''}
                 ` : `
                 <p style="margin: 4px 0; font-size: 13px; color: #3F3F46;">
-                  <strong>Reason:</strong> ${escapeHtml(options.reason || 'Does not qualify under 7-day atelier policy')}
+                  <strong>Reason:</strong> ${escapeHtml(options.reason || 'Does not qualify under 7-day boutique policy')}
                 </p>
                 `}
                 ${options.notes ? `
@@ -1573,7 +1856,7 @@ export function generateReturnDecisionEmailHtml(options: ReturnDecisionEmailOpti
           <!-- Footer -->
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1598,7 +1881,7 @@ export function generateReturnDecisionEmailText(options: ReturnDecisionEmailOpti
 This is an update regarding your return/exchange request for Order #${options.orderNumber}.
 
 Status: ${isApproved ? 'APPROVED — Reverse Pickup Scheduled' : 'DECLINED'}
-${isApproved ? `Resolution: ${options.resolution || 'Refund to Source'}\nCarrier: ${options.carrierName || 'Blue Dart Express Reverse Logistics'}` : `Reason: ${options.reason || 'Does not meet 7-day atelier return guidelines'}`}
+${isApproved ? `Resolution: ${options.resolution || 'Refund to Source'}\nCarrier: ${options.carrierName || 'Blue Dart Express Reverse Logistics'}` : `Reason: ${options.reason || 'Does not meet 7-day boutique return guidelines'}`}
 ${options.notes ? `Concierge Notes: ${options.notes}\n` : ''}
 
 Track your order anytime: ${config.frontendUrl}/track-order?orderNumber=${options.orderNumber}
@@ -1614,7 +1897,7 @@ Team Ethniz Couture
 export function generateContactReplyEmailHtml(options: ContactReplyEmailOptions): string {
   const safeName = options.customerName?.trim() ? escapeHtml(options.customerName.trim()) : 'Patron';
   const storefrontUrl = config.frontendUrl.replace(/\/+$/, '');
-  const sender = options.senderName ? escapeHtml(options.senderName) : 'Atelier Concierge Team';
+  const sender = options.senderName ? escapeHtml(options.senderName) : 'Royal Concierge Team';
 
   const formattedReply = escapeHtml(options.replyMessage).replace(/\n/g, '<br>');
   const formattedOriginal = escapeHtml(options.originalMessage).replace(/\n/g, '<br>');
@@ -1638,7 +1921,7 @@ export function generateContactReplyEmailHtml(options: ContactReplyEmailOptions)
               <span style="font-family: Georgia, Garamond, serif; font-size: 26px; font-weight: bold; letter-spacing: 0.15em; color: #FFFFFF; text-transform: uppercase;">
                 ETHNIZ<span style="color: #DFC89D; font-weight: 300; font-style: italic; text-transform: lowercase; font-size: 24px;">Couture</span>
               </span>
-              <p style="margin: 8px 0 0; color: #DFC89D; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;">Atelier Concierge Response</p>
+              <p style="margin: 8px 0 0; color: #DFC89D; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;">Royal Concierge Response</p>
             </td>
           </tr>
 
@@ -1649,13 +1932,13 @@ export function generateContactReplyEmailHtml(options: ContactReplyEmailOptions)
                 Dear ${safeName},
               </p>
               <p style="font-size: 13px; line-height: 1.7; color: #52525B; margin: 0 0 22px 0;">
-                Thank you for reaching out to the Ethniz Couture Atelier regarding <strong>&ldquo;${escapeHtml(options.originalSubject)}&rdquo;</strong>. Our concierge team has reviewed your inquiry and prepared the following response:
+                Thank you for reaching out to the Ethniz Couture regarding <strong>&ldquo;${escapeHtml(options.originalSubject)}&rdquo;</strong>. Our concierge team has reviewed your inquiry and prepared the following response:
               </p>
 
-              <!-- Atelier Official Response Card -->
+              <!-- Official Response Card -->
               <div style="background-color: #FDFBF7; border-left: 4px solid #C6A15D; border-radius: 0 8px 8px 0; padding: 20px 22px; margin-bottom: 26px;">
                 <div style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; color: #84642C; margin-bottom: 8px;">
-                  Official Atelier Message
+                  Official Concierge Message
                 </div>
                 <div style="font-size: 13px; line-height: 1.8; color: #27272A; font-family: Georgia, serif;">
                   ${formattedReply}
@@ -1691,7 +1974,7 @@ export function generateContactReplyEmailHtml(options: ContactReplyEmailOptions)
           <!-- Footer -->
           <tr>
             <td style="background-color: #F8F5EE; padding: 22px 30px; text-align: center; border-top: 1px solid #EBE4D8; font-size: 11px; color: #A1A1AA; line-height: 1.6;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE ATELIER</p>
+              <p style="margin: 0 0 6px 0; font-weight: 600; color: #71717A;">ETHNIZ COUTURE</p>
               <p style="margin: 0;"><a href="${storefrontUrl}" style="color: #84642C; text-decoration: none;">Visit Storefront</a> &bull; <a href="${storefrontUrl}/contact" style="color: #84642C; text-decoration: none;">Concierge Support</a></p>
             </td>
           </tr>
@@ -1709,13 +1992,13 @@ export function generateContactReplyEmailHtml(options: ContactReplyEmailOptions)
  */
 export function generateContactReplyEmailText(options: ContactReplyEmailOptions): string {
   const safeName = options.customerName?.trim() || 'Patron';
-  const sender = options.senderName || 'Atelier Concierge Team';
+  const sender = options.senderName || 'Royal Concierge Team';
 
   return `Dear ${safeName},
 
-Thank you for reaching out to the Ethniz Couture Atelier regarding "${options.originalSubject}".
+Thank you for reaching out to the Ethniz Couture regarding "${options.originalSubject}".
 
-Atelier Response:
+Concierge Response:
 ${options.replyMessage}
 
 — ${sender}, Ethniz Couture

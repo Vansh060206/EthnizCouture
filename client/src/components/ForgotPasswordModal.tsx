@@ -243,7 +243,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-[#84642C] bg-[#FAF1DF] px-2 py-0.5 rounded">
-                  ATELIER SECURITY
+                  ACCOUNT SECURITY
                 </span>
               </div>
               <h2 id="forgot-password-title" className="text-base sm:text-lg font-serif font-bold text-[#3E1A1E] mt-0.5">
@@ -301,7 +301,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
               <div className="bg-[#FAF7F2] border border-[#EBE4D8] rounded-xl p-3 flex items-start gap-2.5 text-[11px] text-[#84642C]">
                 <KeyRound className="w-4 h-4 shrink-0 mt-0.5 text-[#C5A262]" />
                 <span>
-                  A one-time code valid for 15 minutes will be dispatched to safeguard your atelier account.
+                  A one-time code valid for 15 minutes will be dispatched to safeguard your account.
                 </span>
               </div>
 
@@ -520,7 +520,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
                 onClick={onClose}
                 className="w-full h-12 bg-[#3E1A1E] text-white rounded-xl font-bold uppercase tracking-wider text-xs shadow-md hover:bg-[#2C1215] active:scale-[0.98] transition-all"
               >
-                Continue to Atelier
+                Continue to Boutique
               </button>
             </div>
           )}

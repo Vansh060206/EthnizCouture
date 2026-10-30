@@ -55,7 +55,7 @@ export const CartPage: React.FC = () => {
         </div>
         <h1 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900">Your Couture Bag is Empty</h1>
         <p className="text-xs sm:text-sm text-zinc-500 mt-2 max-w-md mx-auto leading-relaxed">
-          Explore handcrafted Varanasi silks, bridal lehengas, and royal heritage sherwanis crafted for life's most unforgettable moments.
+          Explore handcrafted Varanasi silks, regal anarkalis, and royal heritage sherwanis crafted for life's most unforgettable moments.
         </p>
         <Link
           to="/shop"
@@ -73,7 +73,7 @@ export const CartPage: React.FC = () => {
       
       <div>
         <span className="text-[10px] font-bold tracking-[0.25em] text-gold-700 uppercase block mb-1">
-          Atelier Bag &amp; Review
+          Couture Bag &amp; Review
         </span>
         <h1 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-950">
           Your Shopping Bag

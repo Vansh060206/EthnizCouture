@@ -1444,7 +1444,7 @@ export const replyToInquiry = async (req: Request, res: Response): Promise<void>
       originalSubject: inquiry.subject,
       originalMessage: inquiry.message,
       replyMessage: replyMessage.trim(),
-      senderName: senderName?.trim() || 'Atelier Concierge'
+      senderName: senderName?.trim() || 'Royal Concierge'
     });
 
     // 2. Update status if requested

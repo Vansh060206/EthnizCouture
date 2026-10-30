@@ -19,6 +19,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { ProductCard } from '../components/ProductCard';
+import { InstagramReelsSection } from '../components/InstagramReelsSection';
 import { Product, Category, Banner } from '../types';
 import { useCurrency } from '../context/CurrencyContext';
 import { useToast } from '../context/ToastContext';
@@ -39,12 +40,12 @@ interface HeroSlide {
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
-    tag: 'Haute Couture Bridal 2026',
+    tag: 'Haute Couture 2026',
     title: 'Where Royal Heritage Meets Timeless Grace',
-    subtitle: 'Heirloom bridal lehengas handcrafted with real zari bullion, jewelled velvet, and antique Awadhi zardozi.',
+    subtitle: 'Heirloom royal ensembles handcrafted with real zari bullion, jewelled velvet, and antique Awadhi zardozi.',
     image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=2000&q=90',
-    primaryLink: '/shop?category=lehengas',
-    primaryLabel: 'DISCOVER BRIDALWEAR',
+    primaryLink: '/shop?occasion=Wedding',
+    primaryLabel: 'DISCOVER COUTURE',
     secondaryLink: '/shop?gender=WOMEN',
     secondaryLabel: 'EXPLORE WOMEN'
   },
@@ -54,14 +55,14 @@ const HERO_SLIDES: HeroSlide[] = [
     title: 'Pure Katan Silk & Brocade Treasures',
     subtitle: 'Woven over 180 artisan hours using time-honored interlocking kadwa techniques straight from Varanasi.',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=2000&q=90',
-    primaryLink: '/shop?category=sarees',
-    primaryLabel: 'EXPLORE SAREES',
+    primaryLink: '/shop?fabric=Pure+Katan+Silk',
+    primaryLabel: 'EXPLORE WEAVES',
     secondaryLink: '/shop?fabric=Pure+Katan+Silk',
     secondaryLabel: 'KATAN SILK EDIT'
   },
   {
     id: 3,
-    tag: 'Bespoke Festive Atelier',
+    tag: 'Bespoke Festive Studio',
     title: 'Festive & Soirée Anarkalis',
     subtitle: 'Graceful kalidar silhouettes, tissue organza dupattas, and intricate gota patti embroidery for grand celebrations.',
     image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=2000&q=90',
@@ -89,7 +90,7 @@ const CRAFT_STORIES = [
     history: 'Each motif is engraved onto the loom by hand without any loose floating threads on the reverse side. Authentic Katan silk provides a natural heirloom sheen that deepens with each generation.',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
     hours: '180+ Hours on Handloom',
-    link: '/shop?category=sarees'
+    link: '/shop?fabric=Pure+Katan+Silk'
   },
   {
     id: 'chikankari',
@@ -171,7 +172,7 @@ export const Home: React.FC = () => {
       return;
     }
     setConsultationSubmitted(true);
-    showToast('Your Bridal Styling Consultation is confirmed! Our Senior Atelier Concierge will connect with you.', 'success');
+    showToast('Your Styling Consultation is confirmed! Our Senior Royal Concierge will connect with you.', 'success');
   };
 
   const activeSlide = HERO_SLIDES[currentHeroIndex];
@@ -344,7 +345,7 @@ export const Home: React.FC = () => {
 
               <div className="absolute inset-x-4 bottom-5 text-center">
                 <span className="text-[9px] uppercase font-bold tracking-[0.25em] text-gold-400 block mb-1">
-                  Atelier Archive
+                  Couture Archive
                 </span>
                 <h3 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide group-hover:text-gold-200 transition-colors">
                   {cat.name}
@@ -409,7 +410,7 @@ export const Home: React.FC = () => {
               The Ancient Arts of Karigari
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300 font-light mt-3 leading-relaxed">
-              Explore the four legendary Indian craft disciplines preserved within the EthnizCouture ateliers.
+              Explore the four legendary Indian craft disciplines preserved within EthnizCouture.
             </p>
             <div className="w-16 h-0.5 bg-gold-500 mx-auto mt-4" />
           </div>
@@ -421,8 +422,8 @@ export const Home: React.FC = () => {
                 key={story.id}
                 onClick={() => setActiveCraftTab(idx)}
                 className={`px-5 py-2.5 rounded text-xs font-bold tracking-widest uppercase transition-all duration-300 border ${activeCraftTab === idx
-                    ? 'bg-gold-500 text-zinc-950 border-gold-400 shadow-gold-glow scale-105'
-                    : 'bg-black/40 text-gold-200 border-gold-500/30 hover:bg-maroon-900/60 hover:text-white'
+                  ? 'bg-gold-500 text-zinc-950 border-gold-400 shadow-gold-glow scale-105'
+                  : 'bg-black/40 text-gold-200 border-gold-500/30 hover:bg-maroon-900/60 hover:text-white'
                   }`}
               >
                 {story.name.split(' ')[0]} {story.name.split(' ')[1]}
@@ -515,7 +516,7 @@ export const Home: React.FC = () => {
         )}
       </section>
 
-      {/* 7. BRIDAL ATELIER CONCIERGE BOOKING CARD */}
+      {/* 7. ROYAL CONCIERGE BOOKING CARD */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-br from-[#2F0A12] to-[#170307] text-[#FAF7F2] rounded-2xl p-8 sm:p-14 border border-gold-500/40 shadow-2xl relative overflow-hidden">
           <div className="absolute right-0 top-0 w-96 h-96 bg-jaali-dark opacity-20 pointer-events-none" />
@@ -524,11 +525,11 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-7 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-950/70 border border-gold-500/40 text-gold-300 text-[10px] font-bold tracking-widest uppercase">
                 <Crown className="w-3 h-3 text-gold-400" />
-                <span>Private Atelier Services</span>
+                <span>Private Couture Services</span>
               </div>
 
               <h2 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-white leading-tight">
-                Book a Private Bridal &amp; Groom Consultation
+                Book a Private Styling &amp; Groom Consultation
               </h2>
 
               <p className="text-sm text-zinc-300 font-light leading-relaxed max-w-xl">
@@ -560,7 +561,7 @@ export const Home: React.FC = () => {
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-zinc-900">Appointment Requested</h3>
                   <p className="text-xs text-zinc-600 leading-relaxed">
-                    Thank you, {consultationName}. Our Bridal Concierge will call you at {consultationPhone} within 4 hours to coordinate your video consultation.
+                    Thank you, {consultationName}. Our Royal Concierge will call you at {consultationPhone} within 4 hours to coordinate your video consultation.
                   </p>
                   <button
                     onClick={() => setConsultationSubmitted(false)}
@@ -572,7 +573,7 @@ export const Home: React.FC = () => {
               ) : (
                 <form onSubmit={handleConsultationSubmit} className="space-y-4">
                   <div className="text-center pb-2 border-b border-zinc-100">
-                    <h3 className="font-serif text-xl font-bold text-zinc-900">Schedule Atelier Session</h3>
+                    <h3 className="font-serif text-xl font-bold text-zinc-900">Schedule Styling Session</h3>
                     <p className="text-[11px] text-zinc-500">Complimentary 45-minute video styling</p>
                   </div>
 
@@ -625,8 +626,8 @@ export const Home: React.FC = () => {
                         onChange={(e) => setConsultationNote(e.target.value)}
                         className="w-full h-11 px-3 text-xs bg-white border border-[#E8DEC8] rounded-lg focus:outline-none focus:border-[#3E1A1E] focus:ring-2 focus:ring-[#C6A15D]/30 transition-all text-zinc-900"
                       >
-                        <option value="Bridal Lehenga">Bridal Lehenga</option>
-                        <option value="Banarasi Saree">Banarasi Saree</option>
+                        <option value="Heritage Ensemble">Heritage Ensemble</option>
+                        <option value="Banarasi Brocade">Banarasi Brocade</option>
                         <option value="Groom Sherwani">Groom Sherwani</option>
                         <option value="Trousseau Curations">Full Trousseau</option>
                       </select>
@@ -637,7 +638,7 @@ export const Home: React.FC = () => {
                     type="submit"
                     className="w-full h-12 bg-[#3E1A1E] hover:bg-[#2B0C10] active:bg-[#1A080B] text-[#DFC89D] rounded-lg text-xs font-bold tracking-widest uppercase transition-all duration-300 shadow-md gold-shimmer-btn flex items-center justify-center border border-[#C6A15D]/50"
                   >
-                    CONFIRM ATELIER APPOINTMENT
+                    CONFIRM STYLING APPOINTMENT
                   </button>
                 </form>
               )}
@@ -678,7 +679,7 @@ export const Home: React.FC = () => {
               <div className="mt-6 pt-4 border-t border-zinc-100">
                 <p className="font-serif text-base font-bold text-zinc-900">Aishwarya Roy Singhania</p>
                 <p className="text-[11px] text-zinc-500">Mumbai · Verified Bride</p>
-                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Royal Maroon Velvet Heritage Bridal Lehenga</p>
+                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Royal Maroon Velvet Heritage Ensemble</p>
               </div>
             </div>
 
@@ -718,14 +719,17 @@ export const Home: React.FC = () => {
               <div className="mt-6 pt-4 border-t border-zinc-100">
                 <p className="font-serif text-base font-bold text-zinc-900">Meera Nambiar</p>
                 <p className="text-[11px] text-zinc-500">Bengaluru · Verified Patron</p>
-                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Varanasi Royal Crimson Katan Silk Saree</p>
+                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Varanasi Royal Crimson Katan Silk Ensemble</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 9. WHY ETHNIZCOUTURE PILLARS */}
+      {/* 9. TRENDING INSTAGRAM REELS SPOTLIGHT */}
+      <InstagramReelsSection />
+
+      {/* 10. WHY ETHNIZCOUTURE PILLARS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-14">
           <span className="text-xs font-bold tracking-[0.25em] text-gold-700 uppercase">
@@ -784,7 +788,7 @@ export const Home: React.FC = () => {
             </div>
             <h3 className="font-serif text-xl font-bold text-zinc-900">7-Day Alteration Assistance</h3>
             <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
-              Hassle-free pickup and bespoke size alterations. Our bridal concierge guarantees you step into every event with an immaculate fit.
+              Hassle-free pickup and bespoke size alterations. Our royal concierge guarantees you step into every event with an immaculate fit.
             </p>
           </div>
 

@@ -6,6 +6,7 @@ import { idempotencyService } from '../services/idempotencyService';
 import { backgroundQueue } from '../services/backgroundQueue';
 import { metricsService } from '../services/metricsService';
 import { emailService } from '../services/emailService';
+import { cartRecoveryService } from '../services/cartRecoveryService';
 import { logger } from '../utils/logger';
 import {
   validateEmail,
@@ -333,11 +334,21 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
         }
       });
 
-      // Clear user cart if authenticated
+      // Clear user cart if authenticated and advance cart version
       if (req.user) {
         const userCart = await tx.cart.findUnique({ where: { userId: req.user.id } });
         if (userCart) {
-          await tx.cartItem.deleteMany({ where: { cartId: userCart.id } });
+          const deleted = await tx.cartItem.deleteMany({ where: { cartId: userCart.id } });
+          if (deleted.count > 0) {
+            const updatedCart = await tx.cart.update({
+              where: { id: userCart.id },
+              data: {
+                version: { increment: 1 },
+                lastActivityAt: new Date()
+              }
+            });
+            await cartRecoveryService.recordCartMutationOutbox(tx, userCart.id, updatedCart.version);
+          }
         }
 
         // Auto-save phone number to user profile if provided and not yet set or changed
@@ -823,7 +834,7 @@ export const requestReturn = async (req: AuthRequest, res: Response): Promise<vo
     const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
     if (Date.now() - new Date(deliveryReferenceDate).getTime() > sevenDaysInMs) {
       res.status(400).json({
-        message: 'The 7-day atelier return and exchange window for this order has expired. Please contact concierge support for bespoke assistance.'
+        message: 'The 7-day boutique return and exchange window for this order has expired. Please contact concierge support for bespoke assistance.'
       });
       return;
     }
@@ -861,7 +872,7 @@ export const requestReturn = async (req: AuthRequest, res: Response): Promise<vo
     logger.info(`Return requested for Order ${order.orderNumber} [Resolution: ${chosenResolution}]`);
 
     res.json({
-      message: 'Return request submitted successfully. Our atelier concierge will review within 24 hours.',
+      message: 'Return request submitted successfully. Our royal concierge will review within 24 hours.',
       orderNumber: order.orderNumber,
       orderStatus: 'RETURN_REQUESTED'
     });

@@ -307,7 +307,7 @@ export const AuthModal: React.FC = () => {
                 ETHNIZ<span className="text-[#DFC89D] font-light italic lowercase text-2xl font-serif">couture</span>
               </span>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.2em] bg-[#C6A15D]/20 text-[#DFC89D] border border-[#C6A15D]/40 mt-2 uppercase">
-                <Sparkles className="w-3 h-3 text-[#C6A15D]" /> Haute Couture & Heritage Atelier
+                <Sparkles className="w-3 h-3 text-[#C6A15D]" /> Haute Couture & Royal Heritage
               </div>
             </div>
 
@@ -317,7 +317,7 @@ export const AuthModal: React.FC = () => {
                 Step into the World of Royal Indian Haute Couture
               </h3>
               <p className="text-xs text-[#EAD7B8] mt-2 leading-relaxed font-normal">
-                Join our patron circle to unlock bespoke sizing, private bridal drops, and dedicated concierge assistance.
+                Join our patron circle to unlock bespoke sizing, private VIP drops, and dedicated concierge assistance.
               </p>
             </div>
 
@@ -329,7 +329,7 @@ export const AuthModal: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-white tracking-wide">Private Previews</h4>
-                  <p className="text-[11px] text-[#DFC89D] mt-0.5 leading-snug">Early access to limited bridal & festive capsule releases.</p>
+                  <p className="text-[11px] text-[#DFC89D] mt-0.5 leading-snug">Early access to limited royal & festive capsule releases.</p>
                 </div>
               </div>
 
@@ -376,7 +376,7 @@ export const AuthModal: React.FC = () => {
               <span className="font-serif text-2xl font-bold tracking-wider text-[#3E1A1E] uppercase inline-block">
                 ETHNIZ<span className="text-[#A9833D] font-light italic lowercase text-xl font-serif">couture</span>
               </span>
-              <p className="text-[11px] text-zinc-500 font-medium">Haute Couture Atelier Authentication</p>
+              <p className="text-[11px] text-zinc-500 font-medium">Haute Couture Authentication</p>
             </div>
 
             {/* Navigation Tabs (Login vs Register) */}
@@ -843,7 +843,7 @@ export const AuthModal: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#C6A15D]" />
             </button>
             <p className="text-[10px] text-zinc-400">
-              Zero spam · Atelier privacy guaranteed · Easy guest checkout
+              Zero spam · Patron privacy guaranteed · Easy guest checkout
             </p>
           </div>
         </div>

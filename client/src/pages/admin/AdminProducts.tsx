@@ -60,7 +60,7 @@ export const AdminProducts: React.FC = () => {
     stock: '10',
     availableSizes: 'XS,S,M,L,XL,XXL',
     availableColors: '',
-    tags: 'Handloom,Festive,Bridal',
+    tags: 'Handloom,Festive,Wedding',
     isFeatured: false,
     isBestSeller: false,
     isNewArrival: true,
@@ -626,7 +626,7 @@ export const AdminProducts: React.FC = () => {
             
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <h3 className="font-serif text-2xl font-bold text-white">
-                {editingProductId ? 'Edit Couture Piece' : 'Add New Atelier Piece'}
+                {editingProductId ? 'Edit Couture Piece' : 'Add New Couture Piece'}
               </h3>
               <button onClick={() => setIsModalOpen(false)} className="p-1 text-zinc-400 hover:text-white">
                 <X className="w-5 h-5" />
@@ -644,7 +644,7 @@ export const AdminProducts: React.FC = () => {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Royal Maroon Velvet Heritage Bridal Lehenga"
+                    placeholder="e.g. Royal Maroon Velvet Heritage Ensemble"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-3 py-2 bg-black/40 border border-zinc-700 rounded text-white focus:outline-none focus:border-gold-500"
@@ -793,7 +793,7 @@ export const AdminProducts: React.FC = () => {
                     type="text"
                     value={formData.tags}
                     onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                    placeholder="Banarasi,Zari,Bridal"
+                    placeholder="Banarasi,Zari,Wedding"
                     className="w-full px-3 py-2 bg-black/40 border border-zinc-700 rounded text-white focus:outline-none focus:border-gold-500"
                   />
                 </div>

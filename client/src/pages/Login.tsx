@@ -95,7 +95,7 @@ export const Login: React.FC = () => {
             </span>
           </Link>
           <h2 className="font-serif text-2xl font-bold text-zinc-900 mt-2">
-            Welcome to the Atelier
+            Welcome to Ethniz Couture
           </h2>
           <p className="text-xs text-zinc-500">
             Sign in to access your curated orders, saved pieces, and private concierge.

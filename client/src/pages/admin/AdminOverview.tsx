@@ -190,7 +190,7 @@ export const AdminOverview: React.FC = () => {
         <div className="lg:col-span-5 bg-[#1C060E] p-6 rounded-lg border border-gold-900/40 space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
             <h3 className="font-serif text-lg font-bold text-white">
-              Leading Bridal & Festive Attires
+              Leading Royal & Festive Attires
             </h3>
             <Link to="/atelier-portal/products" className="text-xs text-gold-400 hover:underline">
               All Products

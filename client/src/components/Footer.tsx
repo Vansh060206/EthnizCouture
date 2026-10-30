@@ -130,10 +130,10 @@ export const Footer: React.FC = () => {
             Shop
           </h5>
           <ul className="space-y-2.5 text-xs text-zinc-300">
-            <li><Link to="/shop?category=sarees" className="hover:text-[#DFC89D] transition-colors">Varanasi &amp; Silk Sarees</Link></li>
-            <li><Link to="/shop?category=lehengas" className="hover:text-[#DFC89D] transition-colors">Bridal &amp; Festive Lehengas</Link></li>
+            <li><Link to="/shop?category=sherwanis" className="hover:text-[#DFC89D] transition-colors">Sherwanis &amp; Bandhgalas</Link></li>
+            <li><Link to="/shop?category=indo-western" className="hover:text-[#DFC89D] transition-colors">Indo-Western Ensembles</Link></li>
             <li><Link to="/shop?category=kurta-sets" className="hover:text-[#DFC89D] transition-colors">Kurta Sets &amp; Anarkalis</Link></li>
-            <li><Link to="/shop?occasion=Bridal" className="hover:text-[#DFC89D] transition-colors">Bridal Troussier</Link></li>
+            <li><Link to="/shop?occasion=Wedding" className="hover:text-[#DFC89D] transition-colors">Royal Trousseau</Link></li>
             <li><Link to="/shop" className="hover:text-[#DFC89D] transition-colors">The Collections</Link></li>
             <li><Link to="/shop?sort=newest" className="hover:text-[#DFC89D] transition-colors">New Arrivals</Link></li>
           </ul>
@@ -170,7 +170,7 @@ export const Footer: React.FC = () => {
             JOIN THE COUTURE
           </h5>
           <p className="text-[11px] text-zinc-400 mb-3 leading-relaxed">
-            Invitations to private bridal showcases &amp; seasonal lookbooks.
+            Invitations to private haute couture showcases &amp; seasonal lookbooks.
           </p>
           <form onSubmit={handleNewsletterSubmit} className="space-y-2">
             <input

@@ -11,7 +11,7 @@ export interface ValidationResult {
 export interface PasswordScore {
   isValid: boolean;
   score: number; // 0 to 4
-  level: 'Weak' | 'Fair' | 'Good' | 'Strong' | 'Atelier Royal Grade';
+  level: 'Weak' | 'Fair' | 'Good' | 'Strong' | 'Imperial Royal Grade';
   checks: {
     length: boolean;
     uppercase: boolean;
@@ -156,7 +156,7 @@ export const evaluatePassword = (password?: string): PasswordScore => {
   let level: PasswordScore['level'] = 'Weak';
   if (score === 2) level = 'Fair';
   else if (score === 3) level = 'Good';
-  else if (score === 4) level = val.length >= 12 ? 'Atelier Royal Grade' : 'Strong';
+  else if (score === 4) level = val.length >= 12 ? 'Imperial Royal Grade' : 'Strong';
 
   const isValid = checks.length && checks.uppercase && checks.lowercase && checks.number && checks.specialChar;
 

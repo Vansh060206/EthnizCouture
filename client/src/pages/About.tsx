@@ -11,7 +11,7 @@ export const About: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=2000&q=85"
-            alt="Atelier Loom Heritage"
+            alt="Loom Heritage"
             className="w-full h-full object-cover opacity-35 filter brightness-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#2B0C10] via-black/40 to-black/60" />
@@ -23,7 +23,7 @@ export const About: React.FC = () => {
           </div>
 
           <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#DFC89D] block">
-            The Atelier Chronicles
+            The Heritage Chronicles
           </span>
 
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#FAF7F2] uppercase">
@@ -58,7 +58,7 @@ export const About: React.FC = () => {
               Honoring Heritage, Reimagining Celebrations
             </h3>
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-light">
-              In an era dominated by transient fast fashion, EthnizCouture was established as a sanctuary for slow, intentional haute couture. Every thread in our sarees, lehengas, and royal bandhgalas carries the pulse of generations-old weaving communities nestled along the sacred ghats of Varanasi, the temple towns of Tamil Nadu, and the regal ateliers of Awadh.
+              In an era dominated by transient fast fashion, EthnizCouture was established as a sanctuary for slow, intentional haute couture. Every thread in our regal anarkalis, sherwanis, and royal bandhgalas carries the pulse of generations-old weaving communities nestled along the sacred ghats of Varanasi, the temple towns of Tamil Nadu, and the regal courts of Awadh.
             </p>
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-light">
               We do not treat traditional textiles as antique relics, but as living, evolving art. We sculpt pure Katan silks and Italian micro-velvets into architectural cuts, lightweight silhouettes, and fluid drapes crafted for modern celebrations across London, New York, Dubai, and New Delhi.
@@ -80,7 +80,7 @@ export const About: React.FC = () => {
             <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-xl border border-[#C6A15D]/30 relative group">
               <img
                 src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1200&q=85"
-                alt="Artisan embroidery in EthnizCouture atelier"
+                alt="Artisan embroidery in EthnizCouture boutique"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-6 left-6 right-6 text-white text-xs font-serif italic">
-                “A single bridal Katan silk ensemble requires up to four hundred hours on the hand-operated jacquard pit loom.”
+                “A single royal Katan silk ensemble requires up to four hundred hours on the hand-operated jacquard pit loom.”
               </div>
             </div>
           </div>

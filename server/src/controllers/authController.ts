@@ -130,7 +130,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     if (!user.passwordHash) {
       res.status(401).json({
-        message: 'This account was registered using Google. Please click "Continue with Google" to access your atelier account.'
+        message: 'This account was registered using Google. Please click "Continue with Google" to access your account.'
       });
       return;
     }
@@ -176,14 +176,14 @@ export const adminLogin = async (req: Request, res: Response): Promise<void> => 
     }
 
     if (!masterKey || typeof masterKey !== 'string' || masterKey.trim().length === 0) {
-      res.status(400).json({ message: 'Atelier Secret Passkey is required.', field: 'masterKey' });
+      res.status(400).json({ message: 'Executive Secret Passkey is required.', field: 'masterKey' });
       return;
     }
 
     // Verify Master Secret Passkey strictly
     const expectedKey = config.adminMasterKey.trim();
     if (masterKey.trim() !== expectedKey) {
-      res.status(403).json({ message: 'Invalid Atelier Secret Passkey. Access rejected.' });
+      res.status(403).json({ message: 'Invalid Executive Secret Passkey. Access rejected.' });
       return;
     }
 
@@ -216,7 +216,7 @@ export const adminLogin = async (req: Request, res: Response): Promise<void> => 
     const token = generateToken(user);
 
     res.json({
-      message: 'Atelier administrative session authenticated successfully',
+      message: 'Executive administrative session authenticated successfully',
       user: {
         id: user.id,
         name: user.name,
@@ -247,6 +247,9 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
         email: true,
         phone: true,
         role: true,
+        marketingConsent: true,
+        marketingConsentAt: true,
+        unsubscribedAt: true,
         createdAt: true,
         addresses: {
           orderBy: { isDefault: 'desc' }
@@ -279,7 +282,8 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
       return;
     }
 
-    const { name, phone } = req.body;
+    const { name, phone, marketingConsent } = req.body;
+    const updateData: any = {};
 
     if (name !== undefined) {
       const nameVal = validateFullName(name, 'Full Name');
@@ -287,28 +291,49 @@ export const updateProfile = async (req: AuthRequest, res: Response): Promise<vo
         res.status(400).json({ message: nameVal.message, field: 'name' });
         return;
       }
+      updateData.name = name.trim();
     }
 
-    if (phone !== undefined && phone !== null && String(phone).trim().length > 0) {
-      const phoneVal = validatePhone(phone, true);
-      if (!phoneVal.isValid) {
-        res.status(400).json({ message: phoneVal.message, field: 'phone' });
+    if (phone !== undefined) {
+      if (phone !== null && String(phone).trim().length > 0) {
+        const phoneVal = validatePhone(phone, true);
+        if (!phoneVal.isValid) {
+          res.status(400).json({ message: phoneVal.message, field: 'phone' });
+          return;
+        }
+        updateData.phone = phone.trim();
+      } else {
+        updateData.phone = null;
+      }
+    }
+
+    if (marketingConsent !== undefined) {
+      if (typeof marketingConsent !== 'boolean') {
+        res.status(400).json({ message: 'marketingConsent must be a boolean', field: 'marketingConsent' });
         return;
+      }
+      updateData.marketingConsent = marketingConsent;
+      if (marketingConsent) {
+        updateData.marketingConsentAt = new Date();
+        updateData.marketingConsentSource = 'ACCOUNT_PROFILE';
+        updateData.unsubscribedAt = null;
+      } else {
+        updateData.unsubscribedAt = new Date();
       }
     }
 
     const updated = await prisma.user.update({
       where: { id: req.user.id },
-      data: {
-        name: name ? name.trim() : undefined,
-        phone: phone ? phone.trim() : undefined
-      },
+      data: updateData,
       select: {
         id: true,
         name: true,
         email: true,
         phone: true,
-        role: true
+        role: true,
+        marketingConsent: true,
+        marketingConsentAt: true,
+        unsubscribedAt: true
       }
     });
 
@@ -517,7 +542,7 @@ export const forgotPassword = async (req: Request, res: Response): Promise<void>
     // If the account does not exist, return a generic message without exposing user non-existence
     if (!user) {
       res.status(200).json({
-        message: 'If an atelier account is associated with this email, a 6-digit recovery code has been sent.'
+        message: 'If an account is associated with this email, a 6-digit recovery code has been sent.'
       });
       return;
     }
@@ -561,7 +586,7 @@ export const forgotPassword = async (req: Request, res: Response): Promise<void>
     logger.info(`Password recovery OTP generated and queued for ${cleanEmail}`);
 
     res.status(200).json({
-      message: 'If an atelier account is associated with this email, a 6-digit recovery code has been sent.'
+      message: 'If an account is associated with this email, a 6-digit recovery code has been sent.'
     });
   } catch (error: any) {
     logger.error('forgotPassword error:', error);

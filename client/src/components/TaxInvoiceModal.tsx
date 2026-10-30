@@ -119,13 +119,13 @@ export const TaxInvoiceModal: React.FC<TaxInvoiceModalProps> = ({ order, isOpen,
               </p>
               <div className="mt-3 text-xs text-zinc-600 space-y-0.5 leading-relaxed">
                 <p className="font-bold text-zinc-900">Ethniz Couture Luxury Apparels Pvt. Ltd.</p>
-                <p>Atelier No. 14, Heritage Lane, DLF Phase 2</p>
+                <p>Suite No. 14, Heritage Lane, DLF Phase 2</p>
                 <p>Gurugram, Haryana &mdash; 122002, India</p>
                 <p>
                   <strong>GSTIN:</strong> 06AAECE1234F1Z8 &bull; <strong>State Code:</strong> 06 (Haryana)
                 </p>
                 <p>
-                  <strong>Email:</strong> atelier@ethnizcouture.com &bull; <strong>Phone:</strong> +91 98200 12345
+                  <strong>Email:</strong> concierge@ethnizcouture.com &bull; <strong>Phone:</strong> +91 98200 12345
                 </p>
               </div>
             </div>
@@ -329,7 +329,7 @@ export const TaxInvoiceModal: React.FC<TaxInvoiceModalProps> = ({ order, isOpen,
                   ETHNIZ COUTURE
                 </span>
                 <span className="text-[9px] uppercase tracking-widest text-[#84642C] block">
-                  ATELIER VERIFIED
+                  ROYAL VERIFIED
                 </span>
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 mx-auto mt-0.5" />
               </div>

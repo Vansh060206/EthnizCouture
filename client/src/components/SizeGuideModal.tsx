@@ -28,7 +28,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
               <Ruler className="w-4 h-4 text-[#DFC89D]" />
             </div>
             <h3 className="font-serif text-lg sm:text-2xl font-bold text-zinc-900">
-              Atelier Sizing Guide
+              Couture Sizing Guide
             </h3>
           </div>
           <button
@@ -171,7 +171,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
 
         {/* Note */}
         <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded text-xs text-amber-900 leading-relaxed">
-          <strong>Bespoke Bridal Tailoring:</strong> All EthnizCouture lehengas and sherwanis come with 2-inch internal side seam allowances for effortless tailoring adjustments. Our concierge is available on WhatsApp for custom measurement consultations.
+          <strong>Bespoke Couture Tailoring:</strong> All EthnizCouture ensembles and sherwanis come with 2-inch internal side seam allowances for effortless tailoring adjustments. Our concierge is available on WhatsApp for custom measurement consultations.
         </div>
 
       </div>

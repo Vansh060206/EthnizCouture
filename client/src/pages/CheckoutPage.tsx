@@ -1563,7 +1563,7 @@ export const CheckoutPage: React.FC = () => {
                     />
                     <div>
                       <p className="text-xs font-bold text-zinc-900">
-                        Insured Express Air Shipping (Standard Atelier)
+                        Insured Express Air Shipping (Standard Couture)
                       </p>
                       <p className="text-xs text-zinc-500 mt-0.5">
                         Delivered within 5–7 business days in signature padded luxury box.
@@ -1597,7 +1597,7 @@ export const CheckoutPage: React.FC = () => {
                         <Sparkles className="w-3.5 h-3.5 text-gold-600" />
                       </p>
                       <p className="text-xs text-zinc-500 mt-0.5">
-                        Guaranteed delivery within 2–3 business days with personal bridal stylist dispatch.
+                        Guaranteed delivery within 2–3 business days with personal couture stylist dispatch.
                       </p>
                     </div>
                   </div>
@@ -1724,7 +1724,7 @@ export const CheckoutPage: React.FC = () => {
                   </div>
 
                   <p className="text-xs text-zinc-600 leading-relaxed">
-                    Clicking <strong className="text-[#3E1A1E]">“PAY {formatPrice(total)} VIA UPI QR”</strong> will reserve your atelier items and immediately display a unique, dynamic UPI QR code prefilled with the exact payable amount of <strong className="text-[#3E1A1E] font-bold">{formatPrice(total)}</strong>.
+                    Clicking <strong className="text-[#3E1A1E]">“PAY {formatPrice(total)} VIA UPI QR”</strong> will reserve your selected items and immediately display a unique, dynamic UPI QR code prefilled with the exact payable amount of <strong className="text-[#3E1A1E] font-bold">{formatPrice(total)}</strong>.
                   </p>
 
                   <div className="p-3 bg-white rounded-xl border border-[#C6A15D]/30 space-y-2">
@@ -1769,7 +1769,7 @@ export const CheckoutPage: React.FC = () => {
                       <span>PCI-DSS Level 1 Certified &amp; RBI Regulated Gateway</span>
                     </div>
                     <p className="text-[11px] text-zinc-500">
-                      Your financial details are securely processed directly by Razorpay and are never stored on atelier servers.
+                      Your financial details are securely processed directly by Razorpay and are never stored on our servers.
                     </p>
                   </div>
                 </div>
@@ -1868,7 +1868,7 @@ export const CheckoutPage: React.FC = () => {
           </div>
 
           <div className="p-3 bg-[#FAF7F2] rounded border border-gold-200 text-[11px] text-zinc-600 leading-relaxed">
-            By placing your order, you agree to EthnizCouture’s Atelier Terms of Sale and complimentary 7-day pickup policy.
+            By placing your order, you agree to EthnizCouture’s Royal Terms of Sale and complimentary 7-day pickup policy.
           </div>
         </div>
 

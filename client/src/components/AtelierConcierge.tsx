@@ -4,13 +4,9 @@ import {
   Crown, 
   MessageCircle, 
   Compass, 
-  Ruler, 
-  Phone, 
   X, 
-  Sparkles, 
   Globe, 
-  ChevronRight,
-  ShieldCheck
+  ChevronRight
 } from 'lucide-react';
 import { useCurrency, CURRENCIES, CurrencyCode } from '../context/CurrencyContext';
 
@@ -26,13 +22,13 @@ export const AtelierConcierge: React.FC = () => {
         <button
           onClick={() => setIsOpen(true)}
           className="group px-4 py-3 bg-[#3E1A1E] text-[#DFC89D] rounded-full shadow-2xl border border-[#C6A15D]/60 flex items-center gap-2.5 hover:scale-105 transition-all duration-300"
-          title="Atelier Concierge"
+          title="Royal Concierge"
         >
           <div className="w-6 h-6 rounded-full bg-[#C6A15D]/20 flex items-center justify-center border border-[#C6A15D]/40">
             <Crown className="w-3.5 h-3.5 text-[#DFC89D]" />
           </div>
           <span className="text-xs font-serif tracking-[0.2em] font-semibold uppercase text-[#FAF7F2]">
-            Atelier Concierge
+            Royal Concierge
           </span>
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
         </button>
@@ -49,7 +45,7 @@ export const AtelierConcierge: React.FC = () => {
                 <Crown className="w-4 h-4 text-[#DFC89D]" />
               </div>
               <div>
-                <h3 className="font-serif text-base font-normal text-white uppercase tracking-wider">Atelier Concierge</h3>
+                <h3 className="font-serif text-base font-normal text-white uppercase tracking-wider">Royal Concierge</h3>
                 <p className="text-[10px] text-[#DFC89D] uppercase tracking-widest font-mono">Private Styling &amp; Support</p>
               </div>
             </div>
@@ -64,19 +60,16 @@ export const AtelierConcierge: React.FC = () => {
           {/* Quick Actions List */}
           <div className="space-y-2 text-xs">
             
-            {/* WhatsApp Stylist */}
+            {/* WhatsApp Connect */}
             <a
-              href="https://wa.me/919876543210?text=Hello%20EthnizCouture,%20I%20would%20like%20assistance%20with%20bridal%20ensembles%20and%20sizing."
+              href="https://wa.me/919876543210?text=Hello%20EthnizCouture,%20I%20would%20like%20assistance%20with%20royal%20ensembles%20and%20sizing."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-3 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-600/40 text-emerald-200 transition-colors group"
             >
               <div className="flex items-center gap-2.5">
                 <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <div>
-                  <span className="font-bold block text-white">WhatsApp Atelier Stylist</span>
-                  <span className="text-[10px] text-emerald-300">Live replies from New Delhi atelier</span>
-                </div>
+                <span className="font-bold text-white">Connect on WhatsApp</span>
               </div>
               <ChevronRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
             </a>
@@ -97,22 +90,6 @@ export const AtelierConcierge: React.FC = () => {
               <ChevronRight className="w-4 h-4 text-gold-400 group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
-            {/* Book Styling Appointment */}
-            <Link
-              to="/contact"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between p-3 rounded-lg bg-black/40 hover:bg-black/70 border border-gold-500/30 text-zinc-200 transition-colors group"
-            >
-              <div className="flex items-center gap-2.5">
-                <Sparkles className="w-4 h-4 text-gold-400" />
-                <div>
-                  <span className="font-bold block text-white">Book Video Consultation</span>
-                  <span className="text-[10px] text-zinc-400">1-on-1 private bridal styling</span>
-                </div>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gold-400 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-
             {/* Currency & Pricing Info */}
             <div className="p-3 rounded-lg bg-black/40 border border-gold-500/30 flex items-center justify-between">
               <span className="text-[10px] uppercase tracking-wider text-gold-400 font-bold flex items-center gap-1.5">
@@ -124,15 +101,16 @@ export const AtelierConcierge: React.FC = () => {
 
           </div>
 
-          {/* Direct Atelier Hotline */}
+          {/* WhatsApp Number */}
           <div className="pt-2 border-t border-gold-500/20 text-center">
-            <p className="text-[10px] text-zinc-400">Private Patron Desk (10 AM - 9 PM IST)</p>
             <a
-              href="tel:+911149827700"
-              className="font-mono text-xs text-gold-300 font-bold hover:text-white flex items-center justify-center gap-1 mt-0.5"
+              href="https://wa.me/919876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-gold-300 font-bold hover:text-white flex items-center justify-center gap-1.5"
             >
-              <Phone className="w-3 h-3 text-gold-400" />
-              <span>+91 11 4982 7700</span>
+              <MessageCircle className="w-3 h-3 text-emerald-400" />
+              <span>+91 98765 43210</span>
             </a>
           </div>
 

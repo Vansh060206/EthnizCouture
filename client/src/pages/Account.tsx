@@ -119,8 +119,8 @@ export const Account: React.FC = () => {
     return {
       orderUpdates: true,
       whatsappAlerts: true,
-      atelierLookbooks: true,
-      bridalPreviews: false
+      seasonalLookbooks: true,
+      couturePreviews: false
     };
   });
 
@@ -243,7 +243,7 @@ export const Account: React.FC = () => {
     e.preventDefault();
     try {
       localStorage.setItem('ethniz_notification_prefs', JSON.stringify(notifications));
-      showToast('Atelier communication preferences updated.', 'success');
+      showToast('Communication preferences updated.', 'success');
     } catch {
       showToast('Failed to save preferences.', 'error');
     }
@@ -433,7 +433,7 @@ export const Account: React.FC = () => {
               {activeTab === 'orders' ? 'My Orders' :
                activeTab === 'wishlist' ? 'Saved Pieces' :
                activeTab === 'addresses' ? 'Addresses' :
-               activeTab === 'coupons' ? 'Atelier Privileges' :
+               activeTab === 'coupons' ? 'Royal Privileges' :
                activeTab === 'notifications' ? 'Notifications' : 'Account Details'}
             </span>
           </div>
@@ -570,7 +570,7 @@ export const Account: React.FC = () => {
                   </span>
                 </div>
                 <div>
-                  <p className="font-serif font-bold text-zinc-900 text-sm">Atelier Coupons</p>
+                  <p className="font-serif font-bold text-zinc-900 text-sm">Royal Coupons</p>
                   <p className="text-[10px] text-zinc-500">Exclusive privileges</p>
                 </div>
               </button>
@@ -693,7 +693,7 @@ export const Account: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <Tag className="w-4 h-4 text-maroon-800" />
                   <div className="text-left">
-                    <p className="font-semibold text-zinc-900">Atelier Privileges &amp; Coupons</p>
+                    <p className="font-semibold text-zinc-900">Royal Privileges &amp; Coupons</p>
                     <p className="text-[11px] text-zinc-400">Special seasonal discounts</p>
                   </div>
                 </div>
@@ -809,7 +809,7 @@ export const Account: React.FC = () => {
               >
                 <div className="flex items-center gap-3">
                   <Tag className="w-4 h-4" />
-                  <span>Atelier Privileges</span>
+                  <span>Royal Privileges</span>
                 </div>
                 {coupons.length > 0 && (
                   <span className="bg-gold-100 text-maroon-900 px-1.5 py-0.2 rounded text-[10px] font-bold font-mono">
@@ -845,7 +845,7 @@ export const Account: React.FC = () => {
                   className="w-full flex items-center gap-3 px-4 py-2.5 rounded text-xs font-semibold text-zinc-600 hover:text-maroon-800 hover:bg-[#FAF7F2]"
                 >
                   <HelpCircle className="w-4 h-4" />
-                  <span>Atelier Concierge Care</span>
+                  <span>Royal Concierge Care</span>
                 </Link>
               </div>
 
@@ -1165,12 +1165,12 @@ export const Account: React.FC = () => {
               )}
 
               {/* ========================================================= */}
-              {/* TAB 4: PERSONAL ATELIER PROFILE                           */}
+              {/* TAB 4: PERSONAL PROFILE                                   */}
               {/* ========================================================= */}
               {activeTab === 'profile' && (
                 <div className="space-y-6 animate-fade-in">
                   <h2 className="font-serif text-2xl font-bold text-zinc-900 pb-3 border-b border-zinc-200">
-                    Personal Atelier Information
+                    Personal Profile Information
                   </h2>
 
                   <form onSubmit={handleUpdateProfile} noValidate className="max-w-lg space-y-4 text-xs">
@@ -1265,13 +1265,13 @@ export const Account: React.FC = () => {
               )}
 
               {/* ========================================================= */}
-              {/* TAB 5: ATELIER PRIVILEGES & COUPONS                       */}
+              {/* TAB 5: ROYAL PRIVILEGES & COUPONS                         */}
               {/* ========================================================= */}
               {activeTab === 'coupons' && (
                 <div className="space-y-6 animate-fade-in">
                   <div className="flex items-center justify-between pb-3 border-b border-zinc-200">
                     <h2 className="font-serif text-2xl font-bold text-zinc-900">
-                      Atelier Privileges &amp; Coupons ({coupons.length})
+                      Royal Privileges &amp; Coupons ({coupons.length})
                     </h2>
                     <span className="text-xs text-zinc-500">Apply at checkout</span>
                   </div>
@@ -1365,7 +1365,7 @@ export const Account: React.FC = () => {
                       Notification &amp; Communication Preferences
                     </h2>
                     <p className="text-xs text-zinc-500 mt-0.5">
-                      Choose how our private atelier contacts you regarding logistics and previews.
+                      Choose how our private concierge contacts you regarding logistics and previews.
                     </p>
                   </div>
 
@@ -1403,34 +1403,34 @@ export const Account: React.FC = () => {
                       />
                     </div>
 
-                    {/* Toggle 3: Atelier Lookbooks */}
+                    {/* Toggle 3: Seasonal Lookbooks */}
                     <div className="p-4 rounded-lg border border-[#E8DEC8] bg-[#FAF7F2] flex items-center justify-between gap-4">
                       <div>
                         <p className="font-bold text-zinc-900 text-sm">Seasonal Lookbooks &amp; Private Sales</p>
                         <p className="text-[11px] text-zinc-500 mt-0.5">
-                          Invitations to limited handloom drops and bridal previews.
+                          Invitations to limited handloom drops and seasonal previews.
                         </p>
                       </div>
                       <input
                         type="checkbox"
-                        checked={notifications.atelierLookbooks}
-                        onChange={(e) => setNotifications({ ...notifications, atelierLookbooks: e.target.checked })}
+                        checked={notifications.seasonalLookbooks}
+                        onChange={(e) => setNotifications({ ...notifications, seasonalLookbooks: e.target.checked })}
                         className="w-4 h-4 accent-maroon-800 cursor-pointer"
                       />
                     </div>
 
-                    {/* Toggle 4: Bridal Previews */}
+                    {/* Toggle 4: Bespoke Sizing Previews */}
                     <div className="p-4 rounded-lg border border-[#E8DEC8] bg-[#FAF7F2] flex items-center justify-between gap-4">
                       <div>
-                        <p className="font-bold text-zinc-900 text-sm">Bespoke Bridal Sizing Consultations</p>
+                        <p className="font-bold text-zinc-900 text-sm">Bespoke Sizing Consultations</p>
                         <p className="text-[11px] text-zinc-500 mt-0.5">
-                          Notifications from senior master craftsmen on bespoke lehengas.
+                          Notifications from senior master craftsmen on bespoke royal couture.
                         </p>
                       </div>
                       <input
                         type="checkbox"
-                        checked={notifications.bridalPreviews}
-                        onChange={(e) => setNotifications({ ...notifications, bridalPreviews: e.target.checked })}
+                        checked={notifications.couturePreviews}
+                        onChange={(e) => setNotifications({ ...notifications, couturePreviews: e.target.checked })}
                         className="w-4 h-4 accent-maroon-800 cursor-pointer"
                       />
                     </div>
@@ -1756,7 +1756,7 @@ export const Account: React.FC = () => {
           productName={reviewModalTarget.productName}
           productImage={reviewModalTarget.productImage}
           onReviewSubmitted={() => {
-            showToast('Thank you! Your verified review has been published with the atelier.', 'success');
+            showToast('Thank you! Your verified review has been published with the royal maison.', 'success');
           }}
         />
       )}

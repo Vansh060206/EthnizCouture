@@ -35,9 +35,9 @@ export const AdminInquiries: React.FC = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Atelier Response Composer state
+  // Concierge Response Composer state
   const [replyMessage, setReplyMessage] = useState('');
-  const [senderName, setSenderName] = useState('Atelier Concierge');
+  const [senderName, setSenderName] = useState('Royal Concierge');
   const [markAsResolvedOnSend, setMarkAsResolvedOnSend] = useState(true);
   const [sendingReply, setSendingReply] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -228,7 +228,7 @@ export const AdminInquiries: React.FC = () => {
             )}
           </div>
           <p className="text-xs text-zinc-400 mt-1">
-            Review bespoke styling inquiries, bridal sizing consultations, and customer messages.
+            Review bespoke styling inquiries, custom sizing consultations, and customer messages.
           </p>
         </div>
 
@@ -552,7 +552,7 @@ export const AdminInquiries: React.FC = () => {
                   {selectedInquiry.phone && (
                     <a
                       href={`https://wa.me/${getCleanPhone(selectedInquiry.phone)}?text=${encodeURIComponent(
-                        `Hello ${selectedInquiry.name}, this is the Ethniz Couture Atelier Concierge regarding your inquiry on "${selectedInquiry.subject}". How may we assist you today?`
+                        `Hello ${selectedInquiry.name}, this is the Ethniz Couture Royal Concierge regarding your inquiry on "${selectedInquiry.subject}". How may we assist you today?`
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -565,7 +565,7 @@ export const AdminInquiries: React.FC = () => {
 
                   <a
                     href={`mailto:${selectedInquiry.email}?subject=${encodeURIComponent(
-                      `Re: ${selectedInquiry.subject} — Ethniz Couture Atelier`
+                      `Re: ${selectedInquiry.subject} — Ethniz Couture`
                     )}`}
                     className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-700 rounded text-[11px] font-semibold flex items-center gap-1.5 transition-colors"
                   >
@@ -599,13 +599,13 @@ export const AdminInquiries: React.FC = () => {
                 </div>
               </div>
 
-              {/* Official Atelier Response Composer */}
+              {/* Official Concierge Response Composer */}
               <div className="pt-2 border-t border-zinc-800/80 space-y-4">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#C6A15D]" />
                   <div>
                     <h3 className="font-serif text-sm font-bold text-white">
-                      Dispatch Official Atelier Response
+                      Dispatch Official Concierge Response
                     </h3>
                     <p className="text-[11px] text-zinc-400">
                       Delivers a royal branded HTML response email directly to {selectedInquiry.email}.
@@ -622,7 +622,7 @@ export const AdminInquiries: React.FC = () => {
                       type="text"
                       value={senderName}
                       onChange={(e) => setSenderName(e.target.value)}
-                      placeholder="e.g. Atelier Concierge or Master Stylist Kavita"
+                      placeholder="e.g. Royal Concierge or Master Stylist Kavita"
                       className="w-full px-3 py-2 bg-black/40 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none focus:border-[#C6A15D]"
                     />
                   </div>
@@ -669,7 +669,7 @@ export const AdminInquiries: React.FC = () => {
               <Inbox className="w-10 h-10 text-zinc-700" />
               <p className="font-serif text-sm text-zinc-300">No Inquiry Selected</p>
               <p className="text-xs text-zinc-500 max-w-xs">
-                Select an inquiry from the queue on the left to review the patron's request and send an official atelier response.
+                Select an inquiry from the queue on the left to review the patron's request and send an official concierge response.
               </p>
             </div>
           )}

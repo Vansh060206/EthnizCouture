@@ -39,7 +39,7 @@ export const AdminSettings: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-            Store & Atelier Configuration
+            Store & Executive Configuration
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
             Global store policies, currency conversions, tax thresholds, and customer notifications.
@@ -58,7 +58,7 @@ export const AdminSettings: React.FC = () => {
 
       <form onSubmit={handleSave} className="space-y-6 text-xs">
         
-        {/* 1. General Atelier Identity */}
+        {/* 1. General Brand Identity */}
         <div className="bg-[#1C060E] p-6 rounded-lg border border-gold-900/40 space-y-4">
           <div className="flex items-center gap-2 text-gold-300 pb-2 border-b border-zinc-800">
             <Store className="w-4 h-4" />
@@ -106,7 +106,7 @@ export const AdminSettings: React.FC = () => {
 
             <div>
               <label className="block font-bold uppercase tracking-wider text-zinc-300 mb-1">
-                Atelier WhatsApp Hotline
+                Concierge WhatsApp Hotline
               </label>
               <input
                 type="text"

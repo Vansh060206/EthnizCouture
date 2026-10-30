@@ -60,7 +60,7 @@ export const AdminCustomers: React.FC = () => {
             Client Directory & Patron Loyalty
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Review client purchase frequency, lifetime atelier expenditure, and order histories.
+            Review client purchase frequency, lifetime expenditure, and order histories.
           </p>
         </div>
 

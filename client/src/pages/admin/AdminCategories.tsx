@@ -97,7 +97,7 @@ export const AdminCategories: React.FC = () => {
             Categories & Editorial Curations
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Organize store architecture into sarees, lehengas, bridal pavilions, and festive collections.
+            Organize store architecture into kurta sets, anarkalis, royal pavilions, and festive collections.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ export const AdminCategories: React.FC = () => {
       <div className="bg-[#1C060E] p-6 rounded-lg border border-gold-900/40 space-y-4">
         <h3 className="font-serif text-xl font-bold text-white flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-gold-400" />
-          <span>Curated Festive & Bridal Collections</span>
+          <span>Curated Festive & Royal Collections</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -200,7 +200,7 @@ export const AdminCategories: React.FC = () => {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Sarees, Lehengas"
+                  placeholder="e.g. Kurta Sets, Anarkalis"
                   value={catForm.name}
                   onChange={(e) => setCatForm({ ...catForm, name: e.target.value })}
                   className="w-full px-3 py-2 bg-black/40 border border-zinc-700 rounded text-white focus:outline-none focus:border-gold-500"

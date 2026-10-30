@@ -179,8 +179,8 @@ export const OrderSuccessAnimation: React.FC<OrderSuccessAnimationProps> = ({ or
                   : isPending
                   ? 'Authorization In Progress'
                   : isCOD
-                  ? 'Atelier Order Placed'
-                  : 'Atelier Order Confirmed'}
+                  ? 'Royal Order Placed'
+                  : 'Royal Order Confirmed'}
               </span>
             </div>
 
@@ -209,7 +209,7 @@ export const OrderSuccessAnimation: React.FC<OrderSuccessAnimationProps> = ({ or
               {isFailed ? (
                 'Your payment was declined by the card issuer or gateway. Your reserved items remain safe in your couture bag.'
               ) : isPending ? (
-                'We have registered your order and are waiting for gateway confirmation. Please refresh shortly or contact the atelier concierge.'
+                'We have registered your order and are waiting for gateway confirmation. Please refresh shortly or contact the royal concierge.'
               ) : isCOD ? (
                 <>
                   Thank you for shopping with Ethniz Couture. Order{' '}

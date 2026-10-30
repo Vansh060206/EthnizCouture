@@ -128,6 +128,11 @@ export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
  * 
  */
 export type PasswordReset = $Result.DefaultSelection<Prisma.$PasswordResetPayload>
+/**
+ * Model CartRecovery
+ * 
+ */
+export type CartRecovery = $Result.DefaultSelection<Prisma.$CartRecoveryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -481,6 +486,16 @@ export class PrismaClient<
     * ```
     */
   get passwordReset(): Prisma.PasswordResetDelegate<ExtArgs>;
+
+  /**
+   * `prisma.cartRecovery`: Exposes CRUD operations for the **CartRecovery** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CartRecoveries
+    * const cartRecoveries = await prisma.cartRecovery.findMany()
+    * ```
+    */
+  get cartRecovery(): Prisma.CartRecoveryDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -944,7 +959,8 @@ export namespace Prisma {
     IdempotencyRecord: 'IdempotencyRecord',
     BackgroundJob: 'BackgroundJob',
     AuditLog: 'AuditLog',
-    PasswordReset: 'PasswordReset'
+    PasswordReset: 'PasswordReset',
+    CartRecovery: 'CartRecovery'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -960,7 +976,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "address" | "category" | "collection" | "product" | "productImage" | "productVariant" | "cart" | "cartItem" | "wishlist" | "order" | "orderItem" | "orderStatusHistory" | "review" | "coupon" | "banner" | "mediaAsset" | "contactMessage" | "newsletterSubscriber" | "idempotencyRecord" | "backgroundJob" | "auditLog" | "passwordReset"
+      modelProps: "user" | "address" | "category" | "collection" | "product" | "productImage" | "productVariant" | "cart" | "cartItem" | "wishlist" | "order" | "orderItem" | "orderStatusHistory" | "review" | "coupon" | "banner" | "mediaAsset" | "contactMessage" | "newsletterSubscriber" | "idempotencyRecord" | "backgroundJob" | "auditLog" | "passwordReset" | "cartRecovery"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2574,6 +2590,76 @@ export namespace Prisma {
           }
         }
       }
+      CartRecovery: {
+        payload: Prisma.$CartRecoveryPayload<ExtArgs>
+        fields: Prisma.CartRecoveryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CartRecoveryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CartRecoveryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          findFirst: {
+            args: Prisma.CartRecoveryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CartRecoveryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          findMany: {
+            args: Prisma.CartRecoveryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>[]
+          }
+          create: {
+            args: Prisma.CartRecoveryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          createMany: {
+            args: Prisma.CartRecoveryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CartRecoveryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>[]
+          }
+          delete: {
+            args: Prisma.CartRecoveryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          update: {
+            args: Prisma.CartRecoveryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          deleteMany: {
+            args: Prisma.CartRecoveryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CartRecoveryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CartRecoveryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartRecoveryPayload>
+          }
+          aggregate: {
+            args: Prisma.CartRecoveryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCartRecovery>
+          }
+          groupBy: {
+            args: Prisma.CartRecoveryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CartRecoveryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CartRecoveryCountArgs<ExtArgs>
+            result: $Utils.Optional<CartRecoveryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2739,6 +2825,7 @@ export namespace Prisma {
     orders: number
     reviews: number
     wishlist: number
+    cartRecoveries: number
     auditLogs: number
   }
 
@@ -2747,6 +2834,7 @@ export namespace Prisma {
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
     wishlist?: boolean | UserCountOutputTypeCountWishlistArgs
+    cartRecoveries?: boolean | UserCountOutputTypeCountCartRecoveriesArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
   }
 
@@ -2787,6 +2875,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountWishlistArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WishlistWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCartRecoveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CartRecoveryWhereInput
   }
 
   /**
@@ -2941,10 +3036,12 @@ export namespace Prisma {
 
   export type CartCountOutputType = {
     items: number
+    recoveries: number
   }
 
   export type CartCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | CartCountOutputTypeCountItemsArgs
+    recoveries?: boolean | CartCountOutputTypeCountRecoveriesArgs
   }
 
   // Custom InputTypes
@@ -2963,6 +3060,13 @@ export namespace Prisma {
    */
   export type CartCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CartItemWhereInput
+  }
+
+  /**
+   * CartCountOutputType without action
+   */
+  export type CartCountOutputTypeCountRecoveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CartRecoveryWhereInput
   }
 
 
@@ -3031,6 +3135,10 @@ export namespace Prisma {
     role: string | null
     welcomeEmailSent: boolean | null
     welcomeEmailSentAt: Date | null
+    marketingConsent: boolean | null
+    marketingConsentAt: Date | null
+    marketingConsentSource: string | null
+    unsubscribedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3046,6 +3154,10 @@ export namespace Prisma {
     role: string | null
     welcomeEmailSent: boolean | null
     welcomeEmailSentAt: Date | null
+    marketingConsent: boolean | null
+    marketingConsentAt: Date | null
+    marketingConsentSource: string | null
+    unsubscribedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3061,6 +3173,10 @@ export namespace Prisma {
     role: number
     welcomeEmailSent: number
     welcomeEmailSentAt: number
+    marketingConsent: number
+    marketingConsentAt: number
+    marketingConsentSource: number
+    unsubscribedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3078,6 +3194,10 @@ export namespace Prisma {
     role?: true
     welcomeEmailSent?: true
     welcomeEmailSentAt?: true
+    marketingConsent?: true
+    marketingConsentAt?: true
+    marketingConsentSource?: true
+    unsubscribedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3093,6 +3213,10 @@ export namespace Prisma {
     role?: true
     welcomeEmailSent?: true
     welcomeEmailSentAt?: true
+    marketingConsent?: true
+    marketingConsentAt?: true
+    marketingConsentSource?: true
+    unsubscribedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3108,6 +3232,10 @@ export namespace Prisma {
     role?: true
     welcomeEmailSent?: true
     welcomeEmailSentAt?: true
+    marketingConsent?: true
+    marketingConsentAt?: true
+    marketingConsentSource?: true
+    unsubscribedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3196,6 +3324,10 @@ export namespace Prisma {
     role: string
     welcomeEmailSent: boolean
     welcomeEmailSentAt: Date | null
+    marketingConsent: boolean
+    marketingConsentAt: Date | null
+    marketingConsentSource: string | null
+    unsubscribedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -3228,6 +3360,10 @@ export namespace Prisma {
     role?: boolean
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: boolean
+    marketingConsent?: boolean
+    marketingConsentAt?: boolean
+    marketingConsentSource?: boolean
+    unsubscribedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     addresses?: boolean | User$addressesArgs<ExtArgs>
@@ -3235,6 +3371,7 @@ export namespace Prisma {
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     wishlist?: boolean | User$wishlistArgs<ExtArgs>
     cart?: boolean | User$cartArgs<ExtArgs>
+    cartRecoveries?: boolean | User$cartRecoveriesArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -3250,6 +3387,10 @@ export namespace Prisma {
     role?: boolean
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: boolean
+    marketingConsent?: boolean
+    marketingConsentAt?: boolean
+    marketingConsentSource?: boolean
+    unsubscribedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -3265,6 +3406,10 @@ export namespace Prisma {
     role?: boolean
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: boolean
+    marketingConsent?: boolean
+    marketingConsentAt?: boolean
+    marketingConsentSource?: boolean
+    unsubscribedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -3275,6 +3420,7 @@ export namespace Prisma {
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     wishlist?: boolean | User$wishlistArgs<ExtArgs>
     cart?: boolean | User$cartArgs<ExtArgs>
+    cartRecoveries?: boolean | User$cartRecoveriesArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3288,6 +3434,7 @@ export namespace Prisma {
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       wishlist: Prisma.$WishlistPayload<ExtArgs>[]
       cart: Prisma.$CartPayload<ExtArgs> | null
+      cartRecoveries: Prisma.$CartRecoveryPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3301,6 +3448,10 @@ export namespace Prisma {
       role: string
       welcomeEmailSent: boolean
       welcomeEmailSentAt: Date | null
+      marketingConsent: boolean
+      marketingConsentAt: Date | null
+      marketingConsentSource: string | null
+      unsubscribedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -3672,6 +3823,7 @@ export namespace Prisma {
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany"> | Null>
     wishlist<T extends User$wishlistArgs<ExtArgs> = {}>(args?: Subset<T, User$wishlistArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findMany"> | Null>
     cart<T extends User$cartArgs<ExtArgs> = {}>(args?: Subset<T, User$cartArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    cartRecoveries<T extends User$cartRecoveriesArgs<ExtArgs> = {}>(args?: Subset<T, User$cartRecoveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findMany"> | Null>
     auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3712,6 +3864,10 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'String'>
     readonly welcomeEmailSent: FieldRef<"User", 'Boolean'>
     readonly welcomeEmailSentAt: FieldRef<"User", 'DateTime'>
+    readonly marketingConsent: FieldRef<"User", 'Boolean'>
+    readonly marketingConsentAt: FieldRef<"User", 'DateTime'>
+    readonly marketingConsentSource: FieldRef<"User", 'String'>
+    readonly unsubscribedAt: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -4120,6 +4276,26 @@ export namespace Prisma {
      */
     include?: CartInclude<ExtArgs> | null
     where?: CartWhereInput
+  }
+
+  /**
+   * User.cartRecoveries
+   */
+  export type User$cartRecoveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    where?: CartRecoveryWhereInput
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    cursor?: CartRecoveryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CartRecoveryScalarFieldEnum | CartRecoveryScalarFieldEnum[]
   }
 
   /**
@@ -10540,13 +10716,25 @@ export namespace Prisma {
 
   export type AggregateCart = {
     _count: CartCountAggregateOutputType | null
+    _avg: CartAvgAggregateOutputType | null
+    _sum: CartSumAggregateOutputType | null
     _min: CartMinAggregateOutputType | null
     _max: CartMaxAggregateOutputType | null
+  }
+
+  export type CartAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type CartSumAggregateOutputType = {
+    version: number | null
   }
 
   export type CartMinAggregateOutputType = {
     id: string | null
     userId: string | null
+    version: number | null
+    lastActivityAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10554,6 +10742,8 @@ export namespace Prisma {
   export type CartMaxAggregateOutputType = {
     id: string | null
     userId: string | null
+    version: number | null
+    lastActivityAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10561,15 +10751,27 @@ export namespace Prisma {
   export type CartCountAggregateOutputType = {
     id: number
     userId: number
+    version: number
+    lastActivityAt: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
+  export type CartAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type CartSumAggregateInputType = {
+    version?: true
+  }
+
   export type CartMinAggregateInputType = {
     id?: true
     userId?: true
+    version?: true
+    lastActivityAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10577,6 +10779,8 @@ export namespace Prisma {
   export type CartMaxAggregateInputType = {
     id?: true
     userId?: true
+    version?: true
+    lastActivityAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10584,6 +10788,8 @@ export namespace Prisma {
   export type CartCountAggregateInputType = {
     id?: true
     userId?: true
+    version?: true
+    lastActivityAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10627,6 +10833,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CartAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CartSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CartMinAggregateInputType
@@ -10657,6 +10875,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CartCountAggregateInputType | true
+    _avg?: CartAvgAggregateInputType
+    _sum?: CartSumAggregateInputType
     _min?: CartMinAggregateInputType
     _max?: CartMaxAggregateInputType
   }
@@ -10664,9 +10884,13 @@ export namespace Prisma {
   export type CartGroupByOutputType = {
     id: string
     userId: string | null
+    version: number
+    lastActivityAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: CartCountAggregateOutputType | null
+    _avg: CartAvgAggregateOutputType | null
+    _sum: CartSumAggregateOutputType | null
     _min: CartMinAggregateOutputType | null
     _max: CartMaxAggregateOutputType | null
   }
@@ -10688,16 +10912,21 @@ export namespace Prisma {
   export type CartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    version?: boolean
+    lastActivityAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Cart$userArgs<ExtArgs>
     items?: boolean | Cart$itemsArgs<ExtArgs>
+    recoveries?: boolean | Cart$recoveriesArgs<ExtArgs>
     _count?: boolean | CartCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cart"]>
 
   export type CartSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    version?: boolean
+    lastActivityAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Cart$userArgs<ExtArgs>
@@ -10706,6 +10935,8 @@ export namespace Prisma {
   export type CartSelectScalar = {
     id?: boolean
     userId?: boolean
+    version?: boolean
+    lastActivityAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -10713,6 +10944,7 @@ export namespace Prisma {
   export type CartInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Cart$userArgs<ExtArgs>
     items?: boolean | Cart$itemsArgs<ExtArgs>
+    recoveries?: boolean | Cart$recoveriesArgs<ExtArgs>
     _count?: boolean | CartCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CartIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10724,10 +10956,13 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       items: Prisma.$CartItemPayload<ExtArgs>[]
+      recoveries: Prisma.$CartRecoveryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string | null
+      version: number
+      lastActivityAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["cart"]>
@@ -11096,6 +11331,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Cart$userArgs<ExtArgs> = {}>(args?: Subset<T, Cart$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     items<T extends Cart$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Cart$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartItemPayload<ExtArgs>, T, "findMany"> | Null>
+    recoveries<T extends Cart$recoveriesArgs<ExtArgs> = {}>(args?: Subset<T, Cart$recoveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11127,6 +11363,8 @@ export namespace Prisma {
   interface CartFieldRefs {
     readonly id: FieldRef<"Cart", 'String'>
     readonly userId: FieldRef<"Cart", 'String'>
+    readonly version: FieldRef<"Cart", 'Int'>
+    readonly lastActivityAt: FieldRef<"Cart", 'DateTime'>
     readonly createdAt: FieldRef<"Cart", 'DateTime'>
     readonly updatedAt: FieldRef<"Cart", 'DateTime'>
   }
@@ -11479,6 +11717,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CartItemScalarFieldEnum | CartItemScalarFieldEnum[]
+  }
+
+  /**
+   * Cart.recoveries
+   */
+  export type Cart$recoveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    where?: CartRecoveryWhereInput
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    cursor?: CartRecoveryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CartRecoveryScalarFieldEnum | CartRecoveryScalarFieldEnum[]
   }
 
   /**
@@ -26455,6 +26713,1051 @@ export namespace Prisma {
 
 
   /**
+   * Model CartRecovery
+   */
+
+  export type AggregateCartRecovery = {
+    _count: CartRecoveryCountAggregateOutputType | null
+    _avg: CartRecoveryAvgAggregateOutputType | null
+    _sum: CartRecoverySumAggregateOutputType | null
+    _min: CartRecoveryMinAggregateOutputType | null
+    _max: CartRecoveryMaxAggregateOutputType | null
+  }
+
+  export type CartRecoveryAvgAggregateOutputType = {
+    cartVersion: number | null
+  }
+
+  export type CartRecoverySumAggregateOutputType = {
+    cartVersion: number | null
+  }
+
+  export type CartRecoveryMinAggregateOutputType = {
+    id: string | null
+    cartId: string | null
+    userId: string | null
+    cartVersion: number | null
+    status: string | null
+    skipReason: string | null
+    emailMessageId: string | null
+    sentAt: Date | null
+    metadata: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CartRecoveryMaxAggregateOutputType = {
+    id: string | null
+    cartId: string | null
+    userId: string | null
+    cartVersion: number | null
+    status: string | null
+    skipReason: string | null
+    emailMessageId: string | null
+    sentAt: Date | null
+    metadata: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CartRecoveryCountAggregateOutputType = {
+    id: number
+    cartId: number
+    userId: number
+    cartVersion: number
+    status: number
+    skipReason: number
+    emailMessageId: number
+    sentAt: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CartRecoveryAvgAggregateInputType = {
+    cartVersion?: true
+  }
+
+  export type CartRecoverySumAggregateInputType = {
+    cartVersion?: true
+  }
+
+  export type CartRecoveryMinAggregateInputType = {
+    id?: true
+    cartId?: true
+    userId?: true
+    cartVersion?: true
+    status?: true
+    skipReason?: true
+    emailMessageId?: true
+    sentAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CartRecoveryMaxAggregateInputType = {
+    id?: true
+    cartId?: true
+    userId?: true
+    cartVersion?: true
+    status?: true
+    skipReason?: true
+    emailMessageId?: true
+    sentAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CartRecoveryCountAggregateInputType = {
+    id?: true
+    cartId?: true
+    userId?: true
+    cartVersion?: true
+    status?: true
+    skipReason?: true
+    emailMessageId?: true
+    sentAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CartRecoveryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CartRecovery to aggregate.
+     */
+    where?: CartRecoveryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CartRecoveries to fetch.
+     */
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CartRecoveryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CartRecoveries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CartRecoveries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CartRecoveries
+    **/
+    _count?: true | CartRecoveryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CartRecoveryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CartRecoverySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CartRecoveryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CartRecoveryMaxAggregateInputType
+  }
+
+  export type GetCartRecoveryAggregateType<T extends CartRecoveryAggregateArgs> = {
+        [P in keyof T & keyof AggregateCartRecovery]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCartRecovery[P]>
+      : GetScalarType<T[P], AggregateCartRecovery[P]>
+  }
+
+
+
+
+  export type CartRecoveryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CartRecoveryWhereInput
+    orderBy?: CartRecoveryOrderByWithAggregationInput | CartRecoveryOrderByWithAggregationInput[]
+    by: CartRecoveryScalarFieldEnum[] | CartRecoveryScalarFieldEnum
+    having?: CartRecoveryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CartRecoveryCountAggregateInputType | true
+    _avg?: CartRecoveryAvgAggregateInputType
+    _sum?: CartRecoverySumAggregateInputType
+    _min?: CartRecoveryMinAggregateInputType
+    _max?: CartRecoveryMaxAggregateInputType
+  }
+
+  export type CartRecoveryGroupByOutputType = {
+    id: string
+    cartId: string
+    userId: string
+    cartVersion: number
+    status: string
+    skipReason: string | null
+    emailMessageId: string | null
+    sentAt: Date | null
+    metadata: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: CartRecoveryCountAggregateOutputType | null
+    _avg: CartRecoveryAvgAggregateOutputType | null
+    _sum: CartRecoverySumAggregateOutputType | null
+    _min: CartRecoveryMinAggregateOutputType | null
+    _max: CartRecoveryMaxAggregateOutputType | null
+  }
+
+  type GetCartRecoveryGroupByPayload<T extends CartRecoveryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CartRecoveryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CartRecoveryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CartRecoveryGroupByOutputType[P]>
+            : GetScalarType<T[P], CartRecoveryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CartRecoverySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cartId?: boolean
+    userId?: boolean
+    cartVersion?: boolean
+    status?: boolean
+    skipReason?: boolean
+    emailMessageId?: boolean
+    sentAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    cart?: boolean | CartDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cartRecovery"]>
+
+  export type CartRecoverySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cartId?: boolean
+    userId?: boolean
+    cartVersion?: boolean
+    status?: boolean
+    skipReason?: boolean
+    emailMessageId?: boolean
+    sentAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    cart?: boolean | CartDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cartRecovery"]>
+
+  export type CartRecoverySelectScalar = {
+    id?: boolean
+    cartId?: boolean
+    userId?: boolean
+    cartVersion?: boolean
+    status?: boolean
+    skipReason?: boolean
+    emailMessageId?: boolean
+    sentAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CartRecoveryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cart?: boolean | CartDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type CartRecoveryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cart?: boolean | CartDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $CartRecoveryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CartRecovery"
+    objects: {
+      cart: Prisma.$CartPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      cartId: string
+      userId: string
+      cartVersion: number
+      status: string
+      skipReason: string | null
+      emailMessageId: string | null
+      sentAt: Date | null
+      metadata: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["cartRecovery"]>
+    composites: {}
+  }
+
+  type CartRecoveryGetPayload<S extends boolean | null | undefined | CartRecoveryDefaultArgs> = $Result.GetResult<Prisma.$CartRecoveryPayload, S>
+
+  type CartRecoveryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CartRecoveryFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CartRecoveryCountAggregateInputType | true
+    }
+
+  export interface CartRecoveryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CartRecovery'], meta: { name: 'CartRecovery' } }
+    /**
+     * Find zero or one CartRecovery that matches the filter.
+     * @param {CartRecoveryFindUniqueArgs} args - Arguments to find a CartRecovery
+     * @example
+     * // Get one CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CartRecoveryFindUniqueArgs>(args: SelectSubset<T, CartRecoveryFindUniqueArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one CartRecovery that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CartRecoveryFindUniqueOrThrowArgs} args - Arguments to find a CartRecovery
+     * @example
+     * // Get one CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CartRecoveryFindUniqueOrThrowArgs>(args: SelectSubset<T, CartRecoveryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first CartRecovery that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryFindFirstArgs} args - Arguments to find a CartRecovery
+     * @example
+     * // Get one CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CartRecoveryFindFirstArgs>(args?: SelectSubset<T, CartRecoveryFindFirstArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first CartRecovery that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryFindFirstOrThrowArgs} args - Arguments to find a CartRecovery
+     * @example
+     * // Get one CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CartRecoveryFindFirstOrThrowArgs>(args?: SelectSubset<T, CartRecoveryFindFirstOrThrowArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more CartRecoveries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CartRecoveries
+     * const cartRecoveries = await prisma.cartRecovery.findMany()
+     * 
+     * // Get first 10 CartRecoveries
+     * const cartRecoveries = await prisma.cartRecovery.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cartRecoveryWithIdOnly = await prisma.cartRecovery.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CartRecoveryFindManyArgs>(args?: SelectSubset<T, CartRecoveryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a CartRecovery.
+     * @param {CartRecoveryCreateArgs} args - Arguments to create a CartRecovery.
+     * @example
+     * // Create one CartRecovery
+     * const CartRecovery = await prisma.cartRecovery.create({
+     *   data: {
+     *     // ... data to create a CartRecovery
+     *   }
+     * })
+     * 
+     */
+    create<T extends CartRecoveryCreateArgs>(args: SelectSubset<T, CartRecoveryCreateArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many CartRecoveries.
+     * @param {CartRecoveryCreateManyArgs} args - Arguments to create many CartRecoveries.
+     * @example
+     * // Create many CartRecoveries
+     * const cartRecovery = await prisma.cartRecovery.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CartRecoveryCreateManyArgs>(args?: SelectSubset<T, CartRecoveryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CartRecoveries and returns the data saved in the database.
+     * @param {CartRecoveryCreateManyAndReturnArgs} args - Arguments to create many CartRecoveries.
+     * @example
+     * // Create many CartRecoveries
+     * const cartRecovery = await prisma.cartRecovery.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CartRecoveries and only return the `id`
+     * const cartRecoveryWithIdOnly = await prisma.cartRecovery.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CartRecoveryCreateManyAndReturnArgs>(args?: SelectSubset<T, CartRecoveryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a CartRecovery.
+     * @param {CartRecoveryDeleteArgs} args - Arguments to delete one CartRecovery.
+     * @example
+     * // Delete one CartRecovery
+     * const CartRecovery = await prisma.cartRecovery.delete({
+     *   where: {
+     *     // ... filter to delete one CartRecovery
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CartRecoveryDeleteArgs>(args: SelectSubset<T, CartRecoveryDeleteArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one CartRecovery.
+     * @param {CartRecoveryUpdateArgs} args - Arguments to update one CartRecovery.
+     * @example
+     * // Update one CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CartRecoveryUpdateArgs>(args: SelectSubset<T, CartRecoveryUpdateArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more CartRecoveries.
+     * @param {CartRecoveryDeleteManyArgs} args - Arguments to filter CartRecoveries to delete.
+     * @example
+     * // Delete a few CartRecoveries
+     * const { count } = await prisma.cartRecovery.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CartRecoveryDeleteManyArgs>(args?: SelectSubset<T, CartRecoveryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CartRecoveries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CartRecoveries
+     * const cartRecovery = await prisma.cartRecovery.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CartRecoveryUpdateManyArgs>(args: SelectSubset<T, CartRecoveryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CartRecovery.
+     * @param {CartRecoveryUpsertArgs} args - Arguments to update or create a CartRecovery.
+     * @example
+     * // Update or create a CartRecovery
+     * const cartRecovery = await prisma.cartRecovery.upsert({
+     *   create: {
+     *     // ... data to create a CartRecovery
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CartRecovery we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CartRecoveryUpsertArgs>(args: SelectSubset<T, CartRecoveryUpsertArgs<ExtArgs>>): Prisma__CartRecoveryClient<$Result.GetResult<Prisma.$CartRecoveryPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of CartRecoveries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryCountArgs} args - Arguments to filter CartRecoveries to count.
+     * @example
+     * // Count the number of CartRecoveries
+     * const count = await prisma.cartRecovery.count({
+     *   where: {
+     *     // ... the filter for the CartRecoveries we want to count
+     *   }
+     * })
+    **/
+    count<T extends CartRecoveryCountArgs>(
+      args?: Subset<T, CartRecoveryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CartRecoveryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CartRecovery.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CartRecoveryAggregateArgs>(args: Subset<T, CartRecoveryAggregateArgs>): Prisma.PrismaPromise<GetCartRecoveryAggregateType<T>>
+
+    /**
+     * Group by CartRecovery.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CartRecoveryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CartRecoveryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CartRecoveryGroupByArgs['orderBy'] }
+        : { orderBy?: CartRecoveryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CartRecoveryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCartRecoveryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CartRecovery model
+   */
+  readonly fields: CartRecoveryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CartRecovery.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CartRecoveryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    cart<T extends CartDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CartDefaultArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CartRecovery model
+   */ 
+  interface CartRecoveryFieldRefs {
+    readonly id: FieldRef<"CartRecovery", 'String'>
+    readonly cartId: FieldRef<"CartRecovery", 'String'>
+    readonly userId: FieldRef<"CartRecovery", 'String'>
+    readonly cartVersion: FieldRef<"CartRecovery", 'Int'>
+    readonly status: FieldRef<"CartRecovery", 'String'>
+    readonly skipReason: FieldRef<"CartRecovery", 'String'>
+    readonly emailMessageId: FieldRef<"CartRecovery", 'String'>
+    readonly sentAt: FieldRef<"CartRecovery", 'DateTime'>
+    readonly metadata: FieldRef<"CartRecovery", 'String'>
+    readonly createdAt: FieldRef<"CartRecovery", 'DateTime'>
+    readonly updatedAt: FieldRef<"CartRecovery", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CartRecovery findUnique
+   */
+  export type CartRecoveryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter, which CartRecovery to fetch.
+     */
+    where: CartRecoveryWhereUniqueInput
+  }
+
+  /**
+   * CartRecovery findUniqueOrThrow
+   */
+  export type CartRecoveryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter, which CartRecovery to fetch.
+     */
+    where: CartRecoveryWhereUniqueInput
+  }
+
+  /**
+   * CartRecovery findFirst
+   */
+  export type CartRecoveryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter, which CartRecovery to fetch.
+     */
+    where?: CartRecoveryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CartRecoveries to fetch.
+     */
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CartRecoveries.
+     */
+    cursor?: CartRecoveryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CartRecoveries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CartRecoveries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CartRecoveries.
+     */
+    distinct?: CartRecoveryScalarFieldEnum | CartRecoveryScalarFieldEnum[]
+  }
+
+  /**
+   * CartRecovery findFirstOrThrow
+   */
+  export type CartRecoveryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter, which CartRecovery to fetch.
+     */
+    where?: CartRecoveryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CartRecoveries to fetch.
+     */
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CartRecoveries.
+     */
+    cursor?: CartRecoveryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CartRecoveries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CartRecoveries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CartRecoveries.
+     */
+    distinct?: CartRecoveryScalarFieldEnum | CartRecoveryScalarFieldEnum[]
+  }
+
+  /**
+   * CartRecovery findMany
+   */
+  export type CartRecoveryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter, which CartRecoveries to fetch.
+     */
+    where?: CartRecoveryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CartRecoveries to fetch.
+     */
+    orderBy?: CartRecoveryOrderByWithRelationInput | CartRecoveryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CartRecoveries.
+     */
+    cursor?: CartRecoveryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CartRecoveries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CartRecoveries.
+     */
+    skip?: number
+    distinct?: CartRecoveryScalarFieldEnum | CartRecoveryScalarFieldEnum[]
+  }
+
+  /**
+   * CartRecovery create
+   */
+  export type CartRecoveryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CartRecovery.
+     */
+    data: XOR<CartRecoveryCreateInput, CartRecoveryUncheckedCreateInput>
+  }
+
+  /**
+   * CartRecovery createMany
+   */
+  export type CartRecoveryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CartRecoveries.
+     */
+    data: CartRecoveryCreateManyInput | CartRecoveryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CartRecovery createManyAndReturn
+   */
+  export type CartRecoveryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many CartRecoveries.
+     */
+    data: CartRecoveryCreateManyInput | CartRecoveryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CartRecovery update
+   */
+  export type CartRecoveryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CartRecovery.
+     */
+    data: XOR<CartRecoveryUpdateInput, CartRecoveryUncheckedUpdateInput>
+    /**
+     * Choose, which CartRecovery to update.
+     */
+    where: CartRecoveryWhereUniqueInput
+  }
+
+  /**
+   * CartRecovery updateMany
+   */
+  export type CartRecoveryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CartRecoveries.
+     */
+    data: XOR<CartRecoveryUpdateManyMutationInput, CartRecoveryUncheckedUpdateManyInput>
+    /**
+     * Filter which CartRecoveries to update
+     */
+    where?: CartRecoveryWhereInput
+  }
+
+  /**
+   * CartRecovery upsert
+   */
+  export type CartRecoveryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CartRecovery to update in case it exists.
+     */
+    where: CartRecoveryWhereUniqueInput
+    /**
+     * In case the CartRecovery found by the `where` argument doesn't exist, create a new CartRecovery with this data.
+     */
+    create: XOR<CartRecoveryCreateInput, CartRecoveryUncheckedCreateInput>
+    /**
+     * In case the CartRecovery was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CartRecoveryUpdateInput, CartRecoveryUncheckedUpdateInput>
+  }
+
+  /**
+   * CartRecovery delete
+   */
+  export type CartRecoveryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+    /**
+     * Filter which CartRecovery to delete.
+     */
+    where: CartRecoveryWhereUniqueInput
+  }
+
+  /**
+   * CartRecovery deleteMany
+   */
+  export type CartRecoveryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CartRecoveries to delete
+     */
+    where?: CartRecoveryWhereInput
+  }
+
+  /**
+   * CartRecovery without action
+   */
+  export type CartRecoveryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CartRecovery
+     */
+    select?: CartRecoverySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CartRecoveryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26479,6 +27782,10 @@ export namespace Prisma {
     role: 'role',
     welcomeEmailSent: 'welcomeEmailSent',
     welcomeEmailSentAt: 'welcomeEmailSentAt',
+    marketingConsent: 'marketingConsent',
+    marketingConsentAt: 'marketingConsentAt',
+    marketingConsentSource: 'marketingConsentSource',
+    unsubscribedAt: 'unsubscribedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -26594,6 +27901,8 @@ export namespace Prisma {
   export const CartScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    version: 'version',
+    lastActivityAt: 'lastActivityAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -26841,6 +28150,23 @@ export namespace Prisma {
   export type PasswordResetScalarFieldEnum = (typeof PasswordResetScalarFieldEnum)[keyof typeof PasswordResetScalarFieldEnum]
 
 
+  export const CartRecoveryScalarFieldEnum: {
+    id: 'id',
+    cartId: 'cartId',
+    userId: 'userId',
+    cartVersion: 'cartVersion',
+    status: 'status',
+    skipReason: 'skipReason',
+    emailMessageId: 'emailMessageId',
+    sentAt: 'sentAt',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CartRecoveryScalarFieldEnum = (typeof CartRecoveryScalarFieldEnum)[keyof typeof CartRecoveryScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -26950,6 +28276,10 @@ export namespace Prisma {
     role?: StringFilter<"User"> | string
     welcomeEmailSent?: BoolFilter<"User"> | boolean
     welcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    marketingConsent?: BoolFilter<"User"> | boolean
+    marketingConsentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    marketingConsentSource?: StringNullableFilter<"User"> | string | null
+    unsubscribedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     addresses?: AddressListRelationFilter
@@ -26957,6 +28287,7 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter
     wishlist?: WishlistListRelationFilter
     cart?: XOR<CartNullableRelationFilter, CartWhereInput> | null
+    cartRecoveries?: CartRecoveryListRelationFilter
     auditLogs?: AuditLogListRelationFilter
   }
 
@@ -26971,6 +28302,10 @@ export namespace Prisma {
     role?: SortOrder
     welcomeEmailSent?: SortOrder
     welcomeEmailSentAt?: SortOrderInput | SortOrder
+    marketingConsent?: SortOrder
+    marketingConsentAt?: SortOrderInput | SortOrder
+    marketingConsentSource?: SortOrderInput | SortOrder
+    unsubscribedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     addresses?: AddressOrderByRelationAggregateInput
@@ -26978,6 +28313,7 @@ export namespace Prisma {
     reviews?: ReviewOrderByRelationAggregateInput
     wishlist?: WishlistOrderByRelationAggregateInput
     cart?: CartOrderByWithRelationInput
+    cartRecoveries?: CartRecoveryOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
   }
 
@@ -26995,6 +28331,10 @@ export namespace Prisma {
     role?: StringFilter<"User"> | string
     welcomeEmailSent?: BoolFilter<"User"> | boolean
     welcomeEmailSentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    marketingConsent?: BoolFilter<"User"> | boolean
+    marketingConsentAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    marketingConsentSource?: StringNullableFilter<"User"> | string | null
+    unsubscribedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     addresses?: AddressListRelationFilter
@@ -27002,6 +28342,7 @@ export namespace Prisma {
     reviews?: ReviewListRelationFilter
     wishlist?: WishlistListRelationFilter
     cart?: XOR<CartNullableRelationFilter, CartWhereInput> | null
+    cartRecoveries?: CartRecoveryListRelationFilter
     auditLogs?: AuditLogListRelationFilter
   }, "id" | "email" | "googleId">
 
@@ -27016,6 +28357,10 @@ export namespace Prisma {
     role?: SortOrder
     welcomeEmailSent?: SortOrder
     welcomeEmailSentAt?: SortOrderInput | SortOrder
+    marketingConsent?: SortOrder
+    marketingConsentAt?: SortOrderInput | SortOrder
+    marketingConsentSource?: SortOrderInput | SortOrder
+    unsubscribedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -27037,6 +28382,10 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"User"> | string
     welcomeEmailSent?: BoolWithAggregatesFilter<"User"> | boolean
     welcomeEmailSentAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    marketingConsent?: BoolWithAggregatesFilter<"User"> | boolean
+    marketingConsentAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    marketingConsentSource?: StringNullableWithAggregatesFilter<"User"> | string | null
+    unsubscribedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -27599,19 +28948,25 @@ export namespace Prisma {
     NOT?: CartWhereInput | CartWhereInput[]
     id?: StringFilter<"Cart"> | string
     userId?: StringNullableFilter<"Cart"> | string | null
+    version?: IntFilter<"Cart"> | number
+    lastActivityAt?: DateTimeNullableFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeFilter<"Cart"> | Date | string
     updatedAt?: DateTimeFilter<"Cart"> | Date | string
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     items?: CartItemListRelationFilter
+    recoveries?: CartRecoveryListRelationFilter
   }
 
   export type CartOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    version?: SortOrder
+    lastActivityAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     items?: CartItemOrderByRelationAggregateInput
+    recoveries?: CartRecoveryOrderByRelationAggregateInput
   }
 
   export type CartWhereUniqueInput = Prisma.AtLeast<{
@@ -27620,20 +28975,27 @@ export namespace Prisma {
     AND?: CartWhereInput | CartWhereInput[]
     OR?: CartWhereInput[]
     NOT?: CartWhereInput | CartWhereInput[]
+    version?: IntFilter<"Cart"> | number
+    lastActivityAt?: DateTimeNullableFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeFilter<"Cart"> | Date | string
     updatedAt?: DateTimeFilter<"Cart"> | Date | string
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     items?: CartItemListRelationFilter
+    recoveries?: CartRecoveryListRelationFilter
   }, "id" | "userId">
 
   export type CartOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
+    version?: SortOrder
+    lastActivityAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CartCountOrderByAggregateInput
+    _avg?: CartAvgOrderByAggregateInput
     _max?: CartMaxOrderByAggregateInput
     _min?: CartMinOrderByAggregateInput
+    _sum?: CartSumOrderByAggregateInput
   }
 
   export type CartScalarWhereWithAggregatesInput = {
@@ -27642,6 +29004,8 @@ export namespace Prisma {
     NOT?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Cart"> | string
     userId?: StringNullableWithAggregatesFilter<"Cart"> | string | null
+    version?: IntWithAggregatesFilter<"Cart"> | number
+    lastActivityAt?: DateTimeNullableWithAggregatesFilter<"Cart"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Cart"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cart"> | Date | string
   }
@@ -28861,6 +30225,97 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"PasswordReset"> | Date | string
   }
 
+  export type CartRecoveryWhereInput = {
+    AND?: CartRecoveryWhereInput | CartRecoveryWhereInput[]
+    OR?: CartRecoveryWhereInput[]
+    NOT?: CartRecoveryWhereInput | CartRecoveryWhereInput[]
+    id?: StringFilter<"CartRecovery"> | string
+    cartId?: StringFilter<"CartRecovery"> | string
+    userId?: StringFilter<"CartRecovery"> | string
+    cartVersion?: IntFilter<"CartRecovery"> | number
+    status?: StringFilter<"CartRecovery"> | string
+    skipReason?: StringNullableFilter<"CartRecovery"> | string | null
+    emailMessageId?: StringNullableFilter<"CartRecovery"> | string | null
+    sentAt?: DateTimeNullableFilter<"CartRecovery"> | Date | string | null
+    metadata?: StringNullableFilter<"CartRecovery"> | string | null
+    createdAt?: DateTimeFilter<"CartRecovery"> | Date | string
+    updatedAt?: DateTimeFilter<"CartRecovery"> | Date | string
+    cart?: XOR<CartRelationFilter, CartWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type CartRecoveryOrderByWithRelationInput = {
+    id?: SortOrder
+    cartId?: SortOrder
+    userId?: SortOrder
+    cartVersion?: SortOrder
+    status?: SortOrder
+    skipReason?: SortOrderInput | SortOrder
+    emailMessageId?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    cart?: CartOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CartRecoveryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    cartId_cartVersion?: CartRecoveryCartIdCartVersionCompoundUniqueInput
+    AND?: CartRecoveryWhereInput | CartRecoveryWhereInput[]
+    OR?: CartRecoveryWhereInput[]
+    NOT?: CartRecoveryWhereInput | CartRecoveryWhereInput[]
+    cartId?: StringFilter<"CartRecovery"> | string
+    userId?: StringFilter<"CartRecovery"> | string
+    cartVersion?: IntFilter<"CartRecovery"> | number
+    status?: StringFilter<"CartRecovery"> | string
+    skipReason?: StringNullableFilter<"CartRecovery"> | string | null
+    emailMessageId?: StringNullableFilter<"CartRecovery"> | string | null
+    sentAt?: DateTimeNullableFilter<"CartRecovery"> | Date | string | null
+    metadata?: StringNullableFilter<"CartRecovery"> | string | null
+    createdAt?: DateTimeFilter<"CartRecovery"> | Date | string
+    updatedAt?: DateTimeFilter<"CartRecovery"> | Date | string
+    cart?: XOR<CartRelationFilter, CartWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "cartId_cartVersion">
+
+  export type CartRecoveryOrderByWithAggregationInput = {
+    id?: SortOrder
+    cartId?: SortOrder
+    userId?: SortOrder
+    cartVersion?: SortOrder
+    status?: SortOrder
+    skipReason?: SortOrderInput | SortOrder
+    emailMessageId?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CartRecoveryCountOrderByAggregateInput
+    _avg?: CartRecoveryAvgOrderByAggregateInput
+    _max?: CartRecoveryMaxOrderByAggregateInput
+    _min?: CartRecoveryMinOrderByAggregateInput
+    _sum?: CartRecoverySumOrderByAggregateInput
+  }
+
+  export type CartRecoveryScalarWhereWithAggregatesInput = {
+    AND?: CartRecoveryScalarWhereWithAggregatesInput | CartRecoveryScalarWhereWithAggregatesInput[]
+    OR?: CartRecoveryScalarWhereWithAggregatesInput[]
+    NOT?: CartRecoveryScalarWhereWithAggregatesInput | CartRecoveryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CartRecovery"> | string
+    cartId?: StringWithAggregatesFilter<"CartRecovery"> | string
+    userId?: StringWithAggregatesFilter<"CartRecovery"> | string
+    cartVersion?: IntWithAggregatesFilter<"CartRecovery"> | number
+    status?: StringWithAggregatesFilter<"CartRecovery"> | string
+    skipReason?: StringNullableWithAggregatesFilter<"CartRecovery"> | string | null
+    emailMessageId?: StringNullableWithAggregatesFilter<"CartRecovery"> | string | null
+    sentAt?: DateTimeNullableWithAggregatesFilter<"CartRecovery"> | Date | string | null
+    metadata?: StringNullableWithAggregatesFilter<"CartRecovery"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"CartRecovery"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CartRecovery"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -28872,6 +30327,10 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -28879,6 +30338,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -28893,6 +30353,10 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -28900,6 +30364,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -28914,6 +30379,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -28921,6 +30390,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -28935,6 +30405,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -28942,6 +30416,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -28956,6 +30431,10 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -28971,6 +30450,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28986,6 +30469,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29628,45 +31115,61 @@ export namespace Prisma {
 
   export type CartCreateInput = {
     id?: string
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutCartInput
     items?: CartItemCreateNestedManyWithoutCartInput
+    recoveries?: CartRecoveryCreateNestedManyWithoutCartInput
   }
 
   export type CartUncheckedCreateInput = {
     id?: string
     userId?: string | null
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemUncheckedCreateNestedManyWithoutCartInput
+    recoveries?: CartRecoveryUncheckedCreateNestedManyWithoutCartInput
   }
 
   export type CartUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutCartNestedInput
     items?: CartItemUpdateManyWithoutCartNestedInput
+    recoveries?: CartRecoveryUpdateManyWithoutCartNestedInput
   }
 
   export type CartUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUncheckedUpdateManyWithoutCartNestedInput
+    recoveries?: CartRecoveryUncheckedUpdateManyWithoutCartNestedInput
   }
 
   export type CartCreateManyInput = {
     id?: string
     userId?: string | null
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type CartUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29674,6 +31177,8 @@ export namespace Prisma {
   export type CartUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31040,6 +32545,102 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type CartRecoveryCreateInput = {
+    id?: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cart: CartCreateNestedOneWithoutRecoveriesInput
+    user: UserCreateNestedOneWithoutCartRecoveriesInput
+  }
+
+  export type CartRecoveryUncheckedCreateInput = {
+    id?: string
+    cartId: string
+    userId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CartRecoveryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cart?: CartUpdateOneRequiredWithoutRecoveriesNestedInput
+    user?: UserUpdateOneRequiredWithoutCartRecoveriesNestedInput
+  }
+
+  export type CartRecoveryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryCreateManyInput = {
+    id?: string
+    cartId: string
+    userId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CartRecoveryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -31126,6 +32727,12 @@ export namespace Prisma {
     isNot?: CartWhereInput | null
   }
 
+  export type CartRecoveryListRelationFilter = {
+    every?: CartRecoveryWhereInput
+    some?: CartRecoveryWhereInput
+    none?: CartRecoveryWhereInput
+  }
+
   export type AuditLogListRelationFilter = {
     every?: AuditLogWhereInput
     some?: AuditLogWhereInput
@@ -31153,6 +32760,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CartRecoveryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type AuditLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31168,6 +32779,10 @@ export namespace Prisma {
     role?: SortOrder
     welcomeEmailSent?: SortOrder
     welcomeEmailSentAt?: SortOrder
+    marketingConsent?: SortOrder
+    marketingConsentAt?: SortOrder
+    marketingConsentSource?: SortOrder
+    unsubscribedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31183,6 +32798,10 @@ export namespace Prisma {
     role?: SortOrder
     welcomeEmailSent?: SortOrder
     welcomeEmailSentAt?: SortOrder
+    marketingConsent?: SortOrder
+    marketingConsentAt?: SortOrder
+    marketingConsentSource?: SortOrder
+    unsubscribedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31198,6 +32817,10 @@ export namespace Prisma {
     role?: SortOrder
     welcomeEmailSent?: SortOrder
     welcomeEmailSentAt?: SortOrder
+    marketingConsent?: SortOrder
+    marketingConsentAt?: SortOrder
+    marketingConsentSource?: SortOrder
+    unsubscribedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31724,13 +33347,21 @@ export namespace Prisma {
   export type CartCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    version?: SortOrder
+    lastActivityAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CartAvgOrderByAggregateInput = {
+    version?: SortOrder
   }
 
   export type CartMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    version?: SortOrder
+    lastActivityAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -31738,8 +33369,14 @@ export namespace Prisma {
   export type CartMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    version?: SortOrder
+    lastActivityAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CartSumOrderByAggregateInput = {
+    version?: SortOrder
   }
 
   export type CartRelationFilter = {
@@ -32486,6 +34123,61 @@ export namespace Prisma {
     attempts?: SortOrder
   }
 
+  export type CartRecoveryCartIdCartVersionCompoundUniqueInput = {
+    cartId: string
+    cartVersion: number
+  }
+
+  export type CartRecoveryCountOrderByAggregateInput = {
+    id?: SortOrder
+    cartId?: SortOrder
+    userId?: SortOrder
+    cartVersion?: SortOrder
+    status?: SortOrder
+    skipReason?: SortOrder
+    emailMessageId?: SortOrder
+    sentAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CartRecoveryAvgOrderByAggregateInput = {
+    cartVersion?: SortOrder
+  }
+
+  export type CartRecoveryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    cartId?: SortOrder
+    userId?: SortOrder
+    cartVersion?: SortOrder
+    status?: SortOrder
+    skipReason?: SortOrder
+    emailMessageId?: SortOrder
+    sentAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CartRecoveryMinOrderByAggregateInput = {
+    id?: SortOrder
+    cartId?: SortOrder
+    userId?: SortOrder
+    cartVersion?: SortOrder
+    status?: SortOrder
+    skipReason?: SortOrder
+    emailMessageId?: SortOrder
+    sentAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CartRecoverySumOrderByAggregateInput = {
+    cartVersion?: SortOrder
+  }
+
   export type AddressCreateNestedManyWithoutUserInput = {
     create?: XOR<AddressCreateWithoutUserInput, AddressUncheckedCreateWithoutUserInput> | AddressCreateWithoutUserInput[] | AddressUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AddressCreateOrConnectWithoutUserInput | AddressCreateOrConnectWithoutUserInput[]
@@ -32518,6 +34210,13 @@ export namespace Prisma {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
     connect?: CartWhereUniqueInput
+  }
+
+  export type CartRecoveryCreateNestedManyWithoutUserInput = {
+    create?: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput> | CartRecoveryCreateWithoutUserInput[] | CartRecoveryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutUserInput | CartRecoveryCreateOrConnectWithoutUserInput[]
+    createMany?: CartRecoveryCreateManyUserInputEnvelope
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
   }
 
   export type AuditLogCreateNestedManyWithoutUserInput = {
@@ -32559,6 +34258,13 @@ export namespace Prisma {
     create?: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
     connectOrCreate?: CartCreateOrConnectWithoutUserInput
     connect?: CartWhereUniqueInput
+  }
+
+  export type CartRecoveryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput> | CartRecoveryCreateWithoutUserInput[] | CartRecoveryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutUserInput | CartRecoveryCreateOrConnectWithoutUserInput[]
+    createMany?: CartRecoveryCreateManyUserInputEnvelope
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
   }
 
   export type AuditLogUncheckedCreateNestedManyWithoutUserInput = {
@@ -32654,6 +34360,20 @@ export namespace Prisma {
     update?: XOR<XOR<CartUpdateToOneWithWhereWithoutUserInput, CartUpdateWithoutUserInput>, CartUncheckedUpdateWithoutUserInput>
   }
 
+  export type CartRecoveryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput> | CartRecoveryCreateWithoutUserInput[] | CartRecoveryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutUserInput | CartRecoveryCreateOrConnectWithoutUserInput[]
+    upsert?: CartRecoveryUpsertWithWhereUniqueWithoutUserInput | CartRecoveryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CartRecoveryCreateManyUserInputEnvelope
+    set?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    disconnect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    delete?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    update?: CartRecoveryUpdateWithWhereUniqueWithoutUserInput | CartRecoveryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CartRecoveryUpdateManyWithWhereWithoutUserInput | CartRecoveryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
+  }
+
   export type AuditLogUpdateManyWithoutUserNestedInput = {
     create?: XOR<AuditLogCreateWithoutUserInput, AuditLogUncheckedCreateWithoutUserInput> | AuditLogCreateWithoutUserInput[] | AuditLogUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AuditLogCreateOrConnectWithoutUserInput | AuditLogCreateOrConnectWithoutUserInput[]
@@ -32732,6 +34452,20 @@ export namespace Prisma {
     delete?: CartWhereInput | boolean
     connect?: CartWhereUniqueInput
     update?: XOR<XOR<CartUpdateToOneWithWhereWithoutUserInput, CartUpdateWithoutUserInput>, CartUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CartRecoveryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput> | CartRecoveryCreateWithoutUserInput[] | CartRecoveryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutUserInput | CartRecoveryCreateOrConnectWithoutUserInput[]
+    upsert?: CartRecoveryUpsertWithWhereUniqueWithoutUserInput | CartRecoveryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CartRecoveryCreateManyUserInputEnvelope
+    set?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    disconnect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    delete?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    update?: CartRecoveryUpdateWithWhereUniqueWithoutUserInput | CartRecoveryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CartRecoveryUpdateManyWithWhereWithoutUserInput | CartRecoveryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
   }
 
   export type AuditLogUncheckedUpdateManyWithoutUserNestedInput = {
@@ -33193,11 +34927,25 @@ export namespace Prisma {
     connect?: CartItemWhereUniqueInput | CartItemWhereUniqueInput[]
   }
 
+  export type CartRecoveryCreateNestedManyWithoutCartInput = {
+    create?: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput> | CartRecoveryCreateWithoutCartInput[] | CartRecoveryUncheckedCreateWithoutCartInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutCartInput | CartRecoveryCreateOrConnectWithoutCartInput[]
+    createMany?: CartRecoveryCreateManyCartInputEnvelope
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+  }
+
   export type CartItemUncheckedCreateNestedManyWithoutCartInput = {
     create?: XOR<CartItemCreateWithoutCartInput, CartItemUncheckedCreateWithoutCartInput> | CartItemCreateWithoutCartInput[] | CartItemUncheckedCreateWithoutCartInput[]
     connectOrCreate?: CartItemCreateOrConnectWithoutCartInput | CartItemCreateOrConnectWithoutCartInput[]
     createMany?: CartItemCreateManyCartInputEnvelope
     connect?: CartItemWhereUniqueInput | CartItemWhereUniqueInput[]
+  }
+
+  export type CartRecoveryUncheckedCreateNestedManyWithoutCartInput = {
+    create?: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput> | CartRecoveryCreateWithoutCartInput[] | CartRecoveryUncheckedCreateWithoutCartInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutCartInput | CartRecoveryCreateOrConnectWithoutCartInput[]
+    createMany?: CartRecoveryCreateManyCartInputEnvelope
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutCartNestedInput = {
@@ -33224,6 +34972,20 @@ export namespace Prisma {
     deleteMany?: CartItemScalarWhereInput | CartItemScalarWhereInput[]
   }
 
+  export type CartRecoveryUpdateManyWithoutCartNestedInput = {
+    create?: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput> | CartRecoveryCreateWithoutCartInput[] | CartRecoveryUncheckedCreateWithoutCartInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutCartInput | CartRecoveryCreateOrConnectWithoutCartInput[]
+    upsert?: CartRecoveryUpsertWithWhereUniqueWithoutCartInput | CartRecoveryUpsertWithWhereUniqueWithoutCartInput[]
+    createMany?: CartRecoveryCreateManyCartInputEnvelope
+    set?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    disconnect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    delete?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    update?: CartRecoveryUpdateWithWhereUniqueWithoutCartInput | CartRecoveryUpdateWithWhereUniqueWithoutCartInput[]
+    updateMany?: CartRecoveryUpdateManyWithWhereWithoutCartInput | CartRecoveryUpdateManyWithWhereWithoutCartInput[]
+    deleteMany?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
+  }
+
   export type CartItemUncheckedUpdateManyWithoutCartNestedInput = {
     create?: XOR<CartItemCreateWithoutCartInput, CartItemUncheckedCreateWithoutCartInput> | CartItemCreateWithoutCartInput[] | CartItemUncheckedCreateWithoutCartInput[]
     connectOrCreate?: CartItemCreateOrConnectWithoutCartInput | CartItemCreateOrConnectWithoutCartInput[]
@@ -33236,6 +34998,20 @@ export namespace Prisma {
     update?: CartItemUpdateWithWhereUniqueWithoutCartInput | CartItemUpdateWithWhereUniqueWithoutCartInput[]
     updateMany?: CartItemUpdateManyWithWhereWithoutCartInput | CartItemUpdateManyWithWhereWithoutCartInput[]
     deleteMany?: CartItemScalarWhereInput | CartItemScalarWhereInput[]
+  }
+
+  export type CartRecoveryUncheckedUpdateManyWithoutCartNestedInput = {
+    create?: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput> | CartRecoveryCreateWithoutCartInput[] | CartRecoveryUncheckedCreateWithoutCartInput[]
+    connectOrCreate?: CartRecoveryCreateOrConnectWithoutCartInput | CartRecoveryCreateOrConnectWithoutCartInput[]
+    upsert?: CartRecoveryUpsertWithWhereUniqueWithoutCartInput | CartRecoveryUpsertWithWhereUniqueWithoutCartInput[]
+    createMany?: CartRecoveryCreateManyCartInputEnvelope
+    set?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    disconnect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    delete?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    connect?: CartRecoveryWhereUniqueInput | CartRecoveryWhereUniqueInput[]
+    update?: CartRecoveryUpdateWithWhereUniqueWithoutCartInput | CartRecoveryUpdateWithWhereUniqueWithoutCartInput[]
+    updateMany?: CartRecoveryUpdateManyWithWhereWithoutCartInput | CartRecoveryUpdateManyWithWhereWithoutCartInput[]
+    deleteMany?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
   }
 
   export type CartCreateNestedOneWithoutItemsInput = {
@@ -33488,6 +35264,34 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuditLogsInput, UserUpdateWithoutAuditLogsInput>, UserUncheckedUpdateWithoutAuditLogsInput>
+  }
+
+  export type CartCreateNestedOneWithoutRecoveriesInput = {
+    create?: XOR<CartCreateWithoutRecoveriesInput, CartUncheckedCreateWithoutRecoveriesInput>
+    connectOrCreate?: CartCreateOrConnectWithoutRecoveriesInput
+    connect?: CartWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCartRecoveriesInput = {
+    create?: XOR<UserCreateWithoutCartRecoveriesInput, UserUncheckedCreateWithoutCartRecoveriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCartRecoveriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CartUpdateOneRequiredWithoutRecoveriesNestedInput = {
+    create?: XOR<CartCreateWithoutRecoveriesInput, CartUncheckedCreateWithoutRecoveriesInput>
+    connectOrCreate?: CartCreateOrConnectWithoutRecoveriesInput
+    upsert?: CartUpsertWithoutRecoveriesInput
+    connect?: CartWhereUniqueInput
+    update?: XOR<XOR<CartUpdateToOneWithWhereWithoutRecoveriesInput, CartUpdateWithoutRecoveriesInput>, CartUncheckedUpdateWithoutRecoveriesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCartRecoveriesNestedInput = {
+    create?: XOR<UserCreateWithoutCartRecoveriesInput, UserUncheckedCreateWithoutCartRecoveriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCartRecoveriesInput
+    upsert?: UserUpsertWithoutCartRecoveriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCartRecoveriesInput, UserUpdateWithoutCartRecoveriesInput>, UserUncheckedUpdateWithoutCartRecoveriesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -33905,21 +35709,63 @@ export namespace Prisma {
 
   export type CartCreateWithoutUserInput = {
     id?: string
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemCreateNestedManyWithoutCartInput
+    recoveries?: CartRecoveryCreateNestedManyWithoutCartInput
   }
 
   export type CartUncheckedCreateWithoutUserInput = {
     id?: string
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: CartItemUncheckedCreateNestedManyWithoutCartInput
+    recoveries?: CartRecoveryUncheckedCreateNestedManyWithoutCartInput
   }
 
   export type CartCreateOrConnectWithoutUserInput = {
     where: CartWhereUniqueInput
     create: XOR<CartCreateWithoutUserInput, CartUncheckedCreateWithoutUserInput>
+  }
+
+  export type CartRecoveryCreateWithoutUserInput = {
+    id?: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cart: CartCreateNestedOneWithoutRecoveriesInput
+  }
+
+  export type CartRecoveryUncheckedCreateWithoutUserInput = {
+    id?: string
+    cartId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CartRecoveryCreateOrConnectWithoutUserInput = {
+    where: CartRecoveryWhereUniqueInput
+    create: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput>
+  }
+
+  export type CartRecoveryCreateManyUserInputEnvelope = {
+    data: CartRecoveryCreateManyUserInput | CartRecoveryCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type AuditLogCreateWithoutUserInput = {
@@ -34113,16 +35959,55 @@ export namespace Prisma {
 
   export type CartUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUpdateManyWithoutCartNestedInput
+    recoveries?: CartRecoveryUpdateManyWithoutCartNestedInput
   }
 
   export type CartUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: CartItemUncheckedUpdateManyWithoutCartNestedInput
+    recoveries?: CartRecoveryUncheckedUpdateManyWithoutCartNestedInput
+  }
+
+  export type CartRecoveryUpsertWithWhereUniqueWithoutUserInput = {
+    where: CartRecoveryWhereUniqueInput
+    update: XOR<CartRecoveryUpdateWithoutUserInput, CartRecoveryUncheckedUpdateWithoutUserInput>
+    create: XOR<CartRecoveryCreateWithoutUserInput, CartRecoveryUncheckedCreateWithoutUserInput>
+  }
+
+  export type CartRecoveryUpdateWithWhereUniqueWithoutUserInput = {
+    where: CartRecoveryWhereUniqueInput
+    data: XOR<CartRecoveryUpdateWithoutUserInput, CartRecoveryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CartRecoveryUpdateManyWithWhereWithoutUserInput = {
+    where: CartRecoveryScalarWhereInput
+    data: XOR<CartRecoveryUpdateManyMutationInput, CartRecoveryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CartRecoveryScalarWhereInput = {
+    AND?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
+    OR?: CartRecoveryScalarWhereInput[]
+    NOT?: CartRecoveryScalarWhereInput | CartRecoveryScalarWhereInput[]
+    id?: StringFilter<"CartRecovery"> | string
+    cartId?: StringFilter<"CartRecovery"> | string
+    userId?: StringFilter<"CartRecovery"> | string
+    cartVersion?: IntFilter<"CartRecovery"> | number
+    status?: StringFilter<"CartRecovery"> | string
+    skipReason?: StringNullableFilter<"CartRecovery"> | string | null
+    emailMessageId?: StringNullableFilter<"CartRecovery"> | string | null
+    sentAt?: DateTimeNullableFilter<"CartRecovery"> | Date | string | null
+    metadata?: StringNullableFilter<"CartRecovery"> | string | null
+    createdAt?: DateTimeFilter<"CartRecovery"> | Date | string
+    updatedAt?: DateTimeFilter<"CartRecovery"> | Date | string
   }
 
   export type AuditLogUpsertWithWhereUniqueWithoutUserInput = {
@@ -34166,12 +36051,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -34186,12 +36076,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -34222,12 +36117,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -34242,12 +36142,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -35220,12 +37125,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -35240,12 +37150,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35284,6 +37199,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CartRecoveryCreateWithoutCartInput = {
+    id?: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCartRecoveriesInput
+  }
+
+  export type CartRecoveryUncheckedCreateWithoutCartInput = {
+    id?: string
+    userId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CartRecoveryCreateOrConnectWithoutCartInput = {
+    where: CartRecoveryWhereUniqueInput
+    create: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput>
+  }
+
+  export type CartRecoveryCreateManyCartInputEnvelope = {
+    data: CartRecoveryCreateManyCartInput | CartRecoveryCreateManyCartInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutCartInput = {
     update: XOR<UserUpdateWithoutCartInput, UserUncheckedUpdateWithoutCartInput>
     create: XOR<UserCreateWithoutCartInput, UserUncheckedCreateWithoutCartInput>
@@ -35306,12 +37257,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -35326,12 +37282,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -35351,18 +37312,40 @@ export namespace Prisma {
     data: XOR<CartItemUpdateManyMutationInput, CartItemUncheckedUpdateManyWithoutCartInput>
   }
 
+  export type CartRecoveryUpsertWithWhereUniqueWithoutCartInput = {
+    where: CartRecoveryWhereUniqueInput
+    update: XOR<CartRecoveryUpdateWithoutCartInput, CartRecoveryUncheckedUpdateWithoutCartInput>
+    create: XOR<CartRecoveryCreateWithoutCartInput, CartRecoveryUncheckedCreateWithoutCartInput>
+  }
+
+  export type CartRecoveryUpdateWithWhereUniqueWithoutCartInput = {
+    where: CartRecoveryWhereUniqueInput
+    data: XOR<CartRecoveryUpdateWithoutCartInput, CartRecoveryUncheckedUpdateWithoutCartInput>
+  }
+
+  export type CartRecoveryUpdateManyWithWhereWithoutCartInput = {
+    where: CartRecoveryScalarWhereInput
+    data: XOR<CartRecoveryUpdateManyMutationInput, CartRecoveryUncheckedUpdateManyWithoutCartInput>
+  }
+
   export type CartCreateWithoutItemsInput = {
     id?: string
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutCartInput
+    recoveries?: CartRecoveryCreateNestedManyWithoutCartInput
   }
 
   export type CartUncheckedCreateWithoutItemsInput = {
     id?: string
     userId?: string | null
+    version?: number
+    lastActivityAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    recoveries?: CartRecoveryUncheckedCreateNestedManyWithoutCartInput
   }
 
   export type CartCreateOrConnectWithoutItemsInput = {
@@ -35452,16 +37435,22 @@ export namespace Prisma {
 
   export type CartUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutCartNestedInput
+    recoveries?: CartRecoveryUpdateManyWithoutCartNestedInput
   }
 
   export type CartUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recoveries?: CartRecoveryUncheckedUpdateManyWithoutCartNestedInput
   }
 
   export type ProductUpsertWithoutCartItemsInput = {
@@ -35550,12 +37539,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -35570,12 +37564,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35675,12 +37674,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -35695,12 +37699,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -35790,12 +37799,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -35810,12 +37824,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -35910,12 +37929,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -35930,12 +37954,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -36528,12 +38557,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
   }
 
@@ -36548,12 +38582,17 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -36659,12 +38698,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
   }
 
@@ -36679,12 +38723,17 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -36699,6 +38748,10 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressCreateNestedManyWithoutUserInput
@@ -36706,6 +38759,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutUserInput
     wishlist?: WishlistCreateNestedManyWithoutUserInput
     cart?: CartCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -36719,6 +38773,10 @@ export namespace Prisma {
     role?: string
     welcomeEmailSent?: boolean
     welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
@@ -36726,6 +38784,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
     cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    cartRecoveries?: CartRecoveryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -36755,6 +38814,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUpdateManyWithoutUserNestedInput
@@ -36762,6 +38825,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUpdateManyWithoutUserNestedInput
     cart?: CartUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -36775,6 +38839,10 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
     welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
@@ -36782,6 +38850,179 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
     cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    cartRecoveries?: CartRecoveryUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CartCreateWithoutRecoveriesInput = {
+    id?: string
+    version?: number
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutCartInput
+    items?: CartItemCreateNestedManyWithoutCartInput
+  }
+
+  export type CartUncheckedCreateWithoutRecoveriesInput = {
+    id?: string
+    userId?: string | null
+    version?: number
+    lastActivityAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: CartItemUncheckedCreateNestedManyWithoutCartInput
+  }
+
+  export type CartCreateOrConnectWithoutRecoveriesInput = {
+    where: CartWhereUniqueInput
+    create: XOR<CartCreateWithoutRecoveriesInput, CartUncheckedCreateWithoutRecoveriesInput>
+  }
+
+  export type UserCreateWithoutCartRecoveriesInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    googleId?: string | null
+    avatar?: string | null
+    phone?: string | null
+    role?: string
+    welcomeEmailSent?: boolean
+    welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addresses?: AddressCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
+    wishlist?: WishlistCreateNestedManyWithoutUserInput
+    cart?: CartCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCartRecoveriesInput = {
+    id?: string
+    name: string
+    email: string
+    passwordHash?: string | null
+    googleId?: string | null
+    avatar?: string | null
+    phone?: string | null
+    role?: string
+    welcomeEmailSent?: boolean
+    welcomeEmailSentAt?: Date | string | null
+    marketingConsent?: boolean
+    marketingConsentAt?: Date | string | null
+    marketingConsentSource?: string | null
+    unsubscribedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    addresses?: AddressUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    wishlist?: WishlistUncheckedCreateNestedManyWithoutUserInput
+    cart?: CartUncheckedCreateNestedOneWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCartRecoveriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCartRecoveriesInput, UserUncheckedCreateWithoutCartRecoveriesInput>
+  }
+
+  export type CartUpsertWithoutRecoveriesInput = {
+    update: XOR<CartUpdateWithoutRecoveriesInput, CartUncheckedUpdateWithoutRecoveriesInput>
+    create: XOR<CartCreateWithoutRecoveriesInput, CartUncheckedCreateWithoutRecoveriesInput>
+    where?: CartWhereInput
+  }
+
+  export type CartUpdateToOneWithWhereWithoutRecoveriesInput = {
+    where?: CartWhereInput
+    data: XOR<CartUpdateWithoutRecoveriesInput, CartUncheckedUpdateWithoutRecoveriesInput>
+  }
+
+  export type CartUpdateWithoutRecoveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCartNestedInput
+    items?: CartItemUpdateManyWithoutCartNestedInput
+  }
+
+  export type CartUncheckedUpdateWithoutRecoveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    lastActivityAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: CartItemUncheckedUpdateManyWithoutCartNestedInput
+  }
+
+  export type UserUpsertWithoutCartRecoveriesInput = {
+    update: XOR<UserUpdateWithoutCartRecoveriesInput, UserUncheckedUpdateWithoutCartRecoveriesInput>
+    create: XOR<UserCreateWithoutCartRecoveriesInput, UserUncheckedCreateWithoutCartRecoveriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCartRecoveriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCartRecoveriesInput, UserUncheckedUpdateWithoutCartRecoveriesInput>
+  }
+
+  export type UserUpdateWithoutCartRecoveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
+    welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addresses?: AddressUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+    wishlist?: WishlistUpdateManyWithoutUserNestedInput
+    cart?: CartUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCartRecoveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    welcomeEmailSent?: BoolFieldUpdateOperationsInput | boolean
+    welcomeEmailSentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsent?: BoolFieldUpdateOperationsInput | boolean
+    marketingConsentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    marketingConsentSource?: NullableStringFieldUpdateOperationsInput | string | null
+    unsubscribedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    addresses?: AddressUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    wishlist?: WishlistUncheckedUpdateManyWithoutUserNestedInput
+    cart?: CartUncheckedUpdateOneWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AddressCreateManyUserInput = {
@@ -36850,6 +39091,19 @@ export namespace Prisma {
     id?: string
     productId: string
     createdAt?: Date | string
+  }
+
+  export type CartRecoveryCreateManyUserInput = {
+    id?: string
+    cartId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AuditLogCreateManyUserInput = {
@@ -37068,6 +39322,45 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     productId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cart?: CartUpdateOneRequiredWithoutRecoveriesNestedInput
+  }
+
+  export type CartRecoveryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AuditLogUpdateWithoutUserInput = {
@@ -37586,6 +39879,19 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type CartRecoveryCreateManyCartInput = {
+    id?: string
+    userId: string
+    cartVersion: number
+    status?: string
+    skipReason?: string | null
+    emailMessageId?: string | null
+    sentAt?: Date | string | null
+    metadata?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type CartItemUpdateWithoutCartInput = {
     id?: StringFieldUpdateOperationsInput | string
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -37612,6 +39918,45 @@ export namespace Prisma {
     size?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryUpdateWithoutCartInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCartRecoveriesNestedInput
+  }
+
+  export type CartRecoveryUncheckedUpdateWithoutCartInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CartRecoveryUncheckedUpdateManyWithoutCartInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    cartVersion?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    skipReason?: NullableStringFieldUpdateOperationsInput | string | null
+    emailMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    metadata?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37825,6 +40170,10 @@ export namespace Prisma {
      * @deprecated Use PasswordResetDefaultArgs instead
      */
     export type PasswordResetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PasswordResetDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CartRecoveryDefaultArgs instead
+     */
+    export type CartRecoveryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CartRecoveryDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

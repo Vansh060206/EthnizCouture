@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { 
-  Filter, 
-  X, 
-  ChevronDown, 
-  SlidersHorizontal, 
-  RotateCcw, 
-  Search, 
-  Grid3X3, 
-  LayoutGrid, 
+import {
+  Filter,
+  X,
+  ChevronDown,
+  SlidersHorizontal,
+  RotateCcw,
+  Search,
+  Grid3X3,
+  LayoutGrid,
   Grid2X2,
   Sparkles,
   Check
@@ -48,6 +48,7 @@ export const Shop: React.FC = () => {
   const collectionParam = searchParams.get('collection') || '';
   const genderParam = searchParams.get('gender') || 'ALL';
   const fabricParam = searchParams.get('fabric') || '';
+
   const occasionParam = searchParams.get('occasion') || '';
   const sizeParam = searchParams.get('size') || '';
   const colorParam = searchParams.get('color') || '';
@@ -64,7 +65,7 @@ export const Shop: React.FC = () => {
   const [localSearchInput, setLocalSearchInput] = useState(searchParam);
 
   const fabricsList = ['Pure Katan Silk', 'Royal Velvet', 'Organza', 'Chanderi Silk', 'Georgette', 'Raw Silk', 'Brocade'];
-  const occasionsList = ['Bridal', 'Sangeet', 'Mehendi', 'Reception', 'Festive', 'Cocktail'];
+  const occasionsList = ['Wedding', 'Sangeet', 'Mehendi', 'Reception', 'Festive', 'Cocktail'];
   const sizesList = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'Free Size'];
   const colorsList = ['Crimson Red', 'Emerald Green', 'Royal Gold', 'Wine / Burgundy', 'Midnight Blue', 'Warm Ivory', 'Dusty Rose'];
 
@@ -186,7 +187,7 @@ export const Shop: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 pb-32 lg:pb-12">
-      
+
       {/* 1. EDITORIAL HEADER */}
       <div className="mb-6 sm:mb-10 text-center sm:text-left">
         <div className="flex items-center justify-center sm:justify-start gap-2 text-[10px] text-zinc-500 uppercase tracking-[0.25em] mb-2 font-sans">
@@ -226,9 +227,9 @@ export const Shop: React.FC = () => {
 
       {/* 2. CONTROL BAR: Search, Active Filters, Layout Switcher & Sort */}
       <div className="bg-white rounded-xl border border-[#E8DEC8] p-3 sm:p-4 mb-6 sm:mb-8 shadow-xs space-y-3">
-        
+
         <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
-          
+
           {/* Mobile Filter Toggle */}
           <button
             onClick={() => setIsMobileFilterOpen(true)}
@@ -404,10 +405,10 @@ export const Shop: React.FC = () => {
 
       {/* 3. MAIN SHOP LAYOUT (Left Filter Sidebar + Products Grid) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         {/* DESKTOP REFINED FILTER SIDEBAR (3 cols) */}
         <div className="hidden lg:block lg:col-span-3 space-y-6">
-          
+
           {/* Availability Filter */}
           <div className="bg-white p-5 rounded-lg border border-[#C6A15D]/25">
             <h3 className="font-serif text-sm font-semibold text-[#1A1A1A] mb-3 uppercase tracking-wider">
@@ -523,11 +524,10 @@ export const Shop: React.FC = () => {
                 <button
                   key={s}
                   onClick={() => updateFilter('size', sizeParam === s ? null : s)}
-                  className={`min-w-10 px-3 py-1.5 text-xs rounded border transition-all ${
-                    sizeParam === s
-                      ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
-                      : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
-                  }`}
+                  className={`min-w-10 px-3 py-1.5 text-xs rounded border transition-all ${sizeParam === s
+                    ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
+                    : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
+                    }`}
                 >
                   {s}
                 </button>
@@ -545,11 +545,10 @@ export const Shop: React.FC = () => {
                 <button
                   key={col}
                   onClick={() => updateFilter('color', colorParam === col ? null : col)}
-                  className={`px-3 py-1.5 text-xs rounded border transition-all ${
-                    colorParam === col
-                      ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
-                      : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
-                  }`}
+                  className={`px-3 py-1.5 text-xs rounded border transition-all ${colorParam === col
+                    ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
+                    : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
+                    }`}
                 >
                   {col}
                 </button>
@@ -567,11 +566,10 @@ export const Shop: React.FC = () => {
                 <button
                   key={f}
                   onClick={() => updateFilter('fabric', fabricParam === f ? null : f)}
-                  className={`px-3 py-1.5 text-xs rounded border transition-all ${
-                    fabricParam === f
-                      ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
-                      : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
-                  }`}
+                  className={`px-3 py-1.5 text-xs rounded border transition-all ${fabricParam === f
+                    ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
+                    : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
+                    }`}
                 >
                   {f}
                 </button>
@@ -589,11 +587,10 @@ export const Shop: React.FC = () => {
                 <button
                   key={occ}
                   onClick={() => updateFilter('occasion', occasionParam === occ ? null : occ)}
-                  className={`px-3 py-1.5 text-xs rounded border transition-all ${
-                    occasionParam === occ
-                      ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
-                      : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
-                  }`}
+                  className={`px-3 py-1.5 text-xs rounded border transition-all ${occasionParam === occ
+                    ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] font-bold shadow-xs'
+                    : 'bg-[#FAF7F2] text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
+                    }`}
                 >
                   {occ}
                 </button>
@@ -606,7 +603,7 @@ export const Shop: React.FC = () => {
             <h3 className="font-serif text-sm font-semibold text-[#1A1A1A] uppercase tracking-wider">
               Price Range
             </h3>
-            
+
             <div className="space-y-1.5 text-xs">
               <button
                 onClick={() => applyPriceRangePreset(undefined, 15000)}
@@ -630,7 +627,7 @@ export const Shop: React.FC = () => {
                 onClick={() => applyPriceRangePreset(75000, undefined)}
                 className="w-full text-left py-1 px-2 rounded hover:bg-[#FAF7F2] text-[#3E1A1E] font-bold"
               >
-                Heirloom Bridal ({formatPrice(75000)}+)
+                Heirloom Masterpieces ({formatPrice(75000)}+)
               </button>
             </div>
 
@@ -663,7 +660,7 @@ export const Shop: React.FC = () => {
 
         {/* PRODUCTS CATALOGUE GRID (9 cols) */}
         <div className="lg:col-span-9">
-          
+
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-pulse">
               {[...Array(6)].map((_, i) => (
@@ -693,13 +690,12 @@ export const Shop: React.FC = () => {
             </div>
           ) : (
             <div
-              className={`grid gap-2.5 sm:gap-6 lg:gap-8 ${
-                gridCols === 2
-                  ? 'grid-cols-2 sm:grid-cols-2'
-                  : gridCols === 3
+              className={`grid gap-2.5 sm:gap-6 lg:gap-8 ${gridCols === 2
+                ? 'grid-cols-2 sm:grid-cols-2'
+                : gridCols === 3
                   ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3'
                   : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
-              }`}
+                }`}
             >
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
@@ -716,11 +712,10 @@ export const Shop: React.FC = () => {
                   <button
                     key={p}
                     onClick={() => updateFilter('page', String(p))}
-                    className={`w-10 h-10 rounded border text-xs font-bold transition-all ${
-                      pageParam === p
-                        ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] shadow-sm'
-                        : 'bg-white text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
-                    }`}
+                    className={`w-10 h-10 rounded border text-xs font-bold transition-all ${pageParam === p
+                      ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E] shadow-sm'
+                      : 'bg-white text-zinc-700 border-zinc-200 hover:border-[#C6A15D]'
+                      }`}
                   >
                     {p}
                   </button>
@@ -742,7 +737,7 @@ export const Shop: React.FC = () => {
           />
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
             <div className="w-screen max-w-sm bg-white shadow-2xl flex flex-col border-l border-[#C6A15D]/40">
-              
+
               <div className="p-4 border-b border-[#C6A15D]/25 flex items-center justify-between bg-[#FAF7F2]">
                 <h2 className="font-serif text-lg font-bold text-[#1A1A1A]">Refine Couture Collection</h2>
                 <button
@@ -805,11 +800,10 @@ export const Shop: React.FC = () => {
                       <button
                         key={s}
                         onClick={() => updateFilter('size', sizeParam === s ? null : s)}
-                        className={`px-3 py-1.5 rounded border ${
-                          sizeParam === s
-                            ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
-                            : 'bg-zinc-50 border-zinc-200'
-                        }`}
+                        className={`px-3 py-1.5 rounded border ${sizeParam === s
+                          ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
+                          : 'bg-zinc-50 border-zinc-200'
+                          }`}
                       >
                         {s}
                       </button>
@@ -825,11 +819,10 @@ export const Shop: React.FC = () => {
                       <button
                         key={c}
                         onClick={() => updateFilter('color', colorParam === c ? null : c)}
-                        className={`px-3 py-1.5 rounded border ${
-                          colorParam === c
-                            ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
-                            : 'bg-zinc-50 border-zinc-200'
-                        }`}
+                        className={`px-3 py-1.5 rounded border ${colorParam === c
+                          ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
+                          : 'bg-zinc-50 border-zinc-200'
+                          }`}
                       >
                         {c}
                       </button>
@@ -845,11 +838,10 @@ export const Shop: React.FC = () => {
                       <button
                         key={f}
                         onClick={() => updateFilter('fabric', fabricParam === f ? null : f)}
-                        className={`px-3 py-1.5 rounded border ${
-                          fabricParam === f
-                            ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
-                            : 'bg-zinc-50 border-zinc-200'
-                        }`}
+                        className={`px-3 py-1.5 rounded border ${fabricParam === f
+                          ? 'bg-[#3E1A1E] text-[#DFC89D] border-[#3E1A1E]'
+                          : 'bg-zinc-50 border-zinc-200'
+                          }`}
                       >
                         {f}
                       </button>
@@ -893,12 +885,12 @@ export const Shop: React.FC = () => {
             {sortParam === 'price_asc'
               ? 'Price: Low-High'
               : sortParam === 'price_desc'
-              ? 'Price: High-Low'
-              : sortParam === 'newest'
-              ? 'Newest'
-              : sortParam === 'best_rated'
-              ? 'Best Rated'
-              : 'Featured'}
+                ? 'Price: High-Low'
+                : sortParam === 'newest'
+                  ? 'Newest'
+                  : sortParam === 'best_rated'
+                    ? 'Best Rated'
+                    : 'Featured'}
           </span>
         </button>
         <button
@@ -953,11 +945,10 @@ export const Shop: React.FC = () => {
                     updateFilter('sort', opt.value);
                     setIsMobileSortOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between p-3.5 rounded-xl text-left text-xs font-semibold transition-colors ${
-                    sortParam === opt.value
-                      ? 'bg-[#3E1A1E]/10 text-[#3E1A1E] font-bold'
-                      : 'text-zinc-700 hover:bg-zinc-50'
-                  }`}
+                  className={`w-full flex items-center justify-between p-3.5 rounded-xl text-left text-xs font-semibold transition-colors ${sortParam === opt.value
+                    ? 'bg-[#3E1A1E]/10 text-[#3E1A1E] font-bold'
+                    : 'text-zinc-700 hover:bg-zinc-50'
+                    }`}
                 >
                   <span>{opt.label}</span>
                   {sortParam === opt.value && (

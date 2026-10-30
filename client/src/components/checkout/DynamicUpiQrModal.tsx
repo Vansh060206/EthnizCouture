@@ -197,7 +197,7 @@ export const DynamicUpiQrModal: React.FC<DynamicUpiQrModalProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#C6A15D] animate-pulse" />
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#DFC89D]">
-                ETHNIZ COUTURE ATELIER
+                ETHNIZ COUTURE MAISON
               </span>
             </div>
 

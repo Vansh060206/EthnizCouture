@@ -10,25 +10,30 @@ datasource db {
 }
 
 model User {
-  id                 String    @id @default(uuid())
-  name               String
-  email              String    @unique
-  passwordHash       String?
-  googleId           String?   @unique
-  avatar             String?
-  phone              String?
-  role               String    @default("CUSTOMER") // CUSTOMER, ADMIN
-  welcomeEmailSent   Boolean   @default(false)
-  welcomeEmailSentAt DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  id                     String    @id @default(uuid())
+  name                   String
+  email                  String    @unique
+  passwordHash           String?
+  googleId               String?   @unique
+  avatar                 String?
+  phone                  String?
+  role                   String    @default("CUSTOMER") // CUSTOMER, ADMIN
+  welcomeEmailSent       Boolean   @default(false)
+  welcomeEmailSentAt     DateTime?
+  marketingConsent       Boolean   @default(false)
+  marketingConsentAt     DateTime?
+  marketingConsentSource String? // e.g. "CHECKOUT_OPT_IN", "SIGNUP_OPT_IN", "ACCOUNT_PROFILE"
+  unsubscribedAt         DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 
-  addresses Address[]
-  orders    Order[]
-  reviews   Review[]
-  wishlist  Wishlist[]
-  cart      Cart?
-  auditLogs AuditLog[]
+  addresses      Address[]
+  orders         Order[]
+  reviews        Review[]
+  wishlist       Wishlist[]
+  cart           Cart?
+  cartRecoveries CartRecovery[]
+  auditLogs      AuditLog[]
 
   @@index([role])
   @@index([googleId])
@@ -162,15 +167,19 @@ model ProductVariant {
 }
 
 model Cart {
-  id        String   @id @default(uuid())
-  userId    String?  @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String    @id @default(uuid())
+  userId         String?   @unique
+  version        Int       @default(1)
+  lastActivityAt DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
-  user  User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items CartItem[]
+  user       User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items      CartItem[]
+  recoveries CartRecovery[]
 
   @@index([userId])
+  @@index([lastActivityAt])
 }
 
 model CartItem {
@@ -426,4 +435,25 @@ model PasswordReset {
 
   @@index([email, used])
   @@index([expiresAt])
+}
+
+model CartRecovery {
+  id             String    @id @default(uuid())
+  cartId         String
+  userId         String
+  cartVersion    Int
+  status         String    @default("PENDING") // PENDING, PROCESSING, SKIPPED, SENT, FAILED
+  skipReason     String? // e.g. "CART_NOT_FOUND", "CART_EMPTY", "VERSION_SUPERSEDED", "NO_MARKETING_CONSENT", "USER_UNSUBSCRIBED", "ORDER_COMPLETED", "COOLDOWN_ACTIVE", "ALREADY_SENT"
+  emailMessageId String?
+  sentAt         DateTime?
+  metadata       String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, cartVersion])
+  @@index([userId])
+  @@index([status, createdAt])
 }

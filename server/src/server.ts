@@ -28,6 +28,7 @@ import userRoutes from './routes/userRoutes';
 import contentRoutes from './routes/contentRoutes';
 import adminRoutes from './routes/adminRoutes';
 import locationRoutes from './routes/locationRoutes';
+import recoveryRoutes from './routes/recoveryRoutes';
 import {
   handleStripeWebhook,
   handleRazorpayWebhook,
@@ -144,6 +145,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/location', locationRoutes);
+app.use('/api/recovery', recoveryRoutes);
 
 // Comprehensive Production Health & Readiness Probe
 app.get('/api/health', async (_req: Request, res: Response) => {

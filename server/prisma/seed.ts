@@ -85,16 +85,16 @@ async function main() {
   // 2. Create Categories
   const categoriesData = [
     {
-      name: 'Sarees',
-      slug: 'sarees',
+      name: 'Heritage Silks',
+      slug: 'heritage-silks',
       description: 'Heirloom six yards of grace woven by master artisans in Kanchipuram and Varanasi.',
       image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80',
       featured: true
     },
     {
-      name: 'Lehengas',
-      slug: 'lehengas',
-      description: 'Opulent bridal and festive lehengas intricately adorned with zardozi and gota patti.',
+      name: 'Royal Couture',
+      slug: 'royal-couture',
+      description: 'Opulent regal and festive ensembles intricately adorned with zardozi and gota patti.',
       image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80',
       featured: true
     },
@@ -166,8 +166,8 @@ async function main() {
       featured: true
     },
     {
-      name: 'Lucknowi Chikankari Atelier',
-      slug: 'lucknowi-chikankari-atelier',
+      name: 'Lucknowi Chikankari Heritage',
+      slug: 'lucknowi-chikankari-heritage',
       tagline: 'Delicate floral shadow-work meticulously hand-stitched on gossamer mulmul and organza.',
       bannerImage: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1600&q=85',
       featured: true
@@ -183,17 +183,17 @@ async function main() {
 
   // 4. Create 26 Authentic Luxury Indian Products
   const products = [
-    // SAREES
+    // HERITAGE SILKS
     {
-      name: 'Varanasi Royal Crimson Katan Silk Saree',
-      slug: 'varanasi-royal-crimson-katan-silk-saree',
-      sku: 'EC-SAR-001',
-      description: 'Handwoven in the ancient ghats of Varanasi, this crimson red Katan silk saree is embellished with antique gold zari shikargah motifs depicting floral vines and peacocks.',
+      name: 'Varanasi Royal Crimson Katan Silk Ensemble',
+      slug: 'varanasi-royal-crimson-katan-silk-ensemble',
+      sku: 'EC-ENS-001',
+      description: 'Handwoven in the ancient ghats of Varanasi, this crimson red Katan silk ensemble is embellished with antique gold zari shikargah motifs depicting floral vines and peacocks.',
       details: 'Woven with 100% pure Mulberry silk warp and weft. Features an ornate pallu with traditional meenakari detailing. Includes an unstitched matching blouse piece with zari border.',
       fabric: 'Pure Katan Silk',
       careInstructions: 'Dry clean only. Store wrapped in pure cotton or muslin fabric. Avoid perfume spray directly on zari.',
       gender: 'WOMEN',
-      categoryId: categories['sarees'].id,
+      categoryId: categories['heritage-silks'].id,
       collectionId: collections['royal-heritage-wedding'].id,
       price: 18999,
       comparePrice: 24500,
@@ -204,22 +204,22 @@ async function main() {
       isNewArrival: false,
       availableSizes: 'Free Size',
       availableColors: 'Royal Crimson,Emerald Green',
-      tags: 'Silk Saree,Banarasi,Bridal,Handwoven,Zari',
+      tags: 'Silk Ensemble,Banarasi,Wedding,Handwoven,Zari',
       images: [
         { url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Kanchipuram Temple Border Gold Tissue Saree',
-      slug: 'kanchipuram-temple-border-gold-tissue-saree',
-      sku: 'EC-SAR-002',
+      name: 'Kanchipuram Temple Border Gold Tissue Ensemble',
+      slug: 'kanchipuram-temple-border-gold-tissue-ensemble',
+      sku: 'EC-ENS-002',
       description: 'A masterpiece from Tamil Nadu weavers, woven in shimmering gold tissue with a contrasting ruby red Korvai temple border and intricate rudraksha motifs.',
-      details: 'Pure gold zari thread woven into high-density silk warp. Heavy bridal pallu featuring Gajalakshmi motifs.',
+      details: 'Pure gold zari thread woven into high-density silk warp. Heavy royal pallu featuring Gajalakshmi motifs.',
       fabric: 'Kanjivaram Silk Tissue',
       careInstructions: 'Strictly dry clean. Periodic refolding along natural creases prevents zari breakage.',
       gender: 'WOMEN',
-      categoryId: categories['sarees'].id,
+      categoryId: categories['heritage-silks'].id,
       collectionId: collections['festive-zari-elegance'].id,
       price: 29500,
       comparePrice: 36000,
@@ -230,22 +230,22 @@ async function main() {
       isNewArrival: true,
       availableSizes: 'Free Size',
       availableColors: 'Gold Tissue,Rose Gold',
-      tags: 'Kanjivaram,South Indian Bridal,Gold Tissue,Korvai',
+      tags: 'Kanjivaram,South Indian Wedding,Gold Tissue,Korvai',
       images: [
         { url: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Pastel Mint Organza Hand-Embroidered Saree',
-      slug: 'pastel-mint-organza-hand-embroidered-saree',
-      sku: 'EC-SAR-003',
-      description: 'Ethereal sheer mint green organza saree adorned with delicate pearl cutwork, sequin embroidery, and scalloped borders.',
+      name: 'Pastel Mint Organza Hand-Embroidered Ensemble',
+      slug: 'pastel-mint-organza-hand-embroidered-ensemble',
+      sku: 'EC-ENS-003',
+      description: 'Ethereal sheer mint green organza ensemble adorned with delicate pearl cutwork, sequin embroidery, and scalloped borders.',
       details: 'Lightweight gossamer drape ideal for summer cocktail soirées and sangeet celebrations. Paired with an unstitched dupion silk blouse fabric.',
       fabric: 'Pure Silk Organza',
       careInstructions: 'Dry clean only. Steam iron on reverse at low heat.',
       gender: 'WOMEN',
-      categoryId: categories['sarees'].id,
+      categoryId: categories['heritage-silks'].id,
       price: 14500,
       comparePrice: 17999,
       discountPercent: 19,
@@ -255,22 +255,22 @@ async function main() {
       isNewArrival: true,
       availableSizes: 'Free Size',
       availableColors: 'Mint Green,Powder Peach,Lavender Mist',
-      tags: 'Organza Saree,Cutwork,Cocktail,Pastel,Handcrafted',
+      tags: 'Organza Ensemble,Cutwork,Cocktail,Pastel,Handcrafted',
       images: [
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Chanderi Zari Buti Midnight Blue Saree',
-      slug: 'chanderi-zari-buti-midnight-blue-saree',
-      sku: 'EC-SAR-004',
-      description: 'Heritage Chanderi silk cotton saree dipped in deep midnight indigo, highlighted with hand-punched gold and silver coin (ashrafi) butis.',
+      name: 'Chanderi Zari Buti Midnight Blue Ensemble',
+      slug: 'chanderi-zari-buti-midnight-blue-ensemble',
+      sku: 'EC-ENS-004',
+      description: 'Heritage Chanderi silk cotton ensemble dipped in deep midnight indigo, highlighted with hand-punched gold and silver coin (ashrafi) butis.',
       details: 'Feather-light texture with subtle sheen. 6.5 meters including running blouse fabric.',
       fabric: 'Chanderi Silk Cotton',
       careInstructions: 'Dry clean recommended. Gentle hand wash in cold water with mild detergent.',
       gender: 'WOMEN',
-      categoryId: categories['sarees'].id,
+      categoryId: categories['heritage-silks'].id,
       price: 8999,
       comparePrice: 11500,
       discountPercent: 21,
@@ -287,17 +287,17 @@ async function main() {
       ]
     },
 
-    // LEHENGAS
+    // ROYAL COUTURE
     {
-      name: 'Royal Maroon Velvet Heritage Bridal Lehenga',
-      slug: 'royal-maroon-velvet-heritage-bridal-lehenga',
-      sku: 'EC-LEH-001',
-      description: 'Crafted for the quintessential royal bride, this bespoke maroon velvet lehenga features micro-zardozi handwork, dabka embroidery, and semi-precious bead detailing.',
+      name: 'Royal Maroon Velvet Heritage Ensemble',
+      slug: 'royal-maroon-velvet-heritage-ensemble',
+      sku: 'EC-ENS-005',
+      description: 'Crafted for quintessential royal elegance, this bespoke maroon velvet ensemble features micro-zardozi handwork, dabka embroidery, and semi-precious bead detailing.',
       details: 'Includes a structured 16-kali velvet skirt with double can-can lining, sweetheart neckline blouse, and dual dupattas (one heavy velvet veil and one soft peach tulle dupatta).',
       fabric: 'Rich Micro Velvet & Organza Silk',
-      careInstructions: 'Specialist dry clean only. Preserve in bridal trunk with cedarwood balls.',
+      careInstructions: 'Specialist dry clean only. Preserve in couture trunk with cedarwood balls.',
       gender: 'WOMEN',
-      categoryId: categories['lehengas'].id,
+      categoryId: categories['royal-couture'].id,
       collectionId: collections['royal-heritage-wedding'].id,
       price: 48999,
       comparePrice: 62000,
@@ -308,23 +308,23 @@ async function main() {
       isNewArrival: false,
       availableSizes: 'XS,S,M,L,XL',
       availableColors: 'Royal Maroon,Deep Burgundy',
-      tags: 'Bridal Lehenga,Velvet,Zardozi,Double Dupatta,Wedding Couture',
+      tags: 'Royal Ensemble,Velvet,Zardozi,Double Dupatta,Wedding Couture',
       images: [
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Dusty Rose Mirror-Work Chikankari Lehenga',
-      slug: 'dusty-rose-mirror-work-chikankari-lehenga',
-      sku: 'EC-LEH-002',
+      name: 'Dusty Rose Mirror-Work Chikankari Ensemble',
+      slug: 'dusty-rose-mirror-work-chikankari-ensemble',
+      sku: 'EC-ENS-006',
       description: 'Meticulously embroidered by Lucknowi craftswomen with 32 distinct stitches of chikankari, accentuated with real foil mirror reflections and champagne sequins.',
       details: 'Lightweight silk georgette with voluminous flare. Paired with a contemporary halter-neck blouse and crushed organza dupatta.',
       fabric: 'Pure Silk Georgette & Lucknowi Mulmul',
       careInstructions: 'Dry clean only. Iron inside out.',
       gender: 'WOMEN',
-      categoryId: categories['lehengas'].id,
-      collectionId: collections['lucknowi-chikankari-atelier'].id,
+      categoryId: categories['royal-couture'].id,
+      collectionId: collections['lucknowi-chikankari-heritage'].id,
       price: 34999,
       comparePrice: 42000,
       discountPercent: 16,
@@ -334,22 +334,22 @@ async function main() {
       isNewArrival: true,
       availableSizes: 'S,M,L,XL',
       availableColors: 'Dusty Rose,Ivory Champagne',
-      tags: 'Chikankari,Mirror Work,Sangeet Lehenga,Pastel Bride',
+      tags: 'Chikankari,Mirror Work,Sangeet Ensemble,Festive Grace',
       images: [
         { url: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Emerald Green Brocade Banarasi Lehenga Set',
-      slug: 'emerald-green-brocade-banarasi-lehenga-set',
-      sku: 'EC-LEH-003',
+      name: 'Emerald Green Brocade Banarasi Ensemble Set',
+      slug: 'emerald-green-brocade-banarasi-ensemble-set',
+      sku: 'EC-ENS-007',
       description: 'Lustrous emerald green Banarasi silk brocade skirt woven with royal jaal patterns in spun gold thread, complemented with an elbow-sleeve choli and tissue dupatta.',
       details: 'High-waisted silhouette with handcrafted latkan tassels. Built-in can-can layer for structural regal flare.',
       fabric: 'Banarasi Brocade Silk',
       careInstructions: 'Dry clean only.',
       gender: 'WOMEN',
-      categoryId: categories['lehengas'].id,
+      categoryId: categories['royal-couture'].id,
       collectionId: collections['festive-zari-elegance'].id,
       price: 24999,
       comparePrice: 31000,
@@ -360,22 +360,22 @@ async function main() {
       isNewArrival: false,
       availableSizes: 'XS,S,M,L,XL,XXL',
       availableColors: 'Emerald Green,Royal Navy',
-      tags: 'Banarasi Lehenga,Brocade,Mehendi,Reception',
+      tags: 'Banarasi Ensemble,Brocade,Mehendi,Reception',
       images: [
         { url: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Sunflower Yellow Gota Patti Haldi Lehenga',
-      slug: 'sunflower-yellow-gota-patti-haldi-lehenga',
-      sku: 'EC-LEH-004',
-      description: 'Vibrant celebratory yellow georgette lehenga tailored with traditional Rajasthani gota patti borders, mirror accents, and a flowing scalloped hemline.',
+      name: 'Sunflower Yellow Gota Patti Haldi Ensemble',
+      slug: 'sunflower-yellow-gota-patti-haldi-ensemble',
+      sku: 'EC-ENS-008',
+      description: 'Vibrant celebratory yellow georgette ensemble tailored with traditional Rajasthani gota patti borders, mirror accents, and a flowing scalloped hemline.',
       details: 'Light and dance-friendly. Comes with sweetheart neck blouse and matching net dupatta.',
       fabric: 'Georgette & Net',
       careInstructions: 'Dry clean only.',
       gender: 'WOMEN',
-      categoryId: categories['lehengas'].id,
+      categoryId: categories['royal-couture'].id,
       price: 19999,
       comparePrice: 25000,
       discountPercent: 20,
@@ -385,7 +385,7 @@ async function main() {
       isNewArrival: true,
       availableSizes: 'S,M,L,XL',
       availableColors: 'Sunflower Yellow,Mustard Gold',
-      tags: 'Haldi Lehenga,Gota Patti,Celebration,Bright',
+      tags: 'Haldi Ensemble,Gota Patti,Celebration,Bright',
       images: [
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
@@ -403,7 +403,7 @@ async function main() {
       careInstructions: 'Dry clean only.',
       gender: 'WOMEN',
       categoryId: categories['kurta-sets'].id,
-      collectionId: collections['lucknowi-chikankari-atelier'].id,
+      collectionId: collections['lucknowi-chikankari-heritage'].id,
       price: 12499,
       comparePrice: 15999,
       discountPercent: 21,
@@ -580,7 +580,7 @@ async function main() {
       slug: 'blush-rose-jamawar-silk-sherwani',
       sku: 'EC-SHR-003',
       description: 'Refined pastel menswear in blush pink pure Jamawar silk weave, adorned with subtle Kashmiri paisley motifs and mother-of-pearl buttons.',
-      details: 'Pairs harmoniously with pastel bridal ensembles. Complete with churidar and lightweight organza stole.',
+      details: 'Pairs harmoniously with pastel festive ensembles. Complete with churidar and lightweight organza stole.',
       fabric: 'Pure Jamawar Silk',
       careInstructions: 'Dry clean only.',
       gender: 'MEN',
@@ -612,7 +612,7 @@ async function main() {
       careInstructions: 'Dry clean or gentle hand wash.',
       gender: 'MEN',
       categoryId: categories['kurtas'].id,
-      collectionId: collections['lucknowi-chikankari-atelier'].id,
+      collectionId: collections['lucknowi-chikankari-heritage'].id,
       price: 7499,
       comparePrice: 9500,
       discountPercent: 21,
@@ -681,10 +681,10 @@ async function main() {
 
     // INDO-WESTERN
     {
-      name: 'Draped Pre-Stitched Concept Saree with Embroidered Belt',
-      slug: 'draped-pre-stitched-concept-saree-with-belt',
+      name: 'Draped Pre-Stitched Concept Drape with Embroidered Belt',
+      slug: 'draped-pre-stitched-concept-drape-with-belt',
       sku: 'EC-INW-001',
-      description: 'A revolutionary contemporary take on the timeless saree: pre-pleated satin georgette drape secured with an ornate pearl and zardozi embellished belt.',
+      description: 'A revolutionary contemporary take on timeless couture: pre-pleated satin georgette drape secured with an ornate pearl and zardozi embellished belt.',
       details: 'Includes structured bustier blouse with pearl drop tassels. Slips on effortlessly in 60 seconds.',
       fabric: 'Satin Georgette & Tulle',
       careInstructions: 'Dry clean only.',
@@ -699,15 +699,15 @@ async function main() {
       isNewArrival: true,
       availableSizes: 'XS,S,M,L,XL',
       availableColors: 'Champagne Gold,Wine Plum,Slate Silver',
-      tags: 'Concept Saree,Ready to Wear,Indo Western,Cocktail Gala',
+      tags: 'Concept Ensemble,Ready to Wear,Indo Western,Cocktail Gala',
       images: [
         { url: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
       ]
     },
     {
-      name: 'Cape Lehenga Set with Sheer Embroidered Shrug',
-      slug: 'cape-lehenga-set-with-sheer-embroidered-shrug',
+      name: 'Cape Ensemble Set with Sheer Embroidered Shrug',
+      slug: 'cape-ensemble-set-with-sheer-embroidered-shrug',
       sku: 'EC-INW-002',
       description: 'Three-piece indo-western ensemble featuring a flared crepe skirt, bustier top, and a dramatically sweeping organza cape shrug adorned with gold fringes.',
       details: 'Duptta-free contemporary convenience for modern celebrations.',
@@ -724,7 +724,7 @@ async function main() {
       isNewArrival: false,
       availableSizes: 'S,M,L,XL',
       availableColors: 'Lavender Lilac,Peach Bellini',
-      tags: 'Cape Lehenga,Indo Western,Sangeet,Modern Silhouette',
+      tags: 'Cape Ensemble,Indo Western,Sangeet,Modern Silhouette',
       images: [
         { url: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
@@ -758,8 +758,8 @@ async function main() {
 
     // ACCESSORIES
     {
-      name: 'Handcrafted Zardozi Bridal Potli Bag',
-      slug: 'handcrafted-zardozi-bridal-potli-bag',
+      name: 'Handcrafted Zardozi Royal Potli Bag',
+      slug: 'handcrafted-zardozi-royal-potli-bag',
       sku: 'EC-ACC-001',
       description: 'Luxe velvet drawstring potli bag meticulously hand-embroidered with floral zardozi bullion wires and cascading pearl tassels.',
       details: 'Comfortably fits smartphones, makeup essentials, and keys. Braided gold chain wrist handle.',
@@ -776,7 +776,7 @@ async function main() {
       isNewArrival: false,
       availableSizes: 'One Size',
       availableColors: 'Royal Maroon,Emerald Green,Antique Gold',
-      tags: 'Potli,Bridal Bag,Handmade,Zardozi,Accessories',
+      tags: 'Potli,Royal Bag,Handmade,Zardozi,Accessories',
       images: [
         { url: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=1000&q=85', isPrimary: true, order: 0 },
         { url: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=85', isPrimary: false, order: 1 }
@@ -832,14 +832,14 @@ async function main() {
   // 5. Create Verified Customer Reviews
   const reviewsData = [
     {
-      productIndex: 0, // Katan Silk Saree
+      productIndex: 0, // Katan Silk Ensemble
       rating: 5,
       title: 'Heirloom quality! Truly royal experience.',
-      comment: 'I ordered this saree for my sister’s wedding in Udaipur. The pure silk drape and the weight of the zari are breathtaking. Received compliments all evening. Packaging came in a beautiful ivory velvet box!',
+      comment: 'I ordered this ensemble for my sister’s wedding in Udaipur. The pure silk drape and the weight of the zari are breathtaking. Received compliments all evening. Packaging came in a beautiful ivory velvet box!',
       isVerifiedPurchase: true
     },
     {
-      productIndex: 4, // Maroon Velvet Bridal Lehenga
+      productIndex: 4, // Maroon Velvet Ensemble
       rating: 5,
       title: 'Made my wedding day magical.',
       comment: 'The zardozi embroidery is so fine and intricate. Even better in person than in the photos. The double dupatta draping gave me the exact royal maharani look I wanted. Thank you EthnizCouture!',
@@ -925,7 +925,7 @@ async function main() {
   const bannersData = [
     {
       key: 'announcement',
-      title: 'Complimentary Pan-India Shipping on Orders Above ₹2,999 | Private Bridal Atelier Appointments Available',
+      title: 'Complimentary Pan-India Shipping on Orders Above ₹2,999 | Private Suite Appointments Available',
       order: 1,
       isActive: true
     },
@@ -943,7 +943,7 @@ async function main() {
     {
       key: 'festive_spotlight',
       title: 'The Royal Wedding & Festive Pavilion',
-      subtitle: 'Immerse yourself in handloom Banarasi brocades, antique zardozi lehengas, and regal bespoke sherwanis.',
+      subtitle: 'Immerse yourself in handloom Banarasi brocades, antique zardozi ensembles, and regal bespoke sherwanis.',
       buttonText: 'SHOP FESTIVE EDIT',
       buttonLink: '/shop?collection=royal-heritage-wedding',
       imageUrl: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1600&q=90',

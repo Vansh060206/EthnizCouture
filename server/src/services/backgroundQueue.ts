@@ -41,12 +41,15 @@ class BackgroundQueue {
 
     logger.info(`Background job enqueued: ${type} [ID: ${job.id}]`);
 
-    // Trigger immediate async processing without awaiting
+    this.triggerImmediate();
+
+    return job.id;
+  }
+
+  triggerImmediate(): void {
     setImmediate(() => {
       this.processNextJobs().catch(() => {});
     });
-
-    return job.id;
   }
 
   async processNextJobs(limit: number = 5): Promise<void> {

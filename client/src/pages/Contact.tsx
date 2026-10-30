@@ -6,8 +6,8 @@ import { validateFullName, validateEmail, validatePhone } from '../utils/validat
 
 const FAQS = [
   {
-    q: 'How does bespoke bridal & groom sizing work?',
-    a: 'Every couture bridal lehenga and bespoke sherwani comes with internal 2-inch margins for seamless alterations. Our bridal styling concierge will coordinate with you via WhatsApp or private video call to record exact anatomical measurements.'
+    q: 'How does bespoke wedding & groom sizing work?',
+    a: 'Every couture ensemble and bespoke sherwani comes with internal 2-inch margins for seamless alterations. Our styling concierge will coordinate with you via WhatsApp or private video call to record exact anatomical measurements.'
   },
   {
     q: 'Do you ship internationally with insurance?',
@@ -15,11 +15,11 @@ const FAQS = [
   },
   {
     q: 'Are your silks and zari genuinely certified?',
-    a: 'EthnizCouture strictly uses Silk Mark authorized weavers in Varanasi and Kanchipuram. All heavy bridal pieces arrive with a certified certificate of provenance detailing silk purity and bullion zari composition.'
+    a: 'EthnizCouture strictly uses Silk Mark authorized weavers in Varanasi and Kanchipuram. All heavy heirloom pieces arrive with a certified certificate of provenance detailing silk purity and bullion zari composition.'
   },
   {
     q: 'What is your return & exchange window?',
-    a: 'We offer a complimentary 7-day pickup and size exchange policy for all unstitched sarees, kurtas, and ready-to-wear pieces. Customized bespoke bridal sets undergo rigorous digital video approval prior to dispatch.'
+    a: 'We offer a complimentary 7-day pickup and size exchange policy for all kurtas and ready-to-wear pieces. Customized bespoke sets undergo rigorous digital video approval prior to dispatch.'
   }
 ];
 
@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
         name: '',
         email: '',
         phone: '',
-        subject: 'Bridal Consultation',
+        subject: 'Bespoke Consultation',
         message: ''
       };
     } catch {
@@ -40,7 +40,7 @@ export const Contact: React.FC = () => {
         name: '',
         email: '',
         phone: '',
-        subject: 'Bridal Consultation',
+        subject: 'Bespoke Consultation',
         message: ''
       };
     }
@@ -90,13 +90,13 @@ export const Contact: React.FC = () => {
     setIsSubmitting(true);
     try {
       const res = await api.post('/content/contact', formData);
-      showToast(res.data.message || 'Inquiry received. Our bridal concierge will contact you within 24 hours.', 'success');
+      showToast(res.data.message || 'Inquiry received. Our concierge will contact you within 24 hours.', 'success');
       try {
         sessionStorage.removeItem('ethniz_contact_draft');
       } catch {
         // ignore
       }
-      setFormData({ name: '', email: '', phone: '', subject: 'Bridal Consultation', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: 'Bespoke Consultation', message: '' });
       setTouched({});
       setErrors({});
     } catch (err: any) {
@@ -108,24 +108,24 @@ export const Contact: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-      
+
       {/* 1. SOPHISTICATED HEADER */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#C6A15D] block">
-          Private Atelier Consultations
+          Private Styling Consultations
         </span>
         <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1A1A] tracking-tight uppercase">
           LET'S CREATE SOMETHING BEAUTIFUL.
         </h1>
         <p className="font-serif italic text-sm sm:text-base text-zinc-600 max-w-xl mx-auto font-light">
-          Whether commissioning an heirloom bridal lehenga or reserving a private styling suite, our couturiers are at your service.
+          Whether commissioning an heirloom ensemble or reserving a private styling suite, our couturiers are at your service.
         </p>
         <div className="w-12 h-[1px] bg-[#C6A15D] mx-auto mt-4" />
       </div>
 
       {/* 2. GRID: FORM ON ONE SIDE + BRAND INFO ON THE OTHER */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        
+
         {/* Contact Form (Left: 7 cols) */}
         <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-lg border border-[#C6A15D]/30 shadow-xs space-y-6">
           <div className="pb-4 border-b border-zinc-100 flex items-center justify-between">
@@ -157,11 +157,10 @@ export const Contact: React.FC = () => {
                     setTouched((prev) => ({ ...prev, name: true }));
                     validateField('name', formData.name);
                   }}
-                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${
-                    touched.name && errors.name
-                      ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
-                      : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
-                  }`}
+                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${touched.name && errors.name
+                    ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
+                    : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
+                    }`}
                 />
                 {touched.name && errors.name && (
                   <p className="text-[11px] text-red-600 font-medium mt-1 flex items-center gap-1">
@@ -188,11 +187,10 @@ export const Contact: React.FC = () => {
                     setTouched((prev) => ({ ...prev, email: true }));
                     validateField('email', formData.email);
                   }}
-                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${
-                    touched.email && errors.email
-                      ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
-                      : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
-                  }`}
+                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${touched.email && errors.email
+                    ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
+                    : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
+                    }`}
                 />
                 {touched.email && errors.email && (
                   <p className="text-[11px] text-red-600 font-medium mt-1 flex items-center gap-1">
@@ -221,11 +219,10 @@ export const Contact: React.FC = () => {
                     setTouched((prev) => ({ ...prev, phone: true }));
                     validateField('phone', formData.phone);
                   }}
-                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${
-                    touched.phone && errors.phone
-                      ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
-                      : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
-                  }`}
+                  className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${touched.phone && errors.phone
+                    ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
+                    : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
+                    }`}
                 />
                 {touched.phone && errors.phone && (
                   <p className="text-[11px] text-red-600 font-medium mt-1 flex items-center gap-1">
@@ -244,9 +241,9 @@ export const Contact: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full px-3.5 py-2.5 bg-[#FAF7F2] border border-[#C6A15D]/30 rounded text-[#1A1A1A] focus:outline-none focus:border-[#3E1A1E]"
                 >
-                  <option value="Bridal Consultation">Bespoke Bridal Lehenga Commission</option>
+                  <option value="Bespoke Consultation">Bespoke Couture Commission</option>
                   <option value="Groom Sherwani Consultation">Royal Groom Bandhgala / Sherwani</option>
-                  <option value="Private Showroom Appointment">Private Atelier Appointment</option>
+                  <option value="Private Showroom Appointment">Private Suite Appointment</option>
                   <option value="Order Consignment Assistance">Order Tracking &amp; Fitting</option>
                   <option value="Custom Fabric Inquiry">Artisanal Weave Inquiry</option>
                 </select>
@@ -270,11 +267,10 @@ export const Contact: React.FC = () => {
                   setTouched((prev) => ({ ...prev, message: true }));
                   validateField('message', formData.message);
                 }}
-                className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${
-                  touched.message && errors.message
-                    ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
-                    : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
-                }`}
+                className={`w-full px-3.5 py-2.5 bg-[#FAF7F2] border rounded text-[#1A1A1A] placeholder:text-zinc-400 focus:outline-none transition-colors ${touched.message && errors.message
+                  ? 'border-red-500 bg-red-50/20 focus:border-red-600 focus:ring-1 focus:ring-red-500'
+                  : 'border-[#C6A15D]/30 focus:border-[#3E1A1E]'
+                  }`}
               />
               {touched.message && errors.message && (
                 <p className="text-[11px] text-red-600 font-medium mt-1 flex items-center gap-1">
@@ -290,15 +286,15 @@ export const Contact: React.FC = () => {
               className="w-full h-12 bg-[#3E1A1E] hover:bg-[#2B0C10] active:bg-[#1A080B] disabled:bg-zinc-300 text-[#DFC89D] text-xs font-bold tracking-[0.2em] uppercase rounded-lg shadow-md transition-all duration-300 border border-[#C6A15D]/50 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
             >
               <Send className="w-3.5 h-3.5 text-[#C6A15D]" />
-              <span>{isSubmitting ? 'Transmitting Inquiry...' : 'TRANSMIT ATELIER INQUIRY'}</span>
+              <span>{isSubmitting ? 'Transmitting Inquiry...' : 'TRANSMIT INQUIRY'}</span>
             </button>
           </form>
         </div>
 
         {/* Brand & Contact Information (Right: 5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          
-          {/* Atelier House Information Card */}
+
+          {/* Flagship House Information Card */}
           <div className="bg-[#FAF7F2] p-8 rounded-xl border border-[#E8DEC8] space-y-6 shadow-xs">
             <div className="flex items-center gap-3 pb-4 border-b border-[#C6A15D]/25">
               <div className="p-1.5 rounded bg-[#3E1A1E] border border-[#C6A15D]/40">
@@ -306,7 +302,7 @@ export const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-serif text-lg font-semibold text-[#1A1A1A]">
-                  The EthnizCouture Atelier
+                  The EthnizCouture Flagship
                 </h3>
                 <p className="text-[10px] uppercase tracking-wider text-[#C6A15D] font-bold">Haute Fashion House</p>
               </div>
@@ -316,7 +312,7 @@ export const Contact: React.FC = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#C6A15D] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block text-[#1A1A1A] font-medium">Flagship Bridal Mansion</strong>
+                  <strong className="block text-[#1A1A1A] font-medium">Flagship Heritage Mansion</strong>
                   <p className="font-light text-zinc-600 mt-0.5">Heritage Lane, Near Mehrauli Archaeological Park, New Delhi, India 110030</p>
                 </div>
               </div>
@@ -352,7 +348,7 @@ export const Contact: React.FC = () => {
             <h3 className="font-serif text-base font-semibold text-[#1A1A1A] mb-3 uppercase tracking-wider">
               Patron Questions
             </h3>
-            
+
             <div className="divide-y divide-zinc-100 text-xs">
               {FAQS.map((faq, idx) => (
                 <div key={idx} className="py-2.5">

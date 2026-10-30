@@ -55,12 +55,13 @@ describe('Phase: Mobile-First Customer Account & Personal Shopping Tests', () =>
     assert.strictEqual(res.body.user.id, testUser.id);
     assert.strictEqual(res.body.user.name, 'Sharmila Tagore');
     assert.strictEqual(res.body.user.phone, '9820012345');
+    assert.strictEqual(res.body.user.marketingConsent, false);
     assert.ok(res.body.user._count);
     assert.strictEqual(typeof res.body.user._count.orders, 'number');
     assert.strictEqual(typeof res.body.user._count.wishlist, 'number');
   });
 
-  test('2. PUT /api/auth/profile updates profile and enforces Indian phone validation', async () => {
+  test('2. PUT /api/auth/profile updates profile, phone and marketing consent', async () => {
     // 2.1 Rejects invalid phone number (e.g. invalid digits)
     const invalidRes = await request(app)
       .put('/api/auth/profile')
@@ -69,7 +70,15 @@ describe('Phase: Mobile-First Customer Account & Personal Shopping Tests', () =>
 
     assert.strictEqual(invalidRes.status, 400);
 
-    // 2.2 Accepts valid updated name and phone
+    // 2.2 Rejects non-boolean marketingConsent
+    const invalidConsentRes = await request(app)
+      .put('/api/auth/profile')
+      .set('Authorization', `Bearer ${testToken}`)
+      .send({ marketingConsent: 'yes' });
+
+    assert.strictEqual(invalidConsentRes.status, 400);
+
+    // 2.3 Accepts valid updated name and phone
     const validRes = await request(app)
       .put('/api/auth/profile')
       .set('Authorization', `Bearer ${testToken}`)
@@ -81,6 +90,27 @@ describe('Phase: Mobile-First Customer Account & Personal Shopping Tests', () =>
     assert.strictEqual(validRes.status, 200);
     assert.strictEqual(validRes.body.user.name, 'Begum Sharmila Tagore Pataudi');
     assert.strictEqual(validRes.body.user.phone, '9820098200');
+
+    // 2.4 Allows customer to grant marketing consent with audit metadata
+    const consentRes = await request(app)
+      .put('/api/auth/profile')
+      .set('Authorization', `Bearer ${testToken}`)
+      .send({ marketingConsent: true });
+
+    assert.strictEqual(consentRes.status, 200);
+    assert.strictEqual(consentRes.body.user.marketingConsent, true);
+    assert.ok(consentRes.body.user.marketingConsentAt);
+    assert.strictEqual(consentRes.body.user.unsubscribedAt, null);
+
+    // 2.5 Allows customer to revoke marketing consent (unsubscribedAt populated)
+    const revokeRes = await request(app)
+      .put('/api/auth/profile')
+      .set('Authorization', `Bearer ${testToken}`)
+      .send({ marketingConsent: false });
+
+    assert.strictEqual(revokeRes.status, 200);
+    assert.strictEqual(revokeRes.body.user.marketingConsent, false);
+    assert.ok(revokeRes.body.user.unsubscribedAt);
   });
 
   test('3. GET /api/coupons returns available public atelier coupons for account hub', async () => {

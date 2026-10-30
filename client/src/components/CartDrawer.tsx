@@ -124,7 +124,7 @@ export const CartDrawer: React.FC = () => {
                 </div>
                 <h3 className="font-serif text-lg font-semibold text-zinc-800">Your bag is empty</h3>
                 <p className="text-xs text-zinc-500 mt-1 max-w-xs">
-                  Discover heirloom sarees, bridal lehengas, and royal festive wear crafted for celebrations.
+                  Discover heirloom couture, regal anarkalis, and royal festive wear crafted for celebrations.
                 </p>
                 <button
                   onClick={() => {

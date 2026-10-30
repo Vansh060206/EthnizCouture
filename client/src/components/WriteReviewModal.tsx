@@ -23,7 +23,7 @@ const RATING_LABELS: Record<number, string> = {
 };
 
 const FIT_OPTIONS = ['Runs Small', 'True to Size', 'Runs Large'];
-const OCCASION_OPTIONS = ['Bridal / Wedding', 'Reception', 'Sangeet & Mehendi', 'Festive Celebration', 'Royal Gala / Party'];
+const OCCASION_OPTIONS = ['Wedding Ceremony', 'Reception', 'Sangeet & Mehendi', 'Festive Celebration', 'Royal Gala / Party'];
 
 export const WriteReviewModal: React.FC<WriteReviewModalProps> = ({
   isOpen,
@@ -41,7 +41,7 @@ export const WriteReviewModal: React.FC<WriteReviewModalProps> = ({
   const [title, setTitle] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const [selectedFit, setSelectedFit] = useState<string>('True to Size');
-  const [selectedOccasion, setSelectedOccasion] = useState<string>('Bridal / Wedding');
+  const [selectedOccasion, setSelectedOccasion] = useState<string>('Wedding Ceremony');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -105,7 +105,7 @@ export const WriteReviewModal: React.FC<WriteReviewModalProps> = ({
         comment: structuredComment
       });
 
-      showToast('Your verified review has been published with the royal atelier!', 'success');
+      showToast('Your verified review has been published with the royal maison!', 'success');
       if (onReviewSubmitted) {
         onReviewSubmitted();
       }

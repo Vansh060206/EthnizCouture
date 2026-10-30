@@ -426,7 +426,7 @@ export const OrderTracking: React.FC = () => {
           <div className="bg-white rounded-lg border border-[#E8DEC8] p-12 text-center space-y-4 shadow-xs">
             <RefreshCw className="w-8 h-8 text-maroon-800 animate-spin mx-auto" />
             <p className="font-serif text-lg font-bold text-zinc-800">Locating Royal Order Journey...</p>
-            <p className="text-xs text-zinc-500">Retrieving authentic tracking milestones from our atelier ledger.</p>
+            <p className="text-xs text-zinc-500">Retrieving authentic tracking milestones from our royal ledger.</p>
           </div>
         )}
 
@@ -617,7 +617,7 @@ export const OrderTracking: React.FC = () => {
                     Order Cancelled
                   </h4>
                   <p className="text-red-700 leading-relaxed">
-                    This bespoke order has been cancelled and is no longer in journey. The reserved garments have been returned to atelier stock.
+                    This bespoke order has been cancelled and is no longer in journey. The reserved garments have been returned to boutique stock.
                     {order.paymentStatus === 'REFUNDED' && ' Any prepaid amount has been initiated for refund via the original payment source.'}
                   </p>
                   <p className="text-[11px] text-red-600 pt-1">
@@ -633,7 +633,7 @@ export const OrderTracking: React.FC = () => {
                 <RotateCcw className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <h4 className="font-serif text-base font-bold text-amber-950">
-                    Return / Exchange Under Atelier Review
+                    Return / Exchange Under Concierge Review
                   </h4>
                   <p className="text-amber-800 leading-relaxed">
                     We have received your return request. Our concierge team is reviewing the details and will schedule a doorstep reverse pickup via BlueDart / Delhivery within 24 hours.
@@ -792,7 +792,7 @@ export const OrderTracking: React.FC = () => {
                 )}
               </div>
 
-              {/* Verified Atelier Milestone History */}
+              {/* Verified Royal Milestone History */}
               {order.statusHistory && order.statusHistory.length > 0 && (
                 <div className="pt-2 border-t border-zinc-100 space-y-2">
                   <h4 className="text-[11px] font-bold uppercase tracking-wider text-zinc-600">
@@ -843,7 +843,7 @@ export const OrderTracking: React.FC = () => {
                           <span>Qty: <strong className="text-zinc-700">{item.quantity}</strong></span>
                         </p>
                         <p className="text-zinc-500 text-[11px]">
-                          Seller: <span className="font-medium text-maroon-900">Ethniz Royal Atelier</span>
+                          Seller: <span className="font-medium text-maroon-900">Ethniz Royal Maison</span>
                         </p>
                       </div>
                     </div>
@@ -877,7 +877,7 @@ export const OrderTracking: React.FC = () => {
 
                 {order.discountAmount > 0 && (
                   <div className="flex justify-between text-emerald-700 font-medium">
-                    <span>Atelier Special Discount</span>
+                    <span>Royal Special Discount</span>
                     <span>-₹{order.discountAmount.toLocaleString('en-IN')}</span>
                   </div>
                 )}
@@ -925,14 +925,14 @@ export const OrderTracking: React.FC = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-zinc-900">Need Help with this Order?</p>
-                  <p className="text-zinc-500">Contact our private atelier concierge for sizing, delivery updates, or queries.</p>
+                  <p className="text-zinc-500">Contact our private royal concierge for sizing, delivery updates, or queries.</p>
                 </div>
               </div>
               <Link
                 to="/contact"
                 className="px-4 py-2 border border-maroon-800 text-maroon-800 hover:bg-maroon-800 hover:text-white rounded font-bold uppercase tracking-wider text-[11px] transition-colors text-center shrink-0"
               >
-                Atelier Concierge
+                Royal Concierge
               </Link>
             </div>
 

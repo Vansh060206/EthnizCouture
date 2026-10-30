@@ -123,7 +123,7 @@ export const launchRazorpayStandardCheckout = async ({
           console.error('Razorpay signature verification error:', verifyErr);
           onError(
             verifyErr.response?.data?.message ||
-              'Payment verification failed. Please contact atelier concierge.'
+              'Payment verification failed. Please contact royal concierge.'
           );
         }
       }

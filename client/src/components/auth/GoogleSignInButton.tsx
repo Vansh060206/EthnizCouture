@@ -218,7 +218,7 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
           {isLoading ? (
             <>
               <RefreshCw className="w-4 h-4 text-[#84642C] animate-spin" />
-              <span>Authenticating with Atelier...</span>
+              <span>Authenticating...</span>
             </>
           ) : (
             <>

@@ -3,6 +3,8 @@ import path from 'path';
 
 if (process.env.NODE_ENV === 'test') {
   dotenv.config({ path: path.resolve(__dirname, '../.env.test') });
+} else if (process.env.NODE_ENV === 'staging') {
+  dotenv.config({ path: path.resolve(__dirname, '../.env.staging') });
 } else {
   dotenv.config();
 }
@@ -76,7 +78,7 @@ export const config = {
   requestTimeoutMs: parseInt(process.env.REQUEST_TIMEOUT_MS || '15000', 10),
   cacheTtlSeconds: parseInt(process.env.CACHE_TTL_SECONDS || '60', 10),
   logLevel: process.env.LOG_LEVEL || (nodeEnv === 'production' ? 'info' : 'debug'),
-  adminMasterKey: process.env.ADMIN_MASTER_KEY || 'EC-ROYAL-ATELIER-7K9F-2026-X8Q2',
+  adminMasterKey: process.env.ADMIN_MASTER_KEY || 'EC-ROYAL-PORTAL-7K9F-2026-X8Q2',
   razorpayKeyId: process.env.RAZORPAY_KEY_ID || '',
   razorpayKeySecret: process.env.RAZORPAY_KEY_SECRET || '',
   razorpayWebhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || '',
@@ -85,6 +87,33 @@ export const config = {
   googleClientId: process.env.GOOGLE_CLIENT_ID || '',
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
   emailApiKey: process.env.RESEND_API_KEY || process.env.EMAIL_API_KEY || '',
-  emailFrom: process.env.EMAIL_FROM || 'Ethniz Couture <atelier@ethnizcouture.com>',
-  frontendUrl: process.env.FRONTEND_URL || process.env.CLIENT_URL || 'https://ethnizcouture.com'
+  emailFrom: process.env.EMAIL_FROM || 'Ethniz Couture <concierge@ethnizcouture.com>',
+  frontendUrl: process.env.FRONTEND_URL || process.env.CLIENT_URL || 'https://ethnizcouture.com',
+  n8nWebhookUrl: process.env.N8N_WEBHOOK_URL || '',
+  n8nInboundSecret: process.env.N8N_INBOUND_SECRET || '',
+  n8nOutboundSecret: process.env.N8N_OUTBOUND_SECRET || process.env.N8N_INBOUND_SECRET || '',
+  enableRecoveryEmailLiveSend: process.env.ENABLE_RECOVERY_EMAIL_LIVE_SEND === 'true'
 };
+
+/**
+ * Validates n8n configuration safely without exposing secrets in logs.
+ */
+export function validateN8nConfig(url?: string, secret?: string): { isConfigured: boolean; webhookUrlValid: boolean } {
+  const isUrlSet = Boolean(url && url.trim().length > 0);
+  const isSecretSet = Boolean(secret && secret.trim().length > 0);
+  let webhookUrlValid = false;
+
+  if (isUrlSet) {
+    try {
+      const parsed = new URL(url!.trim());
+      webhookUrlValid = parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch {
+      webhookUrlValid = false;
+    }
+  }
+
+  return {
+    isConfigured: isUrlSet && isSecretSet && webhookUrlValid,
+    webhookUrlValid
+  };
+}

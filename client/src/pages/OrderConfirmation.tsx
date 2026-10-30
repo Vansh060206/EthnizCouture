@@ -63,7 +63,7 @@ export const OrderConfirmation: React.FC = () => {
           Retrieving Couture Receipt...
         </h2>
         <p className="text-xs text-zinc-500">
-          Fetching authoritative verification from Ethniz Couture Atelier
+          Fetching authoritative verification from Ethniz Couture
         </p>
       </div>
     );

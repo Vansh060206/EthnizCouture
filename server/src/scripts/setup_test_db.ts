@@ -52,11 +52,27 @@ for col, col_type, default in [('actorId', 'TEXT', None), ('source', 'TEXT', "'S
 
 user_col_map = dict([(c[1], c[3]) for c in cur.execute("PRAGMA table_info('User')").fetchall()])
 user_cols = list(user_col_map.keys())
-for col, col_type, default in [('googleId', 'TEXT', None), ('avatar', 'TEXT', None), ('welcomeEmailSent', 'BOOLEAN', '0'), ('welcomeEmailSentAt', 'DATETIME', None)]:
+for col, col_type, default in [
+    ('googleId', 'TEXT', None),
+    ('avatar', 'TEXT', None),
+    ('welcomeEmailSent', 'BOOLEAN', '0'),
+    ('welcomeEmailSentAt', 'DATETIME', None),
+    ('marketingConsent', 'BOOLEAN', '0'),
+    ('marketingConsentAt', 'DATETIME', None),
+    ('marketingConsentSource', 'TEXT', None),
+    ('unsubscribedAt', 'DATETIME', None)
+]:
     if col not in user_cols:
-        def_clause = f" DEFAULT {default}" if default else ""
+        def_clause = f" DEFAULT {default}" if default is not None else ""
         cur.execute(f"ALTER TABLE 'User' ADD COLUMN {col} {col_type}{def_clause}")
 cur.execute("CREATE UNIQUE INDEX IF NOT EXISTS 'User_googleId_key' ON 'User'('googleId')")
+
+cart_cols = [c[1] for c in cur.execute("PRAGMA table_info('Cart')").fetchall()]
+for col, col_type, default in [('version', 'INTEGER', '1'), ('lastActivityAt', 'DATETIME', None)]:
+    if col not in cart_cols:
+        def_clause = f" DEFAULT {default}" if default is not None else ""
+        cur.execute(f"ALTER TABLE 'Cart' ADD COLUMN {col} {col_type}{def_clause}")
+cur.execute("CREATE INDEX IF NOT EXISTS 'Cart_lastActivityAt_idx' ON 'Cart'('lastActivityAt')")
 
 if user_col_map.get('passwordHash') == 1:
     cur.execute("PRAGMA foreign_keys=OFF")
@@ -73,13 +89,17 @@ if user_col_map.get('passwordHash') == 1:
             avatar TEXT,
             welcomeEmailSent BOOLEAN NOT NULL DEFAULT 0,
             welcomeEmailSentAt DATETIME,
+            marketingConsent BOOLEAN NOT NULL DEFAULT 0,
+            marketingConsentAt DATETIME,
+            marketingConsentSource TEXT,
+            unsubscribedAt DATETIME,
             createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updatedAt DATETIME NOT NULL
         )
     ''')
     cur.execute('''
-        INSERT INTO new_User (id, name, email, passwordHash, phone, role, googleId, avatar, welcomeEmailSent, welcomeEmailSentAt, createdAt, updatedAt)
-        SELECT id, name, email, passwordHash, phone, role, googleId, avatar, coalesce(welcomeEmailSent, 0), welcomeEmailSentAt, createdAt, updatedAt FROM User
+        INSERT INTO new_User (id, name, email, passwordHash, phone, role, googleId, avatar, welcomeEmailSent, welcomeEmailSentAt, marketingConsent, marketingConsentAt, marketingConsentSource, unsubscribedAt, createdAt, updatedAt)
+        SELECT id, name, email, passwordHash, phone, role, googleId, avatar, coalesce(welcomeEmailSent, 0), welcomeEmailSentAt, coalesce(marketingConsent, 0), marketingConsentAt, marketingConsentSource, unsubscribedAt, createdAt, updatedAt FROM User
     ''')
     cur.execute("DROP TABLE User")
     cur.execute("ALTER TABLE new_User RENAME TO User")
@@ -102,6 +122,27 @@ cur.execute('''
 ''')
 cur.execute("CREATE INDEX IF NOT EXISTS PasswordReset_email_used_idx ON PasswordReset(email, used)")
 cur.execute("CREATE INDEX IF NOT EXISTS PasswordReset_expiresAt_idx ON PasswordReset(expiresAt)")
+
+cur.execute('''
+    CREATE TABLE IF NOT EXISTS CartRecovery (
+        id TEXT NOT NULL PRIMARY KEY,
+        cartId TEXT NOT NULL,
+        userId TEXT NOT NULL,
+        cartVersion INTEGER NOT NULL,
+        status TEXT NOT NULL DEFAULT 'PENDING',
+        skipReason TEXT,
+        emailMessageId TEXT,
+        sentAt DATETIME,
+        metadata TEXT,
+        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (cartId) REFERENCES Cart (id) ON DELETE CASCADE,
+        FOREIGN KEY (userId) REFERENCES User (id) ON DELETE CASCADE
+    )
+''')
+cur.execute("CREATE UNIQUE INDEX IF NOT EXISTS CartRecovery_cartId_cartVersion_key ON CartRecovery(cartId, cartVersion)")
+cur.execute("CREATE INDEX IF NOT EXISTS CartRecovery_userId_idx ON CartRecovery(userId)")
+cur.execute("CREATE INDEX IF NOT EXISTS CartRecovery_status_createdAt_idx ON CartRecovery(status, createdAt)")
 
 con.commit()
 con.close()

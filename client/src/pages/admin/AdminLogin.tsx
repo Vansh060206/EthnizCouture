@@ -83,7 +83,7 @@ export const AdminLogin: React.FC = () => {
 
           <div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-[0.25em] bg-[#C6A15D]/10 text-[#DFC89D] border border-[#C6A15D]/30 mb-2">
-              <Sparkles className="w-3 h-3 text-[#C6A15D]" /> Restricted Executive Atelier
+              <Sparkles className="w-3 h-3 text-[#C6A15D]" /> Restricted Executive Portal
             </span>
             <h1 className="font-serif text-2xl sm:text-3xl font-bold tracking-wider text-[#F7F1E5]">
               Executive Command
@@ -180,7 +180,7 @@ export const AdminLogin: React.FC = () => {
           <div className="space-y-1.5 pt-1">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-semibold uppercase tracking-wider text-[#C6A15D] flex items-center gap-1.5">
-                <KeyRound className="w-3.5 h-3.5 text-[#C6A15D]" /> Atelier Secret Passkey
+                <KeyRound className="w-3.5 h-3.5 text-[#C6A15D]" /> Executive Secret Passkey
               </label>
               <span className="text-[10px] text-stone-400 uppercase tracking-widest">Single-Tenant Exclusive</span>
             </div>
@@ -195,7 +195,7 @@ export const AdminLogin: React.FC = () => {
                   setMasterKey(e.target.value);
                   if (errors.masterKey) setErrors((prev) => ({ ...prev, masterKey: undefined }));
                 }}
-                placeholder="EC-ROYAL-ATELIER-XXXX-XXXX-XXXX"
+                placeholder="EC-ROYAL-PORTAL-XXXX-XXXX-XXXX"
                 autoComplete="off"
                 spellCheck={false}
                 className={`w-full pl-10 pr-10 py-3 bg-[#240812] border ${

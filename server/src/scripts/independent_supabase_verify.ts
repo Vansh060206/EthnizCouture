@@ -183,16 +183,16 @@ async function main() {
 
     // 8. Representative Record Inspection
     console.log('\n8. Representative Records Inspection:');
-    const bridalLehenga = await pgPrisma.product.findUnique({
-      where: { sku: 'EC-LEH-001' },
+    const bridalEnsemble = await pgPrisma.product.findUnique({
+      where: { sku: 'EC-ENS-005' },
       select: { id: true, name: true, sku: true, price: true, stock: true, gender: true, category: { select: { name: true } } }
     });
     console.log('   • Sample Flagship Product:');
-    console.log(`     - Name  : ${bridalLehenga?.name}`);
-    console.log(`     - SKU   : ${bridalLehenga?.sku}`);
-    console.log(`     - Price : ₹${bridalLehenga?.price.toLocaleString('en-IN')}`);
-    console.log(`     - Stock : ${bridalLehenga?.stock} units remaining`);
-    console.log(`     - Cat   : ${bridalLehenga?.category?.name}`);
+    console.log(`     - Name  : ${bridalEnsemble?.name}`);
+    console.log(`     - SKU   : ${bridalEnsemble?.sku}`);
+    console.log(`     - Price : ₹${bridalEnsemble?.price.toLocaleString('en-IN')}`);
+    console.log(`     - Stock : ${bridalEnsemble?.stock} units remaining`);
+    console.log(`     - Cat   : ${bridalEnsemble?.category?.name}`);
 
     const samplePaidOrder = await pgPrisma.order.findUnique({
       where: { orderNumber: 'EC-2026-4AA7F6D7' },
@@ -216,3 +216,7 @@ main().catch(err => {
   console.error('Audit execution error:', err);
   process.exit(1);
 });
+
+
+
+

@@ -133,6 +133,10 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   welcomeEmailSent: 'welcomeEmailSent',
   welcomeEmailSentAt: 'welcomeEmailSentAt',
+  marketingConsent: 'marketingConsent',
+  marketingConsentAt: 'marketingConsentAt',
+  marketingConsentSource: 'marketingConsentSource',
+  unsubscribedAt: 'unsubscribedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -227,6 +231,8 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
 exports.Prisma.CartScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  version: 'version',
+  lastActivityAt: 'lastActivityAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -426,6 +432,20 @@ exports.Prisma.PasswordResetScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CartRecoveryScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  userId: 'userId',
+  cartVersion: 'cartVersion',
+  status: 'status',
+  skipReason: 'skipReason',
+  emailMessageId: 'emailMessageId',
+  sentAt: 'sentAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -465,7 +485,8 @@ exports.Prisma.ModelName = {
   IdempotencyRecord: 'IdempotencyRecord',
   BackgroundJob: 'BackgroundJob',
   AuditLog: 'AuditLog',
-  PasswordReset: 'PasswordReset'
+  PasswordReset: 'PasswordReset',
+  CartRecovery: 'CartRecovery'
 };
 
 /**

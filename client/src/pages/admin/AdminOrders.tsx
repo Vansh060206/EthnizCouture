@@ -118,7 +118,7 @@ export const AdminOrders: React.FC = () => {
   const [returnActionType, setReturnActionType] = useState<'SCHEDULE_PICKUP' | 'IMMEDIATE_REFUND'>('SCHEDULE_PICKUP');
 
   // Return Rejection Form Fields
-  const [returnRejectionReason, setReturnRejectionReason] = useState('Outside 7-day atelier return window');
+  const [returnRejectionReason, setReturnRejectionReason] = useState('Outside 7-day boutique return window');
   const [returnRejectionNotes, setReturnRejectionNotes] = useState('');
 
   // Dispatch Form Fields
@@ -381,7 +381,7 @@ export const AdminOrders: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-gold-900/40">
         <div>
           <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-gold-500">
-            Atelier Operations & Logistics
+            Executive Operations & Logistics
           </span>
           <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">
             Order Fulfilment Pipeline
@@ -544,7 +544,7 @@ export const AdminOrders: React.FC = () => {
                 <tr>
                   <td colSpan={8} className="p-12 text-center text-zinc-500 space-y-3">
                     <RefreshCw className="w-6 h-6 animate-spin text-gold-400 mx-auto" />
-                    <p className="font-medium text-xs">Accessing atelier ledger...</p>
+                    <p className="font-medium text-xs">Accessing order ledger...</p>
                   </td>
                 </tr>
               ) : orders.length === 0 ? (
@@ -791,7 +791,7 @@ export const AdminOrders: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-500">
-                    Atelier Order Fulfilment
+                    Executive Order Fulfilment
                   </span>
                   <span
                     className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${
@@ -1046,14 +1046,14 @@ export const AdminOrders: React.FC = () => {
                       <Truck className="w-4 h-4 text-cyan-400 shrink-0" />
                       <div className="text-xs">
                         <p className="font-bold">Reverse Pickup in Progress with Courier</p>
-                        <p className="text-[11px] text-cyan-300/80">Awaiting garment handover and atelier quality verification.</p>
+                        <p className="text-[11px] text-cyan-300/80">Awaiting garment handover and boutique quality verification.</p>
                       </div>
                     </div>
 
                     <button
                       onClick={() => handleExecuteAction('COMPLETE_RETURN', {
                         restoreStockOnReturn: true,
-                        customerNotes: 'Garment received at atelier, passed quality inspection. Stock restored.'
+                        customerNotes: 'Garment received at boutique, passed quality inspection. Stock restored.'
                       })}
                       disabled={actionLoading}
                       className="px-4 py-2 bg-purple-800 hover:bg-purple-700 disabled:opacity-40 text-white rounded font-bold uppercase tracking-wider text-xs flex items-center gap-1.5 shadow"
@@ -1371,7 +1371,7 @@ export const AdminOrders: React.FC = () => {
                 <label className="block text-zinc-300 font-bold mb-1">Customer-Visible Milestone Note</label>
                 <input
                   type="text"
-                  placeholder="e.g. Handed over to Blue Dart Express Air. Dispatched from Mumbai Central Atelier."
+                  placeholder="e.g. Handed over to Blue Dart Express Air. Dispatched from Mumbai Central Facility."
                   value={dispatchCustomerNotes}
                   onChange={(e) => setDispatchCustomerNotes(e.target.value)}
                   className="w-full px-3 py-2 bg-black/50 border border-zinc-700 rounded text-white focus:border-gold-500"
@@ -1685,11 +1685,11 @@ export const AdminOrders: React.FC = () => {
                   onChange={(e) => setReturnRejectionReason(e.target.value)}
                   className="w-full px-3 py-2 bg-black/50 border border-zinc-700 rounded text-white text-xs"
                 >
-                  <option value="Outside 7-day atelier return window">Outside 7-day atelier return window</option>
+                  <option value="Outside 7-day boutique return window">Outside 7-day boutique return window</option>
                   <option value="Garment shows signs of wear, dry cleaning, or alteration">Garment shows signs of wear or alteration</option>
                   <option value="Bullion security seal or designer tags removed">Bullion security seal or designer tags removed</option>
-                  <option value="Custom bespoke bridal order (non-returnable per policy)">Custom bespoke bridal order (non-returnable)</option>
-                  <option value="Other atelier exception">Other bespoke policy exception</option>
+                  <option value="Custom bespoke order (non-returnable per policy)">Custom bespoke order (non-returnable)</option>
+                  <option value="Other bespoke policy exception">Other bespoke policy exception</option>
                 </select>
               </div>
 
@@ -1700,7 +1700,7 @@ export const AdminOrders: React.FC = () => {
                   rows={3}
                   value={returnRejectionNotes}
                   onChange={(e) => setReturnRejectionNotes(e.target.value)}
-                  placeholder="Provide courteous explanation for why the return cannot be accepted under atelier guidelines..."
+                  placeholder="Provide courteous explanation for why the return cannot be accepted under boutique guidelines..."
                   className="w-full px-3 py-2 bg-black/50 border border-zinc-700 rounded text-white text-xs"
                 />
               </div>
