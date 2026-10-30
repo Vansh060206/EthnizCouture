@@ -12,7 +12,10 @@ import {
   X,
   Sparkles,
   CheckCircle2,
-  Crown
+  Crown,
+  Volume2,
+  VolumeX,
+  Pause
 } from 'lucide-react';
 
 interface ReelData {
@@ -100,6 +103,61 @@ const VERIFIED_REELS: ReelData[] = [
 export const InstagramReelsSection: React.FC = () => {
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
   const [likedReels, setLikedReels] = useState<Record<string, boolean>>({});
+
+  // Optimized smooth video player states
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [videoProgress, setVideoProgress] = useState<number>(0);
+  const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (activeReelModal && videoRef.current) {
+      setIsPlaying(true);
+      setVideoProgress(0);
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If unmuted autoplay is restricted by browser policy, smoothly fall back to muted autoplay to prevent lag
+          if (videoRef.current) {
+            videoRef.current.muted = true;
+            setIsMuted(true);
+            videoRef.current.play().catch(() => {});
+          }
+        });
+      }
+    }
+  }, [activeReelModal]);
+
+  const togglePlayPause = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+    setShowPlayAnim(true);
+    setTimeout(() => setShowPlayAnim(false), 550);
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    const nextMuted = !isMuted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
+  };
+
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const { currentTime, duration } = videoRef.current;
+    if (duration > 0) {
+      setVideoProgress((currentTime / duration) * 100);
+    }
+  };
 
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -442,7 +500,7 @@ export const InstagramReelsSection: React.FC = () => {
         >
           {/* 9:16 Vertical Video Frame */}
           <div 
-            className="relative w-full max-w-[420px] h-[88vh] max-h-[820px] rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-[0_0_60px_rgba(0,0,0,0.95)] border border-[#C6A15D]/40 flex flex-col justify-between"
+            className="relative w-full max-w-[400px] aspect-[9/16] max-h-[88vh] rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-[0_0_60px_rgba(0,0,0,0.95)] border border-[#C6A15D]/40 flex flex-col justify-between select-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar Floating Controls */}
@@ -462,18 +520,33 @@ export const InstagramReelsSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Direct Instagram App Option + Close */}
+              {/* Direct Instagram App Option + Audio Toggle + Close */}
               <div className="flex items-center gap-2">
+                {/* Audio Toggle */}
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all border ${
+                    isMuted 
+                      ? 'bg-black/60 text-zinc-400 border-white/20' 
+                      : 'bg-[#3E1A1E] text-[#DFC89D] border-[#C6A15D]/70 shadow-sm'
+                  } active:scale-95`}
+                  title={isMuted ? 'Tap to unmute sound' : 'Tap to mute sound'}
+                  aria-label="Toggle sound"
+                >
+                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 animate-pulse" />}
+                </button>
+
                 <a
                   href={activeReelModal.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:brightness-110 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all"
+                  className="px-3 py-1.5 rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:brightness-110 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all"
                   title="Watch this exact reel on Instagram"
                 >
                   <Instagram className="w-3.5 h-3.5" />
-                  <span>Watch on Instagram</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <span className="hidden sm:inline">Watch on</span>
+                  <span>Insta ↗</span>
                 </a>
 
                 <button
@@ -487,40 +560,70 @@ export const InstagramReelsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* In That Whole Mode: ONLY Video Playing Edge-to-Edge */}
-            <div className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden">
+            {/* In That Whole Mode: ONLY Video Playing Edge-to-Edge with Tap to Play/Pause */}
+            <div 
+              className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden cursor-pointer"
+              onClick={togglePlayPause}
+            >
               <video
+                ref={videoRef}
                 key={activeReelModal.id}
                 src={activeReelModal.videoSrc}
                 poster={activeReelModal.image}
                 autoPlay
                 loop
                 playsInline
-                controls
-                controlsList="nodownload"
-                className="w-full h-full object-cover bg-black"
+                muted={isMuted}
+                preload="auto"
+                onTimeUpdate={handleTimeUpdate}
+                className="w-full h-full object-cover bg-black select-none pointer-events-none"
               />
+
+              {/* Tap to Play / Pause Center Animation Indicator */}
+              {showPlayAnim && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 animate-fade-in">
+                  <div className="w-16 h-16 rounded-full bg-black/65 backdrop-blur-md border border-white/25 flex items-center justify-center text-white scale-110 shadow-2xl transition-all">
+                    {isPlaying ? (
+                      <Play className="w-8 h-8 fill-current text-[#DFC89D] ml-1" />
+                    ) : (
+                      <Pause className="w-8 h-8 fill-current text-[#DFC89D]" />
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Bottom Overlay Pill: Quick Shop Ensemble */}
-            <div className="absolute bottom-0 inset-x-0 z-30 p-3 sm:p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center justify-between gap-3 pointer-events-auto">
-              <div className="min-w-0 flex-1">
-                <p className="text-white text-xs font-semibold truncate drop-shadow">
-                  {activeReelModal.productName}
-                </p>
-                <p className="text-[#DFC89D] text-[11px] font-mono">
-                  {activeReelModal.productPrice}
-                </p>
+            {/* Bottom Overlay: Smooth Scrubber Bar + Title + Shop Button (NO PRICE) */}
+            <div className="absolute bottom-0 inset-x-0 z-30 pointer-events-auto bg-gradient-to-t from-black/95 via-black/60 to-transparent">
+              {/* Sleek Progress Scrubber Line */}
+              <div className="w-full h-1 bg-white/15 overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[#C6A15D] via-[#DFC89D] to-[#C6A15D] transition-all duration-150"
+                  style={{ width: `${videoProgress}%` }}
+                />
               </div>
 
-              <Link
-                to={activeReelModal.productLink}
-                onClick={() => setActiveReelModal(null)}
-                className="py-1.5 px-3.5 rounded-lg bg-[#3E1A1E]/90 hover:bg-[#522127] text-[#DFC89D] border border-[#C6A15D]/50 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md active:scale-95 transition-all shrink-0 backdrop-blur-sm"
-              >
-                <ShoppingBag className="w-3.5 h-3.5 text-[#C6A15D]" />
-                <span>Shop</span>
-              </Link>
+              {/* Title & Shop Ensemble Action (No Price) */}
+              <div className="p-3.5 sm:p-4 flex items-center justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="text-white text-xs sm:text-sm font-semibold truncate drop-shadow">
+                    {activeReelModal.title}
+                  </p>
+                  <p className="text-[#DFC89D] text-[11px] font-mono tracking-wider flex items-center gap-1.5 mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15D]" />
+                    <span>{activeReelModal.collectionTag}</span>
+                  </p>
+                </div>
+
+                <Link
+                  to={activeReelModal.productLink}
+                  onClick={() => setActiveReelModal(null)}
+                  className="py-2 px-3.5 rounded-xl bg-[#3E1A1E]/95 hover:bg-[#522127] text-[#DFC89D] border border-[#C6A15D]/60 hover:border-[#DFC89D] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg active:scale-95 transition-all shrink-0 backdrop-blur-sm"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5 text-[#C6A15D]" />
+                  <span>Shop Ensemble</span>
+                </Link>
+              </div>
             </div>
 
           </div>
