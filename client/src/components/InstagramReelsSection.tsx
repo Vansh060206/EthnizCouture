@@ -163,6 +163,28 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  // Proactively prefetch video streams during idle time for 0ms mobile playback
+  useEffect(() => {
+    const prefetchVideos = () => {
+      VERIFIED_REELS.forEach((reel) => {
+        // Prefetch link tag for browser cache
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.as = 'fetch';
+        link.href = reel.videoSrc;
+        document.head.appendChild(link);
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(prefetchVideos);
+      } else {
+        setTimeout(prefetchVideos, 800);
+      }
+    }
+  }, []);
+
   // IntersectionObserver for elegant entrance animation
   useEffect(() => {
     const observer = new IntersectionObserver(
