@@ -106,15 +106,17 @@ export const InstagramReelsSection: React.FC = () => {
 
   // Optimized smooth video player states
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [videoProgress, setVideoProgress] = useState<number>(0);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
 
   useEffect(() => {
     if (activeReelModal && videoRef.current) {
       setIsPlaying(true);
-      setVideoProgress(0);
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = '0%';
+      }
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -152,10 +154,11 @@ export const InstagramReelsSection: React.FC = () => {
   };
 
   const handleTimeUpdate = () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || !progressBarRef.current) return;
     const { currentTime, duration } = videoRef.current;
     if (duration > 0) {
-      setVideoProgress((currentTime / duration) * 100);
+      const pct = (currentTime / duration) * 100;
+      progressBarRef.current.style.width = `${pct}%`;
     }
   };
 
@@ -575,8 +578,10 @@ export const InstagramReelsSection: React.FC = () => {
                 playsInline
                 muted={isMuted}
                 preload="auto"
+                disablePictureInPicture
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full h-full object-cover bg-black select-none pointer-events-none"
+                style={{ transform: 'translate3d(0, 0, 0)', willChange: 'transform', backfaceVisibility: 'hidden' }}
               />
 
               {/* Tap to Play / Pause Center Animation Indicator */}
@@ -598,8 +603,8 @@ export const InstagramReelsSection: React.FC = () => {
               {/* Sleek Progress Scrubber Line */}
               <div className="w-full h-1 bg-white/15 overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-[#C6A15D] via-[#DFC89D] to-[#C6A15D] transition-all duration-150"
-                  style={{ width: `${videoProgress}%` }}
+                  ref={progressBarRef}
+                  className="h-full bg-gradient-to-r from-[#C6A15D] via-[#DFC89D] to-[#C6A15D] w-0 transition-[width] duration-75 ease-linear"
                 />
               </div>
 
