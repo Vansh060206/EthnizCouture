@@ -1728,14 +1728,14 @@ export const CheckoutPage: React.FC = () => {
                   </p>
 
                   <div className="p-3 bg-white rounded-xl border border-[#C6A15D]/30 space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-zinc-600 font-medium">Compatible Apps:</span>
-                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-700">
-                        <span className="px-2 py-0.5 bg-zinc-100 rounded">GPay</span>
-                        <span className="px-2 py-0.5 bg-zinc-100 rounded">PhonePe</span>
-                        <span className="px-2 py-0.5 bg-zinc-100 rounded">Paytm</span>
-                        <span className="px-2 py-0.5 bg-zinc-100 rounded">BHIM</span>
-                        <span className="px-2 py-0.5 bg-zinc-100 rounded">CRED</span>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs">
+                      <span className="text-zinc-600 font-medium shrink-0">Compatible Apps:</span>
+                      <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-bold text-zinc-700">
+                        <span className="px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200">GPay</span>
+                        <span className="px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200">PhonePe</span>
+                        <span className="px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200">Paytm</span>
+                        <span className="px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200">BHIM</span>
+                        <span className="px-2 py-0.5 bg-zinc-100 rounded border border-zinc-200">CRED</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 text-[11px] text-zinc-500">
@@ -1745,17 +1745,17 @@ export const CheckoutPage: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <div className="p-5 bg-[#FAF7F2] rounded-xl border border-[#C6A15D]/40 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5 text-emerald-700" />
-                      Razorpay Standard Secure Checkout
+                <div className="p-4 sm:p-5 bg-[#FAF7F2] rounded-xl border border-[#C6A15D]/40 space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <span className="text-xs font-bold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5 shrink-0">
+                      <Lock className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                      <span>Razorpay Standard Secure Checkout</span>
                     </span>
-                    <div className="flex gap-1.5">
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border font-bold text-zinc-700">VISA</span>
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border font-bold text-zinc-700">MASTERCARD</span>
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border font-bold text-zinc-700">RUPAY</span>
-                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border font-bold text-zinc-700">NET BANKING</span>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border border-zinc-200 font-bold text-zinc-700 shadow-xs">VISA</span>
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border border-zinc-200 font-bold text-zinc-700 shadow-xs">MASTERCARD</span>
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border border-zinc-200 font-bold text-zinc-700 shadow-xs">RUPAY</span>
+                      <span className="text-[10px] bg-white px-2 py-0.5 rounded border border-zinc-200 font-bold text-zinc-700 shadow-xs">NET BANKING</span>
                     </div>
                   </div>
 
