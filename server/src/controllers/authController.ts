@@ -430,14 +430,25 @@ export const googleAuth = async (req: Request, res: Response): Promise<void> => 
 
       if (existingUserByEmail) {
         // Link Google ID to existing verified account. Preserve existing role (never elevate)
-        user = await prisma.user.update({
-          where: { id: existingUserByEmail.id },
-          data: {
-            googleId,
-            avatar: existingUserByEmail.avatar || payload.picture || null
+        try {
+          user = await prisma.user.update({
+            where: { id: existingUserByEmail.id },
+            data: {
+              googleId,
+              avatar: existingUserByEmail.avatar || payload.picture || null
+            }
+          });
+          logger.info(`Safely linked Google ID to existing customer account [User ID: ${user.id}]`);
+        } catch (linkErr: any) {
+          if (linkErr.code === 'P2002') {
+            user = await prisma.user.findFirst({
+              where: { OR: [{ googleId }, { email }] }
+            });
+            if (!user) throw linkErr;
+          } else {
+            throw linkErr;
           }
-        });
-        logger.info(`Safely linked Google ID to existing customer account [User ID: ${user.id}]`);
+        }
       } else {
         // 3. Create brand-new patron account
         try {
@@ -500,7 +511,11 @@ export const googleAuth = async (req: Request, res: Response): Promise<void> => 
     });
   } catch (error: any) {
     logger.error('googleAuth error:', error);
-    res.status(500).json({ message: 'Internal server error during Google authentication.' });
+    res.status(500).json({ 
+      message: process.env.NODE_ENV === 'production' 
+        ? 'Internal server error during Google authentication.' 
+        : (error?.message || 'Internal server error during Google authentication.') 
+    });
   }
 };
 
