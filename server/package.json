@@ -4,8 +4,9 @@
   "description": "Backend API for EthnizCouture Luxury Indian Ethnic-Wear",
   "main": "src/server.ts",
   "scripts": {
+    "postinstall": "prisma generate --schema=prisma/schema.prisma",
     "dev": "tsx watch src/server.ts",
-    "build": "prisma generate --schema=prisma/schema.postgresql.prisma && tsc && node -e \"const fs=require('fs'); if(fs.existsSync('src/generated')) fs.cpSync('src/generated', 'dist/generated', {recursive: true});\"",
+    "build": "prisma generate --schema=prisma/schema.prisma && prisma generate --schema=prisma/schema.postgresql.prisma && tsc && node -e \"const fs=require('fs'); if(fs.existsSync('src/generated')) fs.cpSync('src/generated', 'dist/generated', {recursive: true});\"",
     "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
