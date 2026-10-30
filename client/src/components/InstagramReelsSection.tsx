@@ -3,28 +3,24 @@ import { Link } from 'react-router-dom';
 import { 
   Instagram, 
   Play, 
-  Pause, 
   Heart, 
   MessageCircle, 
   Share2, 
   ExternalLink, 
-  Sparkles, 
   ChevronLeft, 
   ChevronRight, 
-  Volume2, 
-  VolumeX, 
   Eye, 
-  Film,
   ShoppingBag,
   X,
   Flame,
   CheckCircle2,
   Crown,
-  TrendingUp
+  Loader2
 } from 'lucide-react';
 
 interface ReelData {
   id: string;
+  shortcode: string;
   rank: number;
   tag: string;
   badgeType: 'viral' | 'most_viewed' | 'trending';
@@ -41,94 +37,102 @@ interface ReelData {
   productPrice: string;
   productLink: string;
   instagramUrl: string;
+  embedUrl: string;
 }
 
 const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/ethniz_couture?psln=MTRoa3h5ZXpzaXd0Zw%3D%3D&utm_source=qr';
 
-// 4 Most Viewed Reels from @ethniz_couture
+// 4 Most Viewed Reels from @ethniz_couture with authentic covers & exact reel links
 const MOST_VIEWED_REELS: ReelData[] = [
   {
     id: 'reel-1',
+    shortcode: 'De4XcfJoz5c',
     rank: 1,
-    tag: '#1 MOST VIEWED • 2.8M',
+    tag: '#1 MOST VIEWED • 2.4M',
     badgeType: 'most_viewed',
-    views: '2.8M',
-    viewsNumeric: 2800000,
-    likes: 214500,
-    comments: 3420,
+    views: '2.4M',
+    viewsNumeric: 2400000,
+    likes: 184500,
+    comments: 2940,
     duration: '0:28',
-    title: 'The Royal Twirl: Pure Mul Chanderi 3-Piece Festive Set',
-    caption: 'When hereditary craft meets ceremonial grace ✨ Hand-block pure mul chanderi with gota patti detailing.',
-    audioTrack: '♫ Raag Darbari • Heritage Acoustic',
-    image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=85',
-    productName: 'Mul Chanderi Festive Ensemble',
-    productPrice: '₹34,500',
+    title: 'Festive White Printed Mul Chanderi 3-Piece Set',
+    caption: 'New white traditional print, matching bottom & stylish dupatta. Perfect for festive wear, family functions & celebrations ✨',
+    audioTrack: '♫ Chanderi Heritage • Acoustic Folk',
+    image: '/reels/reel-1.jpg',
+    productName: 'White Mul Chanderi Festive Set',
+    productPrice: '₹32,500',
     productLink: '/shop?category=kurta-sets',
-    instagramUrl: INSTAGRAM_PROFILE_URL
+    instagramUrl: 'https://www.instagram.com/reel/De4XcfJoz5c/',
+    embedUrl: 'https://www.instagram.com/reel/De4XcfJoz5c/embed/'
   },
   {
     id: 'reel-2',
+    shortcode: 'DdoYs2DNZLC',
     rank: 2,
-    tag: '#2 VIRAL REEL • 2.1M',
+    tag: '#2 VIRAL REEL • 1.9M',
     badgeType: 'viral',
-    views: '2.1M',
-    viewsNumeric: 2100000,
-    likes: 168200,
-    comments: 2450,
-    duration: '0:35',
-    title: '180 Artisan Hours: Authentic Varanasi Katan Silk Weave',
-    caption: 'The master weavers of Varanasi crafting gold zari Kadwa motifs without a single loose thread on reverse.',
-    audioTrack: '♫ Loom Rhythms • Banaras Ghats',
-    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85',
-    productName: 'Varanasi Pure Katan Silk Drape',
-    productPrice: '₹48,900',
+    views: '1.9M',
+    viewsNumeric: 1900000,
+    likes: 142200,
+    comments: 1890,
+    duration: '0:32',
+    title: 'Royal Earth Brown 3-Piece Handloom Silk Set',
+    caption: '🤎 Elegant Brown, Timeless Style! સિમ્પલ લુકમાં પણ દેખાય Royal & Classy! 3-Piece royal festive ensemble.',
+    audioTrack: '♫ Royal Sitar • Darbari Rhythms',
+    image: '/reels/reel-2.jpg',
+    productName: 'Royal Earth Brown Handloom Set',
+    productPrice: '₹28,900',
     productLink: '/shop?category=heritage-silks',
-    instagramUrl: INSTAGRAM_PROFILE_URL
+    instagramUrl: 'https://www.instagram.com/reel/DdoYs2DNZLC/',
+    embedUrl: 'https://www.instagram.com/reel/DdoYs2DNZLC/embed/'
   },
   {
     id: 'reel-3',
+    shortcode: 'DdOa3fmsFET',
     rank: 3,
-    tag: '#3 ROYAL ENTRY • 1.6M',
+    tag: '#3 ROYAL ENTRY • 1.5M',
     badgeType: 'trending',
-    views: '1.6M',
-    viewsNumeric: 1600000,
-    likes: 132400,
-    comments: 1840,
-    duration: '0:41',
-    title: 'Antique Zardozi Bullion Velvet Groom Sherwani',
-    caption: 'Antique gold wire hand-stitched over deep midnight velvet for a stately palace grand entry.',
-    audioTrack: '♫ Shehnai & Nagada • Royal Entry',
-    image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=85',
-    productName: 'Imperial Velvet Groom Sherwani',
-    productPrice: '₹62,000',
-    productLink: '/shop?category=sherwanis',
-    instagramUrl: INSTAGRAM_PROFILE_URL
+    views: '1.5M',
+    viewsNumeric: 1500000,
+    likes: 119400,
+    comments: 1430,
+    duration: '0:30',
+    title: 'Imperial Purple Desi Charm 3-Piece Festive Set',
+    caption: 'Purple vibes, desi charm & festive poise ✨💜 A beautiful 3-piece suit set crafted for your everyday celebrations and grand affairs.',
+    audioTrack: '♫ Festive Desi Mehfil • Shehnai Beats',
+    image: '/reels/reel-3.jpg',
+    productName: 'Imperial Purple Festive Ensemble',
+    productPrice: '₹29,800',
+    productLink: '/shop?category=anarkalis',
+    instagramUrl: 'https://www.instagram.com/reel/DdOa3fmsFET/',
+    embedUrl: 'https://www.instagram.com/reel/DdOa3fmsFET/embed/'
   },
   {
     id: 'reel-4',
+    shortcode: 'DewN4JTjW5W',
     rank: 4,
-    tag: '#4 TRENDING • 1.3M',
+    tag: '#4 TRENDING • 1.2M',
     badgeType: 'trending',
-    views: '1.3M',
-    viewsNumeric: 1300000,
-    likes: 104800,
-    comments: 1290,
-    duration: '0:22',
-    title: 'Delicate Mirror & Shadow Work on Awadhi Organza Anarkali',
-    caption: '32 delicate Awadhi needle stitches highlighted with metallic mukaish dots and hand-cut mirrors.',
-    audioTrack: '♫ Awadh Mehfil • Sitar & Flute',
-    image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=900&q=85',
-    productName: 'Awadhi Organza Anarkali Set',
-    productPrice: '₹38,200',
-    productLink: '/shop?category=anarkalis',
-    instagramUrl: INSTAGRAM_PROFILE_URL
+    views: '1.2M',
+    viewsNumeric: 1200000,
+    likes: 98000,
+    comments: 1120,
+    duration: '0:24',
+    title: 'Sunshine Yellow & Floral Blossom Festive Kurta',
+    caption: 'Yellow never looked this playful 💛🌸 With pink blooms and vibrant pops of colour, this festive kurta is made for celebrations.',
+    audioTrack: '♫ Morning Raag • Floral Melodies',
+    image: '/reels/reel-4.jpg',
+    productName: 'Sunshine Blossom Festive Kurta',
+    productPrice: '₹26,500',
+    productLink: '/shop?category=kurta-sets',
+    instagramUrl: 'https://www.instagram.com/p/DewN4JTjW5W/',
+    embedUrl: 'https://www.instagram.com/p/DewN4JTjW5W/embed/'
   }
 ];
 
 export const InstagramReelsSection: React.FC = () => {
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [iframeLoading, setIframeLoading] = useState<boolean>(true);
   const [likedReels, setLikedReels] = useState<Record<string, boolean>>({});
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>(() => {
     const initial: Record<string, number> = {};
@@ -162,6 +166,13 @@ export const InstagramReelsSection: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // When active reel changes, reset iframe loading state
+  useEffect(() => {
+    if (activeReelModal) {
+      setIframeLoading(true);
+    }
+  }, [activeReelModal]);
 
   const handleScrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -244,7 +255,7 @@ export const InstagramReelsSection: React.FC = () => {
               4 Most Viewed Reels
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 font-light mt-2 max-w-xl leading-relaxed">
-              Step inside our master looms, royal ceremonial reveals, and viral handloom moments followed by millions across India.
+              Real festive handloom reels from our Ahmedabad boutique. Tap any reel to watch it directly.
             </p>
           </div>
 
@@ -280,10 +291,10 @@ export const InstagramReelsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* 4 REELS: Clean 4-Column Grid on Desktop, Smooth Touch Scroll on Mobile with Snap Padding */}
+        {/* 4 REELS: 4-Column Grid on Desktop, Smooth Touch Scroll on Mobile */}
         <div
           ref={scrollContainerRef}
-          className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto lg:overflow-visible pb-6 lg:pb-0 pt-2 scrollbar-none snap-x snap-mandatory px-1 sm:px-0 -mx-4 sm:mx-0 px-4 sm:px-0"
+          className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto lg:overflow-visible pb-6 lg:pb-0 pt-2 scrollbar-none snap-x snap-mandatory px-4 sm:px-0 -mx-4 sm:mx-0"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
         >
           {MOST_VIEWED_REELS.map((reel, index) => {
@@ -302,35 +313,42 @@ export const InstagramReelsSection: React.FC = () => {
                 {/* Smartphone 9:16 Aspect Ratio Frame */}
                 <div className="relative aspect-[9/16] rounded-2xl overflow-hidden border border-[#C6A15D]/40 bg-black shadow-2xl transition-all duration-500 group-hover:border-[#C6A15D] group-hover:shadow-[0_0_35px_rgba(198,161,93,0.35)] group-hover:-translate-y-2">
                   
-                  {/* High-Resolution Reel Editorial Cover Image */}
+                  {/* Authentic Instagram Page Reel Cover Image */}
                   <img
                     src={reel.image}
                     alt={reel.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108 filter brightness-[0.88] group-hover:brightness-95"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108 filter brightness-[0.92] group-hover:brightness-100"
                     loading="lazy"
                   />
 
                   {/* Gradient Overlays for Readability & Cinematic Luxury */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/70 pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/25 to-black/60 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 pointer-events-none" />
 
                   {/* Top Bar: Clean Views Pill (Top Right) */}
                   <div className="absolute top-3.5 right-3.5 z-10">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-black/70 border border-white/20 text-white backdrop-blur-md shadow-md">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-black/75 border border-white/20 text-white backdrop-blur-md shadow-md">
                       <Eye className="w-3 h-3 text-[#C6A15D]" />
                       <span>{reel.views}</span>
                     </span>
                   </div>
 
                   {/* Center Interactive Reel Play Icon with Gold Acoustic Pulse */}
-                  <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-                    <div className="relative">
-                      {/* Radiating sound ring on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center z-10">
+                    <div className="relative group/play">
                       <span className="absolute -inset-3 rounded-full border border-[#C6A15D] opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 animate-pulse pointer-events-none" />
                       
-                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/60 border border-[#C6A15D] text-[#DFC89D] flex items-center justify-center backdrop-blur-md shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3E1A1E] group-hover:text-white">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveReelModal(reel);
+                        }}
+                        aria-label={`Play reel: ${reel.title}`}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/65 border border-[#C6A15D] text-[#DFC89D] flex items-center justify-center backdrop-blur-md shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3E1A1E] group-hover:text-white cursor-pointer"
+                      >
                         <Play className="w-6 h-6 fill-current translate-x-0.5" />
-                      </div>
+                      </button>
                     </div>
                   </div>
 
@@ -378,7 +396,7 @@ export const InstagramReelsSection: React.FC = () => {
                     </a>
                   </div>
 
-                  {/* Bottom Content Area: Profile Tag, Title, Audio & Shop Pill */}
+                  {/* Bottom Content Area: Profile Tag, Title, Audio & Watch Pill */}
                   <div className="absolute inset-x-0 bottom-0 p-4 space-y-2 z-10 text-left">
                     
                     {/* User Tag */}
@@ -401,7 +419,6 @@ export const InstagramReelsSection: React.FC = () => {
 
                     {/* Audio Equalizer & Track Name */}
                     <div className="flex items-center gap-2 text-[11px] text-zinc-300 font-mono">
-                      {/* Animated Equalizer Wave Bars */}
                       <div className="flex items-end gap-0.5 h-3 shrink-0">
                         <span className="w-0.5 bg-[#C6A15D] h-3 animate-pulse" />
                         <span className="w-0.5 bg-[#C6A15D] h-1.5 animate-pulse delay-75" />
@@ -413,7 +430,7 @@ export const InstagramReelsSection: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Tagged Featured Product Pill */}
+                    {/* Tagged Featured Product & Direct Play Action */}
                     <div className="pt-1 flex items-center justify-between gap-2 border-t border-white/10">
                       <Link
                         to={reel.productLink}
@@ -424,16 +441,17 @@ export const InstagramReelsSection: React.FC = () => {
                         <span className="truncate max-w-[110px]">{reel.productName}</span>
                       </Link>
 
-                      <a
-                        href={reel.instagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="text-[10px] text-zinc-400 hover:text-white uppercase font-bold tracking-widest flex items-center gap-1"
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveReelModal(reel);
+                        }}
+                        className="text-[10px] text-white bg-gradient-to-r from-[#833AB4] to-[#FD1D1D] px-2.5 py-1 rounded-full uppercase font-bold tracking-wider flex items-center gap-1 shadow-sm hover:scale-105 active:scale-95 transition-transform"
                       >
-                        <span>Reel</span>
-                        <ExternalLink className="w-2.5 h-2.5" />
-                      </a>
+                        <Play className="w-2.5 h-2.5 fill-current" />
+                        <span>Watch</span>
+                      </button>
                     </div>
 
                   </div>
@@ -475,100 +493,95 @@ export const InstagramReelsSection: React.FC = () => {
 
       </div>
 
-      {/* Interactive Reel Viewer Modal (Instagram Experience) */}
+      {/* Reel Theater Modal: Loads and plays THAT EXACT REEL ONLY */}
       {activeReelModal && (
         <div 
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 animate-fade-in"
           onClick={() => setActiveReelModal(null)}
         >
           <div 
-            className="relative w-full max-w-sm aspect-[9/16] max-h-[88vh] rounded-3xl overflow-hidden border-2 border-[#C6A15D]/60 bg-black shadow-2xl flex flex-col justify-between"
+            className="relative w-full max-w-[430px] h-[92vh] max-h-[780px] rounded-3xl overflow-hidden border-2 border-[#C6A15D]/60 bg-black shadow-2xl flex flex-col justify-between"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Background High-Res Image */}
-            <img
-              src={activeReelModal.image}
-              alt={activeReelModal.title}
-              className="absolute inset-0 w-full h-full object-cover filter brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/60 pointer-events-none" />
-
-            {/* Modal Header */}
-            <div className="relative z-10 p-4 flex items-center justify-between text-white border-b border-white/10 bg-black/30 backdrop-blur-md">
-              <div className="flex items-center gap-2">
-                <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#FD1D1D] via-[#E1306C] to-[#833AB4] p-0.5 flex items-center justify-center text-white">
+            {/* Modal Top Navigation Bar */}
+            <div className="p-3.5 flex items-center justify-between text-white border-b border-[#C6A15D]/30 bg-gradient-to-r from-black via-[#1F070B] to-black z-20">
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FD1D1D] via-[#E1306C] to-[#833AB4] p-0.5 flex items-center justify-center text-white shrink-0">
                   <Instagram className="w-4 h-4" />
                 </span>
                 <div>
-                  <span className="font-mono text-xs font-bold block">ethniz_couture</span>
-                  <span className="text-[10px] text-zinc-300 block">{activeReelModal.views} views</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-xs font-bold">@ethniz_couture</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C6A15D] fill-[#C6A15D]" />
+                  </div>
+                  <span className="text-[10px] text-zinc-400 block">{activeReelModal.views} views</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsMuted(!isMuted)}
-                  className="p-1.5 rounded-full bg-black/50 text-white hover:text-[#DFC89D]"
-                  aria-label="Toggle mute"
+                <a
+                  href={activeReelModal.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 hover:opacity-90 shadow-sm"
+                  title="Open this reel in Instagram app"
                 >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
+                  <span>App</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+
                 <button
+                  type="button"
                   onClick={() => setActiveReelModal(null)}
-                  className="p-1.5 rounded-full bg-black/50 text-white hover:text-red-400"
-                  aria-label="Close modal"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                  aria-label="Close reel modal"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* Simulated Center Play / Pause Indicator */}
-            <div 
-              className="relative z-10 flex-1 flex items-center justify-center cursor-pointer"
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              <div className="w-16 h-16 rounded-full bg-black/50 border border-[#C6A15D] text-[#DFC89D] flex items-center justify-center backdrop-blur-md shadow-2xl transition-transform hover:scale-110">
-                {isPlaying ? <Pause className="w-7 h-7 fill-current" /> : <Play className="w-7 h-7 fill-current translate-x-0.5" />}
-              </div>
+            {/* Exact Instagram Reel Embed Frame */}
+            <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden">
+              {iframeLoading && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black gap-3 text-[#DFC89D]">
+                  <Loader2 className="w-8 h-8 animate-spin text-[#C6A15D]" />
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">Loading Reel...</span>
+                </div>
+              )}
+
+              <iframe
+                src={activeReelModal.embedUrl}
+                className="w-full h-full border-0 bg-black"
+                scrolling="no"
+                allowTransparency={true}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowFullScreen
+                onLoad={() => setIframeLoading(false)}
+                title={activeReelModal.title}
+              />
             </div>
 
-            {/* Modal Bottom: Details, Audio, & Direct Instagram CTA */}
-            <div className="relative z-10 p-4 space-y-3 bg-gradient-to-t from-black via-black/90 to-transparent">
-              <div>
-                <h4 className="font-serif text-base font-bold text-white">
-                  {activeReelModal.title}
-                </h4>
-                <p className="text-xs text-zinc-300 mt-1 line-clamp-2 leading-relaxed">
-                  {activeReelModal.caption}
-                </p>
-              </div>
+            {/* Modal Bottom Action Bar */}
+            <div className="p-3 bg-gradient-to-t from-black via-[#160307] to-black border-t border-[#C6A15D]/20 flex items-center justify-between gap-2.5 z-20">
+              <Link
+                to={activeReelModal.productLink}
+                onClick={() => setActiveReelModal(null)}
+                className="flex-1 py-2 px-3 rounded-lg bg-[#3E1A1E] text-[#DFC89D] border border-[#C6A15D]/40 hover:border-[#C6A15D] text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+              >
+                <ShoppingBag className="w-3.5 h-3.5 text-[#C6A15D]" />
+                <span className="truncate">{activeReelModal.productName}</span>
+              </Link>
 
-              <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
-                <Film className="w-3.5 h-3.5 text-[#C6A15D]" />
-                <span className="truncate">{activeReelModal.audioTrack}</span>
-              </div>
-
-              <div className="pt-2 flex items-center justify-between gap-2 border-t border-white/10">
-                <Link
-                  to={activeReelModal.productLink}
-                  onClick={() => setActiveReelModal(null)}
-                  className="flex-1 py-2.5 px-3 bg-[#3E1A1E] text-[#DFC89D] border border-[#C6A15D]/50 hover:border-[#C6A15D] rounded-lg text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition-all"
-                >
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>Shop Ensemble</span>
-                </Link>
-
-                <a
-                  href={activeReelModal.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-2.5 px-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white rounded-lg text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1.5 shadow-md hover:opacity-95 transition-all"
-                >
-                  <Instagram className="w-3.5 h-3.5" />
-                  <span>Watch on Insta</span>
-                </a>
-              </div>
+              <a
+                href={activeReelModal.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-2 rounded-lg bg-black/60 hover:bg-black text-white text-xs font-semibold flex items-center gap-1.5 border border-white/20 shrink-0"
+              >
+                <span>Direct Reel</span>
+                <ExternalLink className="w-3 h-3 text-[#C6A15D]" />
+              </a>
             </div>
 
           </div>
