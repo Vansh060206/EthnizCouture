@@ -504,75 +504,80 @@ export const InstagramReelsSectionComponent: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar Floating Controls */}
-            <div className="absolute top-0 inset-x-0 z-30 p-3 sm:p-4 bg-gradient-to-b from-black/90 via-black/50 to-transparent flex items-center justify-between pointer-events-auto">
-              <div className="flex items-center gap-2">
-                <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FD1D1D] via-[#E1306C] to-[#833AB4] p-0.5 flex items-center justify-center text-white shrink-0 shadow-md">
-                  <Instagram className="w-4 h-4" />
-                </span>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-xs font-bold text-white drop-shadow">@ethniz_couture</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C6A15D] fill-[#C6A15D]" />
+            <div 
+              className="absolute top-0 inset-x-0 z-30 p-2.5 sm:p-4 bg-gradient-to-b from-black/90 via-black/60 to-transparent flex items-center justify-between pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Left: Brand Identity */}
+              <div className="flex items-center gap-2 min-w-0 pr-2">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#FD1D1D] via-[#E1306C] to-[#833AB4] p-0.5 flex items-center justify-center text-white shrink-0 shadow-md">
+                  <Instagram className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-xs font-bold text-white drop-shadow truncate">@ethniz_couture</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C6A15D] fill-[#C6A15D] shrink-0" />
                   </div>
-                  <span className="text-[10px] text-[#DFC89D] block uppercase font-mono tracking-wider">
+                  <span className="text-[9px] sm:text-[10px] text-[#DFC89D] block uppercase font-mono tracking-wider truncate">
                     {activeReelModal.collectionTag}
                   </span>
                 </div>
               </div>
 
-              {/* Direct Instagram App Option + Audio Toggle + Close */}
-              <div className="flex items-center gap-2">
+              {/* Right: Sound Toggle + Luxury Insta Pill + Close Button */}
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 {/* Audio Toggle */}
                 <button
                   type="button"
                   onClick={toggleMute}
-                  className={`px-2.5 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-md transition-all border text-xs font-semibold ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all border ${
                     isMuted 
-                      ? 'bg-black/70 text-[#DFC89D] border-[#C6A15D]/60 hover:border-[#DFC89D]' 
-                      : 'bg-[#3E1A1E] text-[#DFC89D] border-[#C6A15D] shadow-sm'
-                  } active:scale-95`}
+                      ? 'bg-black/65 text-[#DFC89D] border-[#C6A15D]/40 hover:border-[#DFC89D]' 
+                      : 'bg-[#3E1A1E] text-emerald-400 border-[#C6A15D] shadow-sm'
+                  } active:scale-90`}
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                   title={isMuted ? 'Tap to unmute sound' : 'Tap to mute sound'}
                   aria-label="Toggle sound"
                 >
                   {isMuted ? (
-                    <>
-                      <VolumeX className="w-3.5 h-3.5 text-[#DFC89D]" />
-                      <span className="text-[10px] tracking-wider uppercase">Unmute</span>
-                    </>
+                    <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#DFC89D]" />
                   ) : (
-                    <>
-                      <Volume2 className="w-3.5 h-3.5 text-[#DFC89D] animate-pulse" />
-                      <span className="text-[10px] tracking-wider uppercase text-emerald-400">Sound On</span>
-                    </>
+                    <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse" />
                   )}
                 </button>
 
+                {/* Luxury Instagram Direct Pill Button */}
                 <a
                   href={activeReelModal.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1.5 rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:brightness-110 text-white text-[11px] font-bold flex items-center gap-1.5 shadow-lg active:scale-95 transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                  className="h-7 sm:h-8 px-2.5 sm:px-3 rounded-full bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:brightness-110 active:scale-95 text-white text-[11px] font-semibold flex items-center gap-1.5 shadow-md shadow-black/50 border border-white/25 transition-all select-none"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                   title="Watch this exact reel on Instagram"
                 >
-                  <Instagram className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Watch on</span>
-                  <span>Insta ↗</span>
+                  <Instagram className="w-3.5 h-3.5 text-white shrink-0" />
+                  <span className="tracking-wide">Watch on Insta</span>
+                  <ExternalLink className="w-3 h-3 text-white/90 shrink-0" />
                 </a>
 
+                {/* Close Modal Button */}
                 <button
                   type="button"
                   onClick={() => setActiveReelModal(null)}
-                  className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20 active:scale-95"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/65 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-sm transition-all border border-white/20 active:scale-90 shadow-md"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                   aria-label="Close video player"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </button>
               </div>
             </div>
 
             {/* In That Whole Mode: ONLY Video Playing Edge-to-Edge with Tap to Play/Pause */}
             <div 
-              className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden cursor-pointer"
+              className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden cursor-pointer select-none"
+              style={{ WebkitTapHighlightColor: 'transparent' }}
               onClick={togglePlayPause}
             >
               <video
