@@ -100,68 +100,24 @@ const VERIFIED_REELS: ReelData[] = [
   }
 ];
 
-// Global memory cache for preloaded video blobs (eliminates all HTTP range requests & network latency)
-const videoBlobCache = new Map<string, string>();
-
-const preloadVideoBlob = async (url: string): Promise<string> => {
-  if (videoBlobCache.has(url)) return videoBlobCache.get(url)!;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return url;
-    const blob = await res.blob();
-    const blobUrl = URL.createObjectURL(blob);
-    videoBlobCache.set(url, blobUrl);
-    return blobUrl;
-  } catch {
-    return url;
-  }
-};
-
 export const InstagramReelsSectionComponent: React.FC = () => {
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
-  const [activeVideoSrc, setActiveVideoSrc] = useState<string>('');
   const [likedReels, setLikedReels] = useState<Record<string, boolean>>({});
 
-  // Optimized smooth video player states
+  // Optimized smooth video player states (Zero timers, zero re-render loops, 100% stable playback)
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
 
-  // Proactively fetch all 4 video blobs in background into device RAM on mount
+  // Initialize playback only once when active reel opens (stable key, zero remounts)
   useEffect(() => {
-    VERIFIED_REELS.forEach((reel) => {
-      preloadVideoBlob(reel.videoSrc);
-    });
-  }, []);
-
-  // Set up video playback and blob memory streaming when modal opens
-  useEffect(() => {
-    if (!activeReelModal) {
-      setActiveVideoSrc('');
-      return;
-    }
-
-    let isMounted = true;
-    const cached = videoBlobCache.get(activeReelModal.videoSrc);
-    if (cached) {
-      setActiveVideoSrc(cached);
-    } else {
-      setActiveVideoSrc(activeReelModal.videoSrc);
-      preloadVideoBlob(activeReelModal.videoSrc).then((blobUrl) => {
-        if (isMounted && blobUrl) {
-          setActiveVideoSrc(blobUrl);
-        }
-      });
-    }
-
-    setIsPlaying(true);
-    if (progressBarRef.current) {
-      progressBarRef.current.style.width = '0%';
-    }
-
-    if (videoRef.current) {
+    if (activeReelModal && videoRef.current) {
+      setIsPlaying(true);
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = '0%';
+      }
       videoRef.current.defaultMuted = true;
       videoRef.current.muted = true;
       setIsMuted(true);
@@ -170,11 +126,7 @@ export const InstagramReelsSectionComponent: React.FC = () => {
         playPromise.catch(() => {});
       }
     }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [activeReelModal]);
+  }, [activeReelModal?.id]);
 
   const togglePlayPause = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -210,28 +162,6 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  // Proactively prefetch video streams during idle time for 0ms mobile playback
-  useEffect(() => {
-    const prefetchVideos = () => {
-      VERIFIED_REELS.forEach((reel) => {
-        // Prefetch link tag for browser cache
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.as = 'fetch';
-        link.href = reel.videoSrc;
-        document.head.appendChild(link);
-      });
-    };
-
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(prefetchVideos);
-      } else {
-        setTimeout(prefetchVideos, 800);
-      }
-    }
-  }, []);
 
   // IntersectionObserver for elegant entrance animation
   useEffect(() => {
@@ -652,8 +582,8 @@ export const InstagramReelsSectionComponent: React.FC = () => {
             >
               <video
                 ref={videoRef}
-                key={activeVideoSrc || activeReelModal.id}
-                src={activeVideoSrc || activeReelModal.videoSrc}
+                key={activeReelModal.id}
+                src={activeReelModal.videoSrc}
                 poster={activeReelModal.image}
                 autoPlay
                 loop
