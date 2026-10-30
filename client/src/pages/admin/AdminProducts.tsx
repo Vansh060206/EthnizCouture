@@ -694,8 +694,7 @@ export const AdminProducts: React.FC = () => {
                     className="w-full px-3 py-2 bg-black/40 border border-zinc-700 rounded text-white focus:outline-none focus:border-gold-500"
                   >
                     <option value="WOMEN">Women’s Couture</option>
-                    <option value="MEN">Royal Menswear</option>
-                    <option value="UNISEX">Unisex / Heirloom</option>
+                    <option value="UNISEX">Heirloom / Universal</option>
                   </select>
                 </div>
 

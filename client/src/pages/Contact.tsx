@@ -6,8 +6,8 @@ import { validateFullName, validateEmail, validatePhone } from '../utils/validat
 
 const FAQS = [
   {
-    q: 'How does bespoke wedding & groom sizing work?',
-    a: 'Every couture ensemble and bespoke sherwani comes with internal 2-inch margins for seamless alterations. Our styling concierge will coordinate with you via WhatsApp or private video call to record exact anatomical measurements.'
+    q: 'How does bespoke couture sizing work?',
+    a: 'Every couture ensemble comes with internal 2-inch margins for seamless alterations. Our styling concierge will coordinate with you via WhatsApp or private video call to record exact anatomical measurements.'
   },
   {
     q: 'Do you ship internationally with insurance?',
@@ -242,7 +242,7 @@ export const Contact: React.FC = () => {
                   className="w-full px-3.5 py-2.5 bg-[#FAF7F2] border border-[#C6A15D]/30 rounded text-[#1A1A1A] focus:outline-none focus:border-[#3E1A1E]"
                 >
                   <option value="Bespoke Consultation">Bespoke Couture Commission</option>
-                  <option value="Groom Sherwani Consultation">Royal Groom Bandhgala / Sherwani</option>
+                  <option value="Bridal Couture Consultation">Bridal Couture &amp; Trousseau Consultation</option>
                   <option value="Private Showroom Appointment">Private Suite Appointment</option>
                   <option value="Order Consignment Assistance">Order Tracking &amp; Fitting</option>
                   <option value="Custom Fabric Inquiry">Artisanal Weave Inquiry</option>

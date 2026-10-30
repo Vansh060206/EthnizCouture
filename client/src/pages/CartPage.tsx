@@ -55,7 +55,7 @@ export const CartPage: React.FC = () => {
         </div>
         <h1 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900">Your Couture Bag is Empty</h1>
         <p className="text-xs sm:text-sm text-zinc-500 mt-2 max-w-md mx-auto leading-relaxed">
-          Explore handcrafted Varanasi silks, regal anarkalis, and royal heritage sherwanis crafted for life's most unforgettable moments.
+          Explore handcrafted Varanasi silks, regal anarkalis, and bridal lehengas crafted for life's most unforgettable moments.
         </p>
         <Link
           to="/shop"

@@ -337,12 +337,6 @@ export const Shop: React.FC = () => {
               </span>
             )}
 
-            {genderParam && genderParam !== 'ALL' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF7F2] text-[#3E1A1E] border border-[#C6A15D]/40 rounded-full text-xs font-medium">
-                For: {genderParam === 'WOMEN' ? 'Women' : 'Men'}
-                <X className="w-3 h-3 cursor-pointer hover:text-red-700" onClick={() => updateFilter('gender', null)} />
-              </span>
-            )}
 
             {fabricParam && (
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF7F2] text-[#3E1A1E] border border-[#C6A15D]/40 rounded-full text-xs font-medium">
@@ -425,30 +419,6 @@ export const Shop: React.FC = () => {
             </label>
           </div>
 
-          {/* Department / Silhouettes */}
-          <div className="bg-white p-5 rounded-lg border border-[#C6A15D]/25">
-            <h3 className="font-serif text-sm font-semibold text-[#1A1A1A] mb-3 uppercase tracking-wider">
-              Silhouettes
-            </h3>
-            <div className="space-y-2 text-xs font-medium text-zinc-700">
-              {[
-                { id: 'ALL', label: 'All Ensembles' },
-                { id: 'WOMEN', label: 'Women’s Couture' },
-                { id: 'MEN', label: 'Royal Menswear' }
-              ].map((g) => (
-                <label key={g.id} className="flex items-center gap-2.5 cursor-pointer hover:text-[#3E1A1E]">
-                  <input
-                    type="radio"
-                    name="gender"
-                    checked={genderParam === g.id}
-                    onChange={() => updateFilter('gender', g.id)}
-                    className="accent-[#3E1A1E]"
-                  />
-                  <span>{g.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
 
           {/* Categories Filter */}
           <div className="bg-white p-5 rounded-lg border border-[#C6A15D]/25">

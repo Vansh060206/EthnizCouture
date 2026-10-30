@@ -58,7 +58,7 @@ export const About: React.FC = () => {
               Honoring Heritage, Reimagining Celebrations
             </h3>
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-light">
-              In an era dominated by transient fast fashion, EthnizCouture was established as a sanctuary for slow, intentional haute couture. Every thread in our regal anarkalis, sherwanis, and royal bandhgalas carries the pulse of generations-old weaving communities nestled along the sacred ghats of Varanasi, the temple towns of Tamil Nadu, and the regal courts of Awadh.
+              In an era dominated by transient fast fashion, EthnizCouture was established as a sanctuary for slow, intentional haute couture. Every thread in our regal anarkalis, bridal lehengas, and handwoven sarees carries the pulse of generations-old weaving communities nestled along the sacred ghats of Varanasi, the temple towns of Tamil Nadu, and the regal courts of Awadh.
             </p>
             <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-light">
               We do not treat traditional textiles as antique relics, but as living, evolving art. We sculpt pure Katan silks and Italian micro-velvets into architectural cuts, lightweight silhouettes, and fluid drapes crafted for modern celebrations across London, New York, Dubai, and New Delhi.

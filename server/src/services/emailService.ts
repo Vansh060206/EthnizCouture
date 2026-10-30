@@ -167,7 +167,7 @@ export function generateWelcomeEmailHtml(customerName?: string | null): string {
                   <td align="center" style="font-size: 11px; color: #71717A; line-height: 1.6;">
                     <strong style="color: #3E1A1E;">Ethniz Couture</strong>
                     <br>
-                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Heritage Sherwanis
+                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Bridal Lehengas
                     <br><br>
                     <a href="${storefrontUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Visit Boutique</a>
                     &nbsp;&bull;&nbsp;
@@ -908,7 +908,7 @@ export function generateAbandonedCartEmailHtml(options: AbandonedCartEmailOption
                 <tr>
                   <td align="center" style="font-size: 11px; color: #71717A; line-height: 1.6;">
                     <strong style="color: #3E1A1E;">Ethniz Couture</strong><br>
-                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Heritage Sherwanis<br><br>
+                    Handcrafted Varanasi Silks &bull; Royal Festive Couture &bull; Bridal Lehengas<br><br>
                     <a href="${storefrontUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">Visit Boutique</a>
                     &nbsp;&bull;&nbsp;
                     <a href="${cartUrl}" target="_blank" style="color: #84642C; text-decoration: none; font-weight: 600;">View Cart</a>

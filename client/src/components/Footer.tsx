@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
             Shop
           </h5>
           <ul className="space-y-2.5 text-xs text-zinc-300">
-            <li><Link to="/shop?category=sherwanis" className="hover:text-[#DFC89D] transition-colors">Sherwanis &amp; Bandhgalas</Link></li>
+            <li><Link to="/shop?category=lehengas" className="hover:text-[#DFC89D] transition-colors">Bridal Lehengas &amp; Sarees</Link></li>
             <li><Link to="/shop?category=indo-western" className="hover:text-[#DFC89D] transition-colors">Indo-Western Ensembles</Link></li>
             <li><Link to="/shop?category=kurta-sets" className="hover:text-[#DFC89D] transition-colors">Kurta Sets &amp; Anarkalis</Link></li>
             <li><Link to="/shop?occasion=Wedding" className="hover:text-[#DFC89D] transition-colors">Royal Trousseau</Link></li>

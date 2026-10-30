@@ -291,7 +291,7 @@ export const Home: React.FC = () => {
           <span className="text-gold-500">✦</span>
           <span>COMPLIMENTARY INSURED AIR SHIPPING WORLDWIDE OVER ₹2,999</span>
           <span className="text-gold-500">✦</span>
-          <span>BESPOKE BLOUSE &amp; SHERWANI MADE-TO-MEASURE TAILORING</span>
+          <span>BESPOKE BLOUSE &amp; COUTURE MADE-TO-MEASURE TAILORING</span>
           <span className="text-gold-500">✦</span>
           <span>120+ ARTISAN KARIGARI HOURS PER PIECE</span>
           <span className="text-gold-500">✦</span>
@@ -307,7 +307,7 @@ export const Home: React.FC = () => {
           <span className="text-gold-500">✦</span>
           <span>COMPLIMENTARY INSURED AIR SHIPPING WORLDWIDE OVER ₹2,999</span>
           <span className="text-gold-500">✦</span>
-          <span>BESPOKE BLOUSE &amp; SHERWANI MADE-TO-MEASURE TAILORING</span>
+          <span>BESPOKE BLOUSE &amp; COUTURE MADE-TO-MEASURE TAILORING</span>
           <span className="text-gold-500">✦</span>
           <span>120+ ARTISAN KARIGARI HOURS PER PIECE</span>
           <span className="text-gold-500">✦</span>
@@ -628,7 +628,7 @@ export const Home: React.FC = () => {
                       >
                         <option value="Heritage Ensemble">Heritage Ensemble</option>
                         <option value="Banarasi Brocade">Banarasi Brocade</option>
-                        <option value="Groom Sherwani">Groom Sherwani</option>
+                        <option value="Bridal Lehenga">Bridal Lehenga</option>
                         <option value="Trousseau Curations">Full Trousseau</option>
                       </select>
                     </div>
@@ -658,7 +658,7 @@ export const Home: React.FC = () => {
             <h2 className="font-serif text-3xl sm:text-5xl text-zinc-900 font-medium mt-1">
               Reflections of Elegance
             </h2>
-            <p className="text-xs text-zinc-500 mt-2">Real brides and grooms who celebrated their historic unions in EthnizCouture.</p>
+            <p className="text-xs text-zinc-500 mt-2">Patrons and brides who celebrated their historic occasions in EthnizCouture.</p>
             <div className="w-12 h-0.5 bg-maroon-800 mx-auto mt-3" />
           </div>
 
@@ -692,14 +692,14 @@ export const Home: React.FC = () => {
                   ))}
                 </div>
                 <p className="text-xs sm:text-sm text-zinc-700 italic leading-relaxed">
-                  "The brocade is authentic handloom Banarasi silk. The bespoke silhouette commanded absolute royal dignity at our Delhi reception. Guests couldn't stop praising the regal antique finish."
+                  "The handloom weave and delicate zari motifs are breathtaking. The drape commanded absolute royal dignity at our family reception. Guests couldn't stop praising the timeless finish."
                 </p>
               </div>
 
               <div className="mt-6 pt-4 border-t border-zinc-100">
-                <p className="font-serif text-base font-bold text-zinc-900">Raghav Singhania</p>
-                <p className="text-[11px] text-zinc-500">New Delhi · Verified Groom</p>
-                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Royal Heritage Brocade Groom Sherwani</p>
+                <p className="font-serif text-base font-bold text-zinc-900">Dr. Radhika Sen</p>
+                <p className="text-[11px] text-zinc-500">New Delhi · Verified Patron</p>
+                <p className="text-[10px] text-gold-700 font-semibold mt-0.5">Sunshine Mul Chanderi Festive Set</p>
               </div>
             </div>
 

@@ -4,10 +4,10 @@ import { X, Ruler } from 'lucide-react';
 interface SizeGuideModalProps {
   isOpen: boolean;
   onClose: () => void;
-  gender?: 'WOMEN' | 'MEN' | 'UNISEX';
+  gender?: string;
 }
 
-export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose, gender = 'WOMEN' }) => {
+export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState<'inches' | 'cm'>('inches');
 
   if (!isOpen) return null;
@@ -65,113 +65,67 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose,
         </div>
 
         {/* Size Tables */}
-        {gender === 'MEN' ? (
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs text-left text-zinc-800 border-collapse">
-              <thead>
-                <tr className="bg-[#2D080E] text-gold-300 font-serif text-sm">
-                  <th className="p-2.5">Size</th>
-                  <th className="p-2.5">Chest</th>
-                  <th className="p-2.5">Waist</th>
-                  <th className="p-2.5">Shoulder</th>
-                  <th className="p-2.5">Length (Kurta)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-200 bg-white">
-                <tr>
-                  <td className="p-2.5 font-bold">38 (S)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '32"' : '81 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '17.5"' : '44 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">40 (M)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '34"' : '86 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '18"' : '46 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">42 (L)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '18.5"' : '47 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '44"' : '112 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">44 (XL)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '44"' : '112 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '19"' : '48 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '44"' : '112 cm'}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs text-left text-zinc-800 border-collapse">
-              <thead>
-                <tr className="bg-[#2D080E] text-gold-300 font-serif text-sm">
-                  <th className="p-2.5">Size</th>
-                  <th className="p-2.5">Bust</th>
-                  <th className="p-2.5">Waist</th>
-                  <th className="p-2.5">Hip</th>
-                  <th className="p-2.5">Skirt Length</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-zinc-200 bg-white">
-                <tr>
-                  <td className="p-2.5 font-bold">XS (32)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '32"' : '81 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '26"' : '66 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">S (34)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '34"' : '86 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '28"' : '71 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">M (36)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '30"' : '76 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">L (38)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '32"' : '81 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">XL (40)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '34"' : '86 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '44"' : '112 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
-                </tr>
-                <tr>
-                  <td className="p-2.5 font-bold">XXL (42)</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '46"' : '117 cm'}</td>
-                  <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        )}
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs text-left text-zinc-800 border-collapse">
+            <thead>
+              <tr className="bg-[#2D080E] text-gold-300 font-serif text-sm">
+                <th className="p-2.5">Size</th>
+                <th className="p-2.5">Bust</th>
+                <th className="p-2.5">Waist</th>
+                <th className="p-2.5">Hip</th>
+                <th className="p-2.5">Skirt Length</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-zinc-200 bg-white">
+              <tr>
+                <td className="p-2.5 font-bold">XS (32)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '32"' : '81 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '26"' : '66 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-bold">S (34)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '34"' : '86 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '28"' : '71 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-bold">M (36)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '30"' : '76 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-bold">L (38)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '38"' : '96 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '32"' : '81 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-bold">XL (40)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '40"' : '101 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '34"' : '86 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '44"' : '112 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
+              </tr>
+              <tr>
+                <td className="p-2.5 font-bold">XXL (42)</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '42"' : '106 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '36"' : '91 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '46"' : '117 cm'}</td>
+                <td className="p-2.5">{activeTab === 'inches' ? '43"' : '109 cm'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         {/* Note */}
         <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded text-xs text-amber-900 leading-relaxed">
-          <strong>Bespoke Couture Tailoring:</strong> All EthnizCouture ensembles and sherwanis come with 2-inch internal side seam allowances for effortless tailoring adjustments. Our concierge is available on WhatsApp for custom measurement consultations.
+          <strong>Bespoke Couture Tailoring:</strong> All EthnizCouture ensembles come with 2-inch internal side seam allowances for effortless tailoring adjustments. Our concierge is available on WhatsApp for custom measurement consultations.
         </div>
 
       </div>

@@ -231,12 +231,12 @@ export const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              to="/shop?category=sherwanis"
+              to="/shop?category=kurta-sets"
               className={`transition-colors py-6 relative group ${
                 isTransparent ? 'text-white/90 hover:text-[#DFC89D]' : 'text-zinc-800 hover:text-[#3E1A1E]'
               }`}
             >
-              <span>SHERWANIS</span>
+              <span>KURTA SETS</span>
               <span className="absolute bottom-5 left-0 w-0 h-[1.5px] bg-[#C6A15D] transition-all duration-300 group-hover:w-full" />
             </Link>
 
@@ -459,7 +459,7 @@ export const Navbar: React.FC = () => {
                 Couture Pavilions
               </span>
               <ul className="space-y-2 text-sm font-medium">
-                <li><Link to="/shop?category=sherwanis" className="hover:text-[#3E1A1E] block py-1 font-bold text-[#3E1A1E]">Royal Sherwanis &amp; Bandhgalas</Link></li>
+                <li><Link to="/shop?category=lehengas" className="hover:text-[#3E1A1E] block py-1 font-bold text-[#3E1A1E]">Bridal &amp; Heritage Lehengas</Link></li>
                 <li><Link to="/shop?category=indo-western" className="hover:text-[#3E1A1E] block py-1">Indo-Western Ensembles</Link></li>
                 <li><Link to="/shop?category=kurta-sets" className="hover:text-[#3E1A1E] block py-1">Embroidered Kurta Sets</Link></li>
                 <li><Link to="/shop?category=anarkalis" className="hover:text-[#3E1A1E] block py-1">Floor-Length Anarkalis</Link></li>
@@ -686,13 +686,13 @@ export const Navbar: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/shop?category=sherwanis"
+                    to="/shop?category=lehengas"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="px-5 py-3.5 hover:bg-white flex items-center justify-between border-b border-zinc-100 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-[#3E1A1E]" />
-                      <span>Royal Sherwanis &amp; Bandhgalas</span>
+                      <span>Bridal &amp; Heritage Lehengas</span>
                     </div>
                     <span className="text-[9px] bg-red-50 text-red-800 px-2 py-0.5 rounded border border-red-200 font-semibold tracking-normal normal-case">
                       👑 Royal Edit
@@ -718,23 +718,9 @@ export const Navbar: React.FC = () => {
                   >
                     <div className="flex items-center gap-3">
                       <span className="w-2 h-2 rounded-full bg-zinc-400" />
-                      <span>Kurta Sets &amp; Anarkalis</span>
+                      <span>Kurta Sets &amp; Shararas</span>
                     </div>
                     <ChevronRight className="w-4 h-4 text-zinc-400" />
-                  </Link>
-
-                  <Link
-                    to="/shop?gender=MEN"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="px-5 py-3.5 hover:bg-white flex items-center justify-between border-b border-zinc-100 transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-zinc-400" />
-                      <span>Royal Menswear</span>
-                    </div>
-                    <span className="text-[9px] bg-amber-50 text-amber-900 px-2 py-0.5 rounded border border-amber-200 font-semibold tracking-normal normal-case">
-                      Sherwanis
-                    </span>
                   </Link>
 
                   <Link
@@ -927,7 +913,7 @@ export const Navbar: React.FC = () => {
 
             {!isSearching && searchQuery.trim() && searchResults.length === 0 && (
               <div className="py-6 text-center text-sm text-zinc-500">
-                No couture pieces found matching "{searchQuery}". Try searching for 'Anarkali', 'Sherwani', or 'Silk'.
+                No couture pieces found matching "{searchQuery}". Try searching for 'Anarkali', 'Lehenga', or 'Silk'.
               </div>
             )}
           </div>

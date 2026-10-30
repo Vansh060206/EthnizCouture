@@ -693,7 +693,7 @@ export const ProductDetail: React.FC = () => {
               {activeAccordion === 'details' && (
                 <div className="pb-4 text-zinc-600 leading-relaxed space-y-2 font-light">
                   <p>{product.details || 'Handcrafted on traditional pit looms by heritage artisan families in Varanasi and Lucknow.'}</p>
-                  <p><strong>Department:</strong> {product.gender === 'WOMEN' ? "Women's Couture" : "Royal Menswear"}</p>
+                  <p><strong>Department:</strong> Women's Couture</p>
                   {product.sku && <p><strong>Artisan Serial:</strong> {product.sku}</p>}
                 </div>
               )}
@@ -989,7 +989,6 @@ export const ProductDetail: React.FC = () => {
       <SizeGuideModal
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
-        gender={product.gender}
       />
 
       {/* Lightbox Fullscreen Modal */}
