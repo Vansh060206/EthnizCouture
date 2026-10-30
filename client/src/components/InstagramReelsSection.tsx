@@ -100,7 +100,7 @@ const VERIFIED_REELS: ReelData[] = [
   }
 ];
 
-export const InstagramReelsSection: React.FC = () => {
+export const InstagramReelsSectionComponent: React.FC = () => {
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
   const [likedReels, setLikedReels] = useState<Record<string, boolean>>({});
 
@@ -109,6 +109,7 @@ export const InstagramReelsSection: React.FC = () => {
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
 
   useEffect(() => {
@@ -585,7 +586,32 @@ export const InstagramReelsSection: React.FC = () => {
                 muted={isMuted}
                 preload="auto"
                 disablePictureInPicture
+                onWaiting={() => setIsBuffering(true)}
+                onPlaying={() => {
+                  setIsBuffering(false);
+                  setIsPlaying(true);
+                }}
+                onCanPlay={() => {
+                  setIsBuffering(false);
+                  if (videoRef.current && isPlaying && videoRef.current.paused) {
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
+                onStalled={() => {
+                  if (videoRef.current && isPlaying && videoRef.current.paused) {
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
+                onPause={() => setIsPlaying(false)}
+                onPlay={() => setIsPlaying(true)}
+                onEnded={() => {
+                  if (videoRef.current) {
+                    videoRef.current.currentTime = 0;
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
                 onLoadedData={() => {
+                  setIsBuffering(false);
                   if (videoRef.current) {
                     videoRef.current.play().catch(() => {});
                   }
@@ -594,6 +620,13 @@ export const InstagramReelsSection: React.FC = () => {
                 className="w-full h-full object-cover bg-black select-none pointer-events-none"
                 style={{ transform: 'translate3d(0, 0, 0)', willChange: 'transform', backfaceVisibility: 'hidden' }}
               />
+
+              {/* Luxury Gold Spinner when Buffering */}
+              {isBuffering && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                  <div className="w-12 h-12 rounded-full border-2 border-[#C6A15D]/20 border-t-[#C6A15D] animate-spin shadow-lg" />
+                </div>
+              )}
 
               {/* Tap to Play / Pause Center Animation Indicator */}
               {showPlayAnim && (
@@ -648,3 +681,5 @@ export const InstagramReelsSection: React.FC = () => {
     </section>
   );
 };
+
+export const InstagramReelsSection = React.memo(InstagramReelsSectionComponent);

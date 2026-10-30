@@ -56,7 +56,9 @@ app.use(
     level: 6,
     threshold: 1024,
     filter: (req: any, res: any) => {
-      if (req.headers['x-no-compression']) return false;
+      if (req.headers['x-no-compression'] || req.headers['range'] || (req.url && (req.url.endsWith('.mp4') || req.url.includes('/reels/')))) {
+        return false;
+      }
       return compression.filter(req, res);
     }
   })

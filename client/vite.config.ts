@@ -1,9 +1,70 @@
-import { defineConfig } from 'vite';
+import { defineConfig, Plugin, ViteDevServer } from 'vite';
 import react from '@vitejs/plugin-react';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Middleware to properly support HTTP Range Requests (206 Partial Content) for MP4 videos in Vite dev server
+function mp4RangePlugin(): Plugin {
+  return {
+    name: 'mp4-range-middleware',
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url && req.url.includes('.mp4')) {
+          const cleanUrl = req.url.split('?')[0];
+          const filePath = path.resolve(__dirname, 'public', cleanUrl.replace(/^\//, ''));
+
+          if (!fs.existsSync(filePath)) {
+            return next();
+          }
+
+          const stat = fs.statSync(filePath);
+          const fileSize = stat.size;
+          const range = req.headers.range;
+
+          if (range) {
+            const parts = range.replace(/bytes=/, '').split('-');
+            const start = parseInt(parts[0], 10);
+            const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+
+            if (start >= fileSize) {
+              res.writeHead(416, {
+                'Content-Range': `bytes */${fileSize}`,
+                'Accept-Ranges': 'bytes'
+              });
+              return res.end();
+            }
+
+            const chunkSize = end - start + 1;
+            const fileStream = fs.createReadStream(filePath, { start, end });
+
+            res.writeHead(206, {
+              'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+              'Accept-Ranges': 'bytes',
+              'Content-Length': chunkSize,
+              'Content-Type': 'video/mp4'
+            });
+
+            fileStream.pipe(res);
+            return;
+          } else {
+            res.writeHead(200, {
+              'Content-Length': fileSize,
+              'Content-Type': 'video/mp4',
+              'Accept-Ranges': 'bytes'
+            });
+            fs.createReadStream(filePath).pipe(res);
+            return;
+          }
+        }
+        next();
+      });
+    }
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), mp4RangePlugin()],
   server: {
     host: true,
     port: 5173,
