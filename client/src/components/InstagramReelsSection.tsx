@@ -103,6 +103,18 @@ const VERIFIED_REELS: ReelData[] = [
 export const InstagramReelsSectionComponent: React.FC = () => {
   const [activeReelModal, setActiveReelModal] = useState<ReelData | null>(null);
   const [likedReels, setLikedReels] = useState<Record<string, boolean>>({});
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  // Responsive device check for lightweight mobile gallery vs desktop player
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobileQuery = window.innerWidth < 1024 || ('ontouchstart' in window && window.innerWidth < 1024);
+      setIsMobile(mobileQuery);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Optimized smooth video player states (Zero timers, zero re-render loops, 100% stable playback)
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -131,11 +143,23 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   };
 
   const handleCardClick = (reel: ReelData) => {
-    // If the user was swiping/scrolling through the carousel on mobile, do not open modal
+    // If the user was swiping/scrolling through the carousel on mobile, do not trigger action
     if (isTouchSwiping.current) {
       isTouchSwiping.current = false;
       return;
     }
+
+    if (isMobile) {
+      // On mobile devices: Open the authentic Instagram Reel directly in native app for flawless 120fps playback
+      window.open(reel.instagramUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      // On desktop: Open the full-bleed video player modal
+      setActiveReelModal(reel);
+    }
+  };
+
+  const handleOpenModal = (reel: ReelData, e: React.MouseEvent) => {
+    e.stopPropagation();
     setActiveReelModal(reel);
   };
 
@@ -399,12 +423,20 @@ export const InstagramReelsSectionComponent: React.FC = () => {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setActiveReelModal(reel);
+                          if (isMobile) {
+                            window.open(reel.instagramUrl, '_blank', 'noopener,noreferrer');
+                          } else {
+                            setActiveReelModal(reel);
+                          }
                         }}
-                        aria-label={`Play ${reel.title} on website`}
-                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/70 border-2 border-[#C6A15D] text-[#DFC89D] flex items-center justify-center backdrop-blur-md shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3E1A1E] group-hover:text-white cursor-pointer"
+                        aria-label={isMobile ? `Watch ${reel.title} on Instagram` : `Play ${reel.title} on website`}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-black/70 border-2 border-[#C6A15D] text-[#DFC89D] flex items-center justify-center backdrop-blur-md shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3E1A1E] group-hover:text-white cursor-pointer active:scale-95"
                       >
-                        <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                        {isMobile ? (
+                          <Instagram className="w-6 h-6 text-[#DFC89D]" />
+                        ) : (
+                          <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -470,32 +502,32 @@ export const InstagramReelsSectionComponent: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Dual Action Buttons: Play Reel on Website + Watch on Instagram */}
+                    {/* Action Buttons: Play/Preview Reel + Watch on Instagram */}
                     <div className="pt-2 flex items-center justify-between gap-2 border-t border-white/10">
-                      {/* Button 1: Play Reel on Website */}
+                      {/* Button 1: Desktop = Play Video; Mobile = Preview */}
                       <button
                         type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setActiveReelModal(reel);
-                        }}
-                        className="flex-1 py-1.5 px-2.5 rounded-lg bg-[#3E1A1E] hover:bg-[#522127] text-[#DFC89D] text-[11px] font-bold uppercase tracking-wider border border-[#C6A15D]/40 hover:border-[#C6A15D] flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95"
+                        onClick={(e) => handleOpenModal(reel, e)}
+                        className="py-1.5 px-2.5 rounded-lg bg-[#3E1A1E] hover:bg-[#522127] text-[#DFC89D] text-[11px] font-bold uppercase tracking-wider border border-[#C6A15D]/40 hover:border-[#C6A15D] flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 shrink-0"
+                        title="Preview video directly on site"
                       >
                         <Play className="w-3 h-3 fill-current" />
-                        <span>Play Video</span>
+                        <span>{isMobile ? 'Preview' : 'Play Video'}</span>
                       </button>
 
-                      {/* Button 2: Watch on Instagram */}
+                      {/* Button 2: Watch on Instagram (Primary action on mobile) */}
                       <a
                         href={reel.instagramUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="py-1.5 px-3 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:opacity-95 text-white text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 shrink-0"
+                        className={`py-1.5 px-3 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] hover:opacity-95 text-white text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 ${
+                          isMobile ? 'flex-1' : 'shrink-0'
+                        }`}
                         title="Watch directly on Instagram app"
                       >
                         <Instagram className="w-3.5 h-3.5" />
-                        <span>Insta ↗</span>
+                        <span>{isMobile ? 'Watch on Instagram ↗' : 'Insta ↗'}</span>
                       </a>
                     </div>
 
