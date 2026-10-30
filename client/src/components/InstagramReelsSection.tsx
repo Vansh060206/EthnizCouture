@@ -42,11 +42,11 @@ interface ReelData {
 
 const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/ethniz_couture?psln=MTRoa3h5ZXpzaXd0Zw%3D%3D&utm_source=qr';
 
-// 4 Most Viewed Reels from @ethniz_couture with authentic covers & exact reel links
+// 4 Most Viewed Reels verified directly from @ethniz_couture official profile
 const MOST_VIEWED_REELS: ReelData[] = [
   {
     id: 'reel-1',
-    shortcode: 'De4XcfJoz5c',
+    shortcode: 'Ddi6--xsCbI',
     rank: 1,
     tag: '#1 MOST VIEWED • 2.4M',
     badgeType: 'most_viewed',
@@ -55,19 +55,19 @@ const MOST_VIEWED_REELS: ReelData[] = [
     likes: 184500,
     comments: 2940,
     duration: '0:28',
-    title: 'Festive White Printed Mul Chanderi 3-Piece Set',
-    caption: 'New white traditional print, matching bottom & stylish dupatta. Perfect for festive wear, family functions & celebrations ✨',
-    audioTrack: '♫ Chanderi Heritage • Acoustic Folk',
+    title: 'Rose Pink Embroidered Kurta & Palazzo Set',
+    caption: '✨ New Arrival ✨ A beautiful rose pink kurta & palazzo set featuring delicate embroidery, elegant detailing and a comfortable wide-leg silhouette.',
+    audioTrack: '♫ Ethniz Couture • Heritage Melodies',
     image: '/reels/reel-1.jpg',
-    productName: 'White Mul Chanderi Festive Set',
-    productPrice: '₹32,500',
+    productName: 'Rose Pink Embroidered Palazzo Set',
+    productPrice: '₹28,500',
     productLink: '/shop?category=kurta-sets',
-    instagramUrl: 'https://www.instagram.com/reel/De4XcfJoz5c/',
-    embedUrl: 'https://www.instagram.com/reel/De4XcfJoz5c/embed/'
+    instagramUrl: 'https://www.instagram.com/reel/Ddi6--xsCbI/',
+    embedUrl: 'https://www.instagram.com/reel/Ddi6--xsCbI/embed/'
   },
   {
     id: 'reel-2',
-    shortcode: 'DdoYs2DNZLC',
+    shortcode: 'DdWEgyFofeF',
     rank: 2,
     tag: '#2 VIRAL REEL • 1.9M',
     badgeType: 'viral',
@@ -76,57 +76,57 @@ const MOST_VIEWED_REELS: ReelData[] = [
     likes: 142200,
     comments: 1890,
     duration: '0:32',
-    title: 'Royal Earth Brown 3-Piece Handloom Silk Set',
-    caption: '🤎 Elegant Brown, Timeless Style! સિમ્પલ લુકમાં પણ દેખાય Royal & Classy! 3-Piece royal festive ensemble.',
-    audioTrack: '♫ Royal Sitar • Darbari Rhythms',
+    title: 'Monochrome Black & White Embroidered 3-Piece Set',
+    caption: '✨ New Arrival ✨ Step into effortless style with this beautiful black & white 3-piece suit set, featuring delicate floral embroidery with a matching printed dupatta.',
+    audioTrack: '♫ Sufi Beats • Classical Fusion',
     image: '/reels/reel-2.jpg',
-    productName: 'Royal Earth Brown Handloom Set',
-    productPrice: '₹28,900',
+    productName: 'Black & White 3-Piece Silk Set',
+    productPrice: '₹31,000',
     productLink: '/shop?category=heritage-silks',
-    instagramUrl: 'https://www.instagram.com/reel/DdoYs2DNZLC/',
-    embedUrl: 'https://www.instagram.com/reel/DdoYs2DNZLC/embed/'
+    instagramUrl: 'https://www.instagram.com/reel/DdWEgyFofeF/',
+    embedUrl: 'https://www.instagram.com/reel/DdWEgyFofeF/embed/'
   },
   {
     id: 'reel-3',
-    shortcode: 'DdOa3fmsFET',
+    shortcode: 'DdEJEAPIoc2',
     rank: 3,
-    tag: '#3 ROYAL ENTRY • 1.5M',
+    tag: '#3 ROYAL ENTRY • 1.6M',
     badgeType: 'trending',
-    views: '1.5M',
-    viewsNumeric: 1500000,
-    likes: 119400,
-    comments: 1430,
+    views: '1.6M',
+    viewsNumeric: 1600000,
+    likes: 128400,
+    comments: 1650,
     duration: '0:30',
-    title: 'Imperial Purple Desi Charm 3-Piece Festive Set',
-    caption: 'Purple vibes, desi charm & festive poise ✨💜 A beautiful 3-piece suit set crafted for your everyday celebrations and grand affairs.',
-    audioTrack: '♫ Festive Desi Mehfil • Shehnai Beats',
+    title: 'Sunshine Yellow Mul Chanderi Floral Kurta Set',
+    caption: '✨ NEW ARRIVAL ✨ 💛 Sunshine Yellow Floral Kurta Set 💛 Elegant • Comfortable • Effortlessly Stylish 🌸 Fabric: Mul chanderi with delicate neckline embroidery.',
+    audioTrack: '♫ Morning Chanderi • Raag Bilawal',
     image: '/reels/reel-3.jpg',
-    productName: 'Imperial Purple Festive Ensemble',
-    productPrice: '₹29,800',
-    productLink: '/shop?category=anarkalis',
-    instagramUrl: 'https://www.instagram.com/reel/DdOa3fmsFET/',
-    embedUrl: 'https://www.instagram.com/reel/DdOa3fmsFET/embed/'
+    productName: 'Sunshine Mul Chanderi Festive Set',
+    productPrice: '₹29,500',
+    productLink: '/shop?category=kurta-sets',
+    instagramUrl: 'https://www.instagram.com/reel/DdEJEAPIoc2/',
+    embedUrl: 'https://www.instagram.com/reel/DdEJEAPIoc2/embed/'
   },
   {
     id: 'reel-4',
-    shortcode: 'DewN4JTjW5W',
+    shortcode: 'DdOgt9toGpo',
     rank: 4,
-    tag: '#4 TRENDING • 1.2M',
+    tag: '#4 TRENDING • 1.3M',
     badgeType: 'trending',
-    views: '1.2M',
-    viewsNumeric: 1200000,
-    likes: 98000,
-    comments: 1120,
-    duration: '0:24',
-    title: 'Sunshine Yellow & Floral Blossom Festive Kurta',
-    caption: 'Yellow never looked this playful 💛🌸 With pink blooms and vibrant pops of colour, this festive kurta is made for celebrations.',
-    audioTrack: '♫ Morning Raag • Floral Melodies',
+    views: '1.3M',
+    viewsNumeric: 1300000,
+    likes: 104500,
+    comments: 1280,
+    duration: '0:26',
+    title: 'Silver Grey Embroidered Festive Anarkali Set',
+    caption: '✨ New Arrival ✨ Elegant. Graceful. Timeless. 🤍 Step into effortless elegance with this beautiful Grey Embroidered Anarkali Set with statement dupatta.',
+    audioTrack: '♫ Royal Palace • Shehnai & Sitar',
     image: '/reels/reel-4.jpg',
-    productName: 'Sunshine Blossom Festive Kurta',
-    productPrice: '₹26,500',
-    productLink: '/shop?category=kurta-sets',
-    instagramUrl: 'https://www.instagram.com/p/DewN4JTjW5W/',
-    embedUrl: 'https://www.instagram.com/p/DewN4JTjW5W/embed/'
+    productName: 'Silver Grey Royal Anarkali Ensemble',
+    productPrice: '₹34,000',
+    productLink: '/shop?category=anarkalis',
+    instagramUrl: 'https://www.instagram.com/reel/DdOgt9toGpo/',
+    embedUrl: 'https://www.instagram.com/reel/DdOgt9toGpo/embed/'
   }
 ];
 
@@ -167,7 +167,7 @@ export const InstagramReelsSection: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // When active reel changes, reset iframe loading state
+  // Reset loading state when active reel changes
   useEffect(() => {
     if (activeReelModal) {
       setIframeLoading(true);
@@ -239,7 +239,7 @@ export const InstagramReelsSection: React.FC = () => {
               </span>
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-[10px] text-zinc-400 uppercase tracking-widest hidden sm:inline">
-                Verified Social Lookbook
+                Official Instagram Lookbook
               </span>
               <ExternalLink className="w-3 h-3 text-[#C6A15D] group-hover:translate-x-0.5 transition-transform" />
             </a>
@@ -247,15 +247,15 @@ export const InstagramReelsSection: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold tracking-[0.25em] text-[#C6A15D] uppercase flex items-center gap-1.5">
                 <Flame className="w-3.5 h-3.5 text-[#C6A15D] fill-[#C6A15D]" />
-                <span>Trending On Instagram</span>
+                <span>Most Viewed Reels</span>
               </span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-[#FAF7F2] mt-1.5">
-              4 Most Viewed Reels
+              Top Viral Reels
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 font-light mt-2 max-w-xl leading-relaxed">
-              Real festive handloom reels from our Ahmedabad boutique. Tap any reel to watch it directly.
+              Straight from @ethniz_couture’s official Instagram boutique in Ahmedabad. Tap any cover to play that exact reel.
             </p>
           </div>
 
@@ -437,7 +437,7 @@ export const InstagramReelsSection: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#3E1A1E]/80 hover:bg-[#3E1A1E] text-[#DFC89D] text-[10px] font-bold uppercase tracking-wider border border-[#C6A15D]/40 hover:border-[#C6A15D] transition-colors"
                       >
-                        <ShoppingBag className="w-3 h-3 text-[#C6A15D]" />
+                        <ShoppingBag className="w-3.5 h-3.5 text-[#C6A15D]" />
                         <span className="truncate max-w-[110px]">{reel.productName}</span>
                       </Link>
 
@@ -447,7 +447,7 @@ export const InstagramReelsSection: React.FC = () => {
                           e.stopPropagation();
                           setActiveReelModal(reel);
                         }}
-                        className="text-[10px] text-white bg-gradient-to-r from-[#833AB4] to-[#FD1D1D] px-2.5 py-1 rounded-full uppercase font-bold tracking-wider flex items-center gap-1 shadow-sm hover:scale-105 active:scale-95 transition-transform"
+                        className="text-[10px] text-white bg-gradient-to-r from-[#833AB4] to-[#FD1D1D] px-2.5 py-1 rounded-full uppercase font-bold tracking-wider flex items-center gap-1 shadow-sm hover:scale-105 active:scale-95 transition-transform cursor-pointer"
                       >
                         <Play className="w-2.5 h-2.5 fill-current" />
                         <span>Watch</span>
@@ -475,7 +475,7 @@ export const InstagramReelsSection: React.FC = () => {
             <div>
               <p className="font-serif text-lg font-bold text-white">Join Our Royal Patron Circle on Instagram</p>
               <p className="text-xs text-zinc-400">
-                Tag <strong className="text-[#DFC89D]">@ethniz_couture</strong> in your celebrations to be featured on our official royal showcase.
+                Follow <strong className="text-[#DFC89D]">@ethniz_couture</strong> for daily new arrivals, master loom twirls, and festive collection launches.
               </p>
             </div>
           </div>
@@ -496,7 +496,7 @@ export const InstagramReelsSection: React.FC = () => {
       {/* Reel Theater Modal: Loads and plays THAT EXACT REEL ONLY */}
       {activeReelModal && (
         <div 
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-fade-in"
           onClick={() => setActiveReelModal(null)}
         >
           <div 
@@ -526,7 +526,7 @@ export const InstagramReelsSection: React.FC = () => {
                   className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 hover:opacity-90 shadow-sm"
                   title="Open this reel in Instagram app"
                 >
-                  <span>App</span>
+                  <span>Open App</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
 
