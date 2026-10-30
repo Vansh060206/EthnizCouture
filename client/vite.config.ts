@@ -21,10 +21,16 @@ function mp4RangePlugin(): Plugin {
           const fileSize = stat.size;
           const range = req.headers.range;
 
+          // Maximum chunk size (512 KB) for instantaneous startup & smooth progressive streaming on low connectivity
+          const MAX_CHUNK_SIZE = 512 * 1024;
+
           if (range) {
             const parts = range.replace(/bytes=/, '').split('-');
             const start = parseInt(parts[0], 10);
-            const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+            let end = parts[1] ? parseInt(parts[1], 10) : start + MAX_CHUNK_SIZE - 1;
+            if (end >= fileSize) {
+              end = fileSize - 1;
+            }
 
             if (start >= fileSize) {
               res.writeHead(416, {
@@ -41,18 +47,27 @@ function mp4RangePlugin(): Plugin {
               'Content-Range': `bytes ${start}-${end}/${fileSize}`,
               'Accept-Ranges': 'bytes',
               'Content-Length': chunkSize,
-              'Content-Type': 'video/mp4'
+              'Content-Type': 'video/mp4',
+              'Cache-Control': 'public, max-age=31536000, immutable'
             });
 
             fileStream.pipe(res);
+            res.on('close', () => {
+              fileStream.destroy();
+            });
             return;
           } else {
             res.writeHead(200, {
               'Content-Length': fileSize,
               'Content-Type': 'video/mp4',
-              'Accept-Ranges': 'bytes'
+              'Accept-Ranges': 'bytes',
+              'Cache-Control': 'public, max-age=31536000, immutable'
             });
-            fs.createReadStream(filePath).pipe(res);
+            const fileStream = fs.createReadStream(filePath);
+            fileStream.pipe(res);
+            res.on('close', () => {
+              fileStream.destroy();
+            });
             return;
           }
         }

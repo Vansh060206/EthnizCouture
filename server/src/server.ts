@@ -218,7 +218,19 @@ const altClientDistPath = path.resolve(__dirname, '../client/dist');
 const resolvedClientDist = fs.existsSync(clientDistPath) ? clientDistPath : (fs.existsSync(altClientDistPath) ? altClientDistPath : null);
 
 if (resolvedClientDist) {
-  app.use(express.static(resolvedClientDist));
+  app.use(
+    express.static(resolvedClientDist, {
+      maxAge: '30d',
+      etag: true,
+      lastModified: true,
+      setHeaders: (res: any, filePath: string) => {
+        if (filePath.endsWith('.mp4') || filePath.includes('reels')) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          res.setHeader('Accept-Ranges', 'bytes');
+        }
+      }
+    })
+  );
   app.get('*', (req: Request, res: Response, next: NextFunction) => {
     if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
       return next();

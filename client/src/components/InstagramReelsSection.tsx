@@ -119,7 +119,9 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   // Optimized smooth video player states (Zero timers, zero re-render loops, 100% stable playback)
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const bufferedBarRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [showPlayAnim, setShowPlayAnim] = useState<boolean>(false);
   const [isAutoplayBlocked, setIsAutoplayBlocked] = useState<boolean>(false);
@@ -219,13 +221,39 @@ export const InstagramReelsSectionComponent: React.FC = () => {
   };
 
   const handleTimeUpdate = () => {
-    if (!videoRef.current || !progressBarRef.current) return;
-    const { currentTime, duration } = videoRef.current;
+    if (!videoRef.current) return;
+    const { currentTime, duration, buffered } = videoRef.current;
     if (duration > 0) {
-      const pct = (currentTime / duration) * 100;
-      progressBarRef.current.style.width = `${pct}%`;
+      if (progressBarRef.current) {
+        const pct = (currentTime / duration) * 100;
+        progressBarRef.current.style.width = `${pct}%`;
+      }
+      if (bufferedBarRef.current && buffered.length > 0) {
+        try {
+          const bufferedEnd = buffered.end(buffered.length - 1);
+          const bufPct = Math.min(100, (bufferedEnd / duration) * 100);
+          bufferedBarRef.current.style.width = `${bufPct}%`;
+        } catch {
+          // Ignore range index errors
+        }
+      }
     }
   };
+
+  // Low-connectivity buffer recovery watchdog
+  useEffect(() => {
+    if (!activeReelModal) return;
+
+    const watchdog = setInterval(() => {
+      const video = videoRef.current;
+      if (video && isBuffering && video.readyState >= 3 && !video.paused) {
+        video.play().catch(() => {});
+        setIsBuffering(false);
+      }
+    }, 800);
+
+    return () => clearInterval(watchdog);
+  }, [activeReelModal, isBuffering]);
 
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -669,10 +697,16 @@ export const InstagramReelsSectionComponent: React.FC = () => {
                 muted={isMuted}
                 preload="auto"
                 disablePictureInPicture
+                onWaiting={() => setIsBuffering(true)}
+                onStalled={() => setIsBuffering(true)}
+                onPlaying={() => setIsBuffering(false)}
+                onCanPlay={() => setIsBuffering(false)}
+                onProgress={handleTimeUpdate}
                 onLoadedData={() => {
                   if (videoRef.current) {
                     videoRef.current.play().catch(() => {});
                   }
+                  setIsBuffering(false);
                 }}
                 onEnded={() => {
                   if (videoRef.current) {
@@ -684,6 +718,17 @@ export const InstagramReelsSectionComponent: React.FC = () => {
                 className="w-full h-full object-cover bg-black select-none pointer-events-none"
                 style={{ transform: 'translate3d(0, 0, 0)', willChange: 'transform', backfaceVisibility: 'hidden' }}
               />
+
+              {/* Low-Connectivity Adaptive Buffering Indicator */}
+              {isBuffering && !isAutoplayBlocked && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/45 backdrop-blur-[2px] z-20 pointer-events-none animate-fade-in">
+                  <div className="w-12 h-12 rounded-full border-2 border-[#C6A15D]/25 border-t-[#C6A15D] animate-spin shadow-xl" />
+                  <div className="mt-3 px-3 py-1 rounded-full bg-black/80 border border-[#C6A15D]/40 text-[#DFC89D] font-mono text-[10px] tracking-widest uppercase flex items-center gap-1.5 shadow-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C6A15D] animate-ping" />
+                    <span>Optimizing Stream...</span>
+                  </div>
+                </div>
+              )}
 
               {/* Mobile Autoplay Policy Tap-to-Play Indicator */}
               {isAutoplayBlocked && (
@@ -716,11 +761,17 @@ export const InstagramReelsSectionComponent: React.FC = () => {
 
             {/* Bottom Overlay: Smooth Scrubber Bar + Title + Shop Button (NO PRICE) */}
             <div className="absolute bottom-0 inset-x-0 z-30 pointer-events-auto bg-gradient-to-t from-black/95 via-black/60 to-transparent">
-              {/* Sleek Progress Scrubber Line */}
-              <div className="w-full h-1 bg-white/15 overflow-hidden">
+              {/* Sleek Dual-Layer Scrubber Line with Low-Connectivity Buffered Preload Track */}
+              <div className="relative w-full h-1 bg-white/15 overflow-hidden">
+                {/* Buffer Track: Visual confidence for low-connectivity networks */}
+                <div
+                  ref={bufferedBarRef}
+                  className="absolute inset-y-0 left-0 bg-white/30 w-0 transition-[width] duration-300 ease-out"
+                />
+                {/* Active Playhead Track */}
                 <div 
                   ref={progressBarRef}
-                  className="h-full bg-gradient-to-r from-[#C6A15D] via-[#DFC89D] to-[#C6A15D] w-0 transition-[width] duration-75 ease-linear"
+                  className="relative h-full bg-gradient-to-r from-[#C6A15D] via-[#DFC89D] to-[#C6A15D] w-0 transition-[width] duration-75 ease-linear z-10"
                 />
               </div>
 
